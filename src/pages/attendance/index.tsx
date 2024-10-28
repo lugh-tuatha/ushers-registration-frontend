@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Layout from '../../components/layout'
+import { useAttendees } from '../../hooks';
 
 import { 
     Breadcrumb,
@@ -23,10 +24,12 @@ import {
     Button,
     Input,
 } from '@chakra-ui/react'
-import { FaFilter } from "react-icons/fa";
-
 
 export default function Attendance() {
+    const [search, setSearch] = useState("")
+
+    const { data, error, isLoading } = useAttendees()
+
     return (
         <Layout>
             <Breadcrumb mb='4'>
@@ -42,7 +45,11 @@ export default function Attendance() {
             <Heading textAlign='center'>Welcome back 👋🏻</Heading>
             <Text textAlign='center'>Are you a regular attendee, part of Back to Life, or a VIP? Find your name here and click 'Present' to mark yourself as present.</Text>
 
-            <Input placeholder='Enter your name to check in' type='search' my='4'/>
+            <Input 
+                placeholder='Enter your name to check in' type='search' my='4'
+                onChange={(e) => setSearch(e.target.value)}
+
+            />
             <Table size='sm'>
                 <TableCaption>List of all Attendees</TableCaption>
                 <Thead>
@@ -54,14 +61,16 @@ export default function Attendance() {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    <Tr>
-                        <Td>Ace Gabriel</Td>
-                        <Td>Cell Member</Td>
-                        <Td>Regular</Td>
-                        <Td textAlign='end'>
-                            <Button colorScheme='blue' size='sm'>Present</Button>
-                        </Td>
-                    </Tr>
+                    {data?.map((attendee: any) => (
+                        <Tr key={attendee._id}>
+                            <Td>{attendee.first_name}</Td>
+                            <Td>{attendee.church_roles}</Td>
+                            <Td>Regular</Td>
+                            <Td textAlign='end'>
+                                <Button colorScheme='blue' size='sm'>Present</Button>
+                            </Td>
+                        </Tr>
+                    ))}
                 </Tbody>
             </Table>
         </Layout>

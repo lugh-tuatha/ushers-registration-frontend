@@ -23,7 +23,9 @@ export default function Header() {
                     </ListItem>
                 </UnorderedList>
 
-                <Button>Admin Dashboard</Button>
+                <Button>
+                    <Link href='/login'>Login as Admin</Link>
+                </Button>
             </Container>
         </Box>
     )
