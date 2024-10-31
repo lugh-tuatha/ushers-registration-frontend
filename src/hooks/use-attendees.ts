@@ -1,10 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { ATTENDEES_QUERY_KEY } from "../constants";
-import { createNewAttendee, deleteAttendee, getAllAttendees } from "../services";
+import { ATTENDEE_QUERY_KEY, ATTENDEES_QUERY_KEY } from "../constants";
+import { createNewAttendee, deleteAttendee, getAllAttendees, getAttendeesById } from "../services";
 import { AttendeesResponseHttpData } from "../types";
-
-
 
 export const useAttendees = () => 
     useQuery<AttendeesResponseHttpData[]>({
@@ -13,6 +11,13 @@ export const useAttendees = () =>
         staleTime: Infinity
     });
 
+export const useAttendee = (id: string = "") =>
+    useQuery<any>({
+        queryKey: [ATTENDEE_QUERY_KEY, id],
+        queryFn: () => getAttendeesById(id),
+        staleTime: Infinity
+    })
+
 export const useMutateAttendees = () => {
     const queryClient = useQueryClient()
 
@@ -20,7 +25,6 @@ export const useMutateAttendees = () => {
         mutationFn: createNewAttendee,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [ATTENDEES_QUERY_KEY] })
-            close()
         }
     })
 }

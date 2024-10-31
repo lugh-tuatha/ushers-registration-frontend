@@ -1,9 +1,11 @@
+import { API_BASE_URL } from "../constants";
+
 import axios from "axios";
 import { CreateNewAttendeeBody } from "../types";
 
 export const getAllAttendees = async (query = ""): Promise<any> => {
     try {
-        const response = await axios.get("http://localhost:5000/api/v1/attendees");
+        const response = await axios.get(API_BASE_URL + "/attendees");
         return response.data.data;
     } catch (error) {
         console.log(error);
@@ -11,9 +13,19 @@ export const getAllAttendees = async (query = ""): Promise<any> => {
     }
 }
 
+export const getAttendeesById = async (id: string): Promise<any> => {
+    try {
+        const response = await axios.get(API_BASE_URL + "/attendees/" + id)
+        return response.data.data
+    } catch (error) {
+        console.log(error);
+        throw new Error("Failed to fetch attendee")
+    }
+}
+
 export const createNewAttendee = async (body: CreateNewAttendeeBody) => {
     try {
-        const response = await axios.post("http://localhost:5000/api/v1/attendees", body)
+        const response = await axios.post(API_BASE_URL + "/attendees", body)
         return response;
     } catch (error) {
         console.log(error);
@@ -23,7 +35,7 @@ export const createNewAttendee = async (body: CreateNewAttendeeBody) => {
 
 export const deleteAttendee = async (id: string) => {
     try {
-        const response = await axios.delete("http://localhost:5000/api/v1/attendees/" + id)
+        const response = await axios.delete(API_BASE_URL + "/attendees/" + id)
         return response
     } catch (error) {
         console.log(error)

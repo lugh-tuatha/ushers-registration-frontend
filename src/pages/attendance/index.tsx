@@ -55,7 +55,7 @@ export default function Attendance() {
                 <Thead>
                     <Tr>
                         <Th>Name</Th>
-                        <Th>Cell Status</Th>
+                        <Th>Church Hierarchy</Th>
                         <Th>Attendance Status</Th>
                         <Th textAlign='end'>Action</Th>
                     </Tr>
@@ -64,7 +64,7 @@ export default function Attendance() {
                     {data?.map((attendee: any) => (
                         <Tr key={attendee._id}>
                             <Td>{attendee.first_name}</Td>
-                            <Td>{attendee.church_roles}</Td>
+                            <Td>{attendee.network}</Td>
                             <Td>Regular</Td>
                             <Td textAlign='end'>
                                 <Button colorScheme='blue' size='sm'>Present</Button>

@@ -5,9 +5,9 @@ export interface AttendeesResponseHttpData {
     age: Number,
     status: String,
     address: String,
-    church_roles: String,
-    church_heirarchy: String,
-    assigned_leader: String,
+    network: String,
+    church_hierarchy: String,
+    primary_leader: String,
     is_leader: boolean
 }
 
@@ -17,8 +17,8 @@ export interface CreateNewAttendeeBody {
     age: Number,
     status: String,
     address: String,
-    church_roles: String,
-    church_heirarchy: String,
-    assigned_leader: String,
+    network: String,
+    church_hierarchy: String,
+    primary_leader: String,
     is_leader: boolean
 }

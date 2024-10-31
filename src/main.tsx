@@ -11,11 +11,15 @@ import './index.css'
 import { ChakraProvider } from '@chakra-ui/react'
 
 import App from './App.tsx'
-import Attendees from './pages/attendees/index.tsx';
-import SpecialMention from './pages/special-mention/index.tsx';
+import Regular from './pages/regular/index.tsx';
 import Attendance from './pages/attendance/index.tsx';
+import Vip from './pages/vip/index.tsx';
 import AdminLogin from './pages/admin-login/index.tsx';
-import Attendee from './pages/attendee/index.tsx';
+import Profile from './pages/regular/_pages/profile.tsx';
+import Reports from './pages/reports/index.tsx';
+import Summary from './pages/summary/index.tsx';
+import SundayAttendance from './pages/sunday-attendance/index.tsx';
+import UpcomingEvents from './pages/upcoming-events/index.tsx';
 
 const router = createBrowserRouter([
     {
@@ -23,25 +27,41 @@ const router = createBrowserRouter([
         element: <App />,
     },
     {
-        path: "/attendees",
-        element: <Attendees />,
+        path: "/regular/",
+        element: <Regular />,
     },
     {
-        path: "/special-mention",
-        element: <SpecialMention />,
+        path: "/regular/:slug",
+        element: <Profile />
+    },
+    {
+        path: "/vip",
+        element: <Vip />,
     },
     {
         path: "/attendance",
         element: <Attendance />,
     },
     {
+        path: "/sunday-attendance",
+        element: <SundayAttendance />
+    },
+    {
         path: "/login",
         element: <AdminLogin />,
     },
     {
-        path: "/attendee",
-        element: <Attendee />
-    }
+        path: "/upcoming-events",
+        element: <UpcomingEvents />
+    },
+    {
+        path: "/summary",
+        element: <Summary />
+    },
+    {
+        path: "/reports",
+        element: <Reports />,
+    },
 ]);
 
 const queryClient = new QueryClient();
