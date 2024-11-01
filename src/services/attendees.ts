@@ -1,11 +1,11 @@
-import { API_BASE_URL } from "../constants";
-
 import axios from "axios";
+
+import { API_BASE_URL } from "../constants";
 import { CreateNewAttendeeBody } from "../types";
 
-export const getAllAttendees = async (query = ""): Promise<any> => {
+export const getAllAttendees = async (search = ""): Promise<any> => {
     try {
-        const response = await axios.get(API_BASE_URL + "/attendees");
+        const response = await axios.get(API_BASE_URL + "/attendees?search=" + search);
         return response.data.data;
     } catch (error) {
         console.log(error);

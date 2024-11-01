@@ -11,15 +11,16 @@ import { Box, Button, Container, Heading, Link, ListItem, UnorderedList,
     MenuDivider,
     textDecoration,
     Flex,
+    Text,
  } from '@chakra-ui/react'
 import { FaChevronDown } from 'react-icons/fa6'
 
 export default function Header() {
     return (
         <Box px=''>
-            <Container maxW='7xl' p='4' display='flex' justifyContent='space-between'>
-                <Heading size="lg" color='blue.600'>
-                    <Link href='/'>USHERS REGISTRATION</Link>
+            <Container maxW='7xl' p='4' display='flex' alignItems='center' justifyContent='space-between'>
+                <Heading size="xl" color='blue.600'>
+                    <Link href='/'>Project Luke <Text fontSize='1.25rem' color='black'>Ushers Registration</Text></Link>
                 </Heading>
 
                 <UnorderedList display='flex' alignItems='center' gap='4' fontWeight='bold' listStyleType='none'>
@@ -67,6 +68,9 @@ export default function Header() {
                                 <MenuItem>Mentoring Attendance</MenuItem>
                                 <MenuItem>Conference Attendance</MenuItem>
                                 <MenuItem>Wild Fire Attendance</MenuItem>
+                                <MenuItem>Valenzuela Attendance</MenuItem>
+                                <MenuItem>Japan Attendance</MenuItem>
+                                <MenuItem>Herbosa Attendance</MenuItem>
                             </MenuList>
                         </Menu>
                     </ListItem>

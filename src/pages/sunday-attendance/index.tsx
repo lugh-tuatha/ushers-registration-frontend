@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { useAttendance } from '../../hooks/use-attendance'
+
 import Layout from '../../components/layout'
 import { 
     Breadcrumb,
@@ -12,6 +14,9 @@ import {
 import SundayAttendanceTableList from './_components/sunday-attendance-table-list'
 
 export default function SundayAttendance() {
+    const { data, isLoading } = useAttendance()
+
+    console.log(data)
     return (
         <Layout>
             <Breadcrumb mb='4'>
@@ -24,7 +29,7 @@ export default function SundayAttendance() {
                 </BreadcrumbItem>
             </Breadcrumb>
 
-            <Flex justifyContent='space-between' alignItems='center' mb='4'>
+            <Flex justifyContent='space-between' alignItems='center' mb='2'>
                 <Heading size="md" mb='2'>Attendees This Sunday (10/23/2024)</Heading>
                 <Button colorScheme='blue'>
                     Print

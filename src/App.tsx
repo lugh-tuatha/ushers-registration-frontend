@@ -55,37 +55,27 @@ function App() {
 
             <HStack gap="12" mt="8" alignItems="start">
                 <Box>
-                    <Heading size="md">This Week's Attendees</Heading>
+                    <Heading size="md">Foundation</Heading>
 
-                    <Text my="4" textAlign="justify" opacity=".50">Join us in welcoming everyone who attended this week! Each service brings together new faces and familiar friends, creating a vibrant and growing community. Take a moment to see who joined us and celebrate the people who make our gatherings so special.</Text>
+                    {/* <Text mt="4" textAlign="justify" opacity=".50">Join us in welcoming everyone who attended this week! Each service brings together new faces and familiar friends, creating a vibrant and growing community. Take a moment to see who joined us and celebrate the people who make our gatherings so special.</Text> */}
+                    <Text my='2' opacity=".75" textAlign='justify'>" <b>36</b> as though you were waiting for your master to return from the wedding feast. Then you will be ready to open the door and let him in the moment he arrives and knocks. 37 The servants who are ready and waiting for his return will be rewarded. I tell you the truth, he himself will seat them, put on an apron, and serve them as they sit and eat! <b>38</b> He may come in the middle of the night or just before dawn. But whenever he comes, he will reward the servants who are ready. " </Text>
+
+                    <Text textAlign='end' fontWeight='bold' opacity='.75'>- Luke 12:36-38</Text>
 
                     <Button colorScheme='blue'>
-                        <Link href="/attendees">View Attendees This Week</Link>
+                        <Link href="/regular">View Attendees This Week</Link>
                     </Button>
 
                     <Text mt="2" textDecoration="underline" cursor="pointer">Watch this week's Live</Text>
                 </Box>
 
-                <Image src='/assets/sundays-are-for-worship.jpg' alt='Sundays are for Worship' width="400px"/>
-            </HStack>
-
-            <HStack gap="12" mt="8" alignItems="start">
-                <Image src='/assets/welcome-to-church.jpg' alt='Welcome to Church' width="450px"/>
-
-                <Box>
-                    <Heading size="md   ">Convert VIPs to Regular Attendees</Heading>
-
-                    <Text my="4" opacity=".50">
-                        Officially transition VIPs to regular attendees. With just one click, you can update their status and welcome them into our regular attendee community, celebrating their ongoing commitment and presence in our church family.
-                    </Text>
-
-                    <Button colorScheme='blue'>Convert VIPs to Regular Attendees</Button>
-                </Box>
+                <Image src='/assets/luke.jpg' alt='Sundays are for Worship' height="300px"/>
             </HStack>
 
             <HStack gap="4" mt="8">
                 <Box textAlign="center" width="50%">
-                    <Heading size="md">Meet Our Primary Leaders</Heading>
+                    <Heading size="md" mb='2'>Meet Our Primary Leaders</Heading>
+                    <Image src='/assets/leader.jpg' alt='Sundays are for Worship' w="full" aspectRatio='16/9' border='1px' borderColor='gray.500'/>
                     <Text my="2" opacity=".50">Get to know our dedicated primary leaders, the men and women who guide and inspire our church family. Click on any leader to view their cell members and learn more about their attendance.</Text>
                     <Button colorScheme='blue'>
                         <Link href='/summary'>View Primary Leaders</Link>
@@ -93,7 +83,8 @@ function App() {
                 </Box>
 
                 <Box textAlign="center" width="50%">
-                    <Heading size="md">Reports</Heading>
+                    <Heading size="md" mb='2'>Reports</Heading>
+                    <Image src='/assets/reports.png' alt='Sundays are for Worship' w="full" aspectRatio='16/9' border='1px' borderColor='gray.500'/>
                     <Text my="2" opacity=".50">Gain insights into our church community with detailed attendance reports. Track overall attendees, monitor average weekly attendance, and explore monthly and yearly trends. </Text>
                     <Button colorScheme='blue'>
                         <Link href='/reports'>Explore Reports</Link>

@@ -71,7 +71,7 @@ createRoot(document.getElementById('root')!).render(
         <QueryClientProvider client={queryClient}>
             <ChakraProvider>
                 <RouterProvider router={router} />
-                <ReactQueryDevtools />
+                {/* <ReactQueryDevtools /> */}
             </ChakraProvider>
         </QueryClientProvider>
     </StrictMode>,

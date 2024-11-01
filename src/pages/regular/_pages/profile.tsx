@@ -11,6 +11,7 @@ import {
     Button,
     Flex,
     Image,
+    Link,
     ListItem,
     Text,
     UnorderedList,
@@ -57,8 +58,10 @@ export default function Profile() {
 
                         <AttendanceHeatmap />
                     </Flex>
-
-                    <Button colorScheme='blue' w='15rem' mt='2'>Download Profile QR</Button>
+                    
+                    <Link href='/assets/attendee-qr/justin.egonia.png' download>
+                        <Button colorScheme='blue' w='15rem' mt='2'>Download Profile QR</Button>
+                    </Link>
                     
                     <Text fontWeight="semibold" fontSize="xl" my='1'>
                         {data?.first_name} {data?.last_name}

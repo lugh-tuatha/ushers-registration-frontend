@@ -1,50 +1,52 @@
 import React from 'react'
 import Layout from '../../components/layout'
 
-import { 
+import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
-    Tabs, 
-    TabList, 
-    TabPanels, 
-    Tab, 
+    Tabs,
+    TabList,
+    TabPanels,
+    Tab,
     TabPanel,
- } from '@chakra-ui/react'
+} from '@chakra-ui/react'
 import AttendeesListTable from '../regular/_components/attendees-list-table'
+import { useAttendees } from '../../hooks'
 
 
 export default function Summary() {
-  return (
-    <Layout>
-        <Breadcrumb mb='4'>
-            <BreadcrumbItem>
-                <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-            </BreadcrumbItem>
 
-            <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink href='#'>Summary</BreadcrumbLink>
-            </BreadcrumbItem>
-        </Breadcrumb>
-        
-        <Tabs>
-            <TabList>
-                <Tab>Primary Men's</Tab>
-                <Tab>Primary Women's</Tab>
-            </TabList>
+    return (
+        <Layout>
+            <Breadcrumb mb='4'>
+                <BreadcrumbItem>
+                    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+                </BreadcrumbItem>
 
-            <TabPanels>
-                <TabPanel px='0' py='1'>
-                    <AttendeesListTable />
-                </TabPanel>
-                <TabPanel>
-                    <p>two!</p>
-                </TabPanel>
-                <TabPanel>
-                    <p>three!</p>
-                </TabPanel>
-            </TabPanels>
-        </Tabs>
-    </Layout>
-  )
+                <BreadcrumbItem isCurrentPage>
+                    <BreadcrumbLink href='#'>Summary</BreadcrumbLink>
+                </BreadcrumbItem>
+            </Breadcrumb>
+
+            <Tabs>
+                <TabList>
+                    <Tab>Primary Leader</Tab>
+                    <Tab>Secondary Leader</Tab>
+                </TabList>
+
+                <TabPanels>
+                    <TabPanel px='0' py='1'>
+                        <AttendeesListTable />
+                    </TabPanel>
+                    <TabPanel>
+                        <p>two!</p>
+                    </TabPanel>
+                    <TabPanel>
+                        <p>three!</p>
+                    </TabPanel>
+                </TabPanels>
+            </Tabs>
+        </Layout>
+    )
 }

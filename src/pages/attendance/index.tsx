@@ -26,9 +26,17 @@ import {
 } from '@chakra-ui/react'
 
 export default function Attendance() {
+    const [searchTerm, setSearchTerm] = useState("")
     const [search, setSearch] = useState("")
 
-    const { data, error, isLoading } = useAttendees()
+    const { data, error, isLoading } = useAttendees(search)
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if(event.key === "Enter"){
+            setSearch(searchTerm)
+            console.log(search)
+        }
+    }
 
     return (
         <Layout>
@@ -47,8 +55,11 @@ export default function Attendance() {
 
             <Input 
                 placeholder='Enter your name to check in' type='search' my='4'
-                onChange={(e) => setSearch(e.target.value)}
-
+                value={searchTerm}
+                onChange={(event) => {
+                    setSearchTerm(event.target.value)
+                }}
+                onKeyDown={handleKeyDown}
             />
             <Table size='sm'>
                 <TableCaption>List of all Attendees</TableCaption>
@@ -63,7 +74,7 @@ export default function Attendance() {
                 <Tbody>
                     {data?.map((attendee: any) => (
                         <Tr key={attendee._id}>
-                            <Td>{attendee.first_name}</Td>
+                            <Td>{attendee.first_name} {attendee.last_name}</Td>
                             <Td>{attendee.network}</Td>
                             <Td>Regular</Td>
                             <Td textAlign='end'>

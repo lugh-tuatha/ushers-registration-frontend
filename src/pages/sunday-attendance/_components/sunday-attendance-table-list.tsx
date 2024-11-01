@@ -48,7 +48,7 @@ export default function SundayAttendanceTableList() {
                     <Tr>
                         <Td cursor='pointer'>
                             {/* <Link href={`/profile/${data._id}`} > */}
-                                Ace Gabriel P. Pasiliao
+                                Mark Ezekiel Baloloy
                             {/* </Link> */}
                         </Td>
                         <Td>Bro. Justin</Td>

@@ -4,11 +4,10 @@ import { ATTENDEE_QUERY_KEY, ATTENDEES_QUERY_KEY } from "../constants";
 import { createNewAttendee, deleteAttendee, getAllAttendees, getAttendeesById } from "../services";
 import { AttendeesResponseHttpData } from "../types";
 
-export const useAttendees = () => 
+export const useAttendees = (search: string | undefined = undefined) => 
     useQuery<AttendeesResponseHttpData[]>({
-        queryKey: [ATTENDEES_QUERY_KEY],
-        queryFn: () => getAllAttendees(),
-        staleTime: Infinity
+        queryKey: [ATTENDEES_QUERY_KEY, search],
+        queryFn: () => getAllAttendees(search),
     });
 
 export const useAttendee = (id: string = "") =>
@@ -42,4 +41,3 @@ export const useMutateDeleteAttendee = () => {
         },
     })
 }
-    

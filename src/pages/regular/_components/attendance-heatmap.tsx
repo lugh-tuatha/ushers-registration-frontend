@@ -15,7 +15,7 @@ import {
 import { useCalendar } from '../../../hooks/use-calendar'
 
 export default function AttendanceHeatmap() {
-    const { data: calendarData, isLoading: isCalendarLoading } = useCalendar(2024)
+    const { data: calendarData, isLoading: isCalendarLoading } = useCalendar(2025)
 
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -48,8 +48,8 @@ export default function AttendanceHeatmap() {
                 </Flex>
 
                 <UnorderedList listStyleType='none' ml='0'>
-                    <ListItem bg='blue.500' px='6' py='2' rounded='4'>2024</ListItem>
-                    <ListItem px='6' py='2'>2023</ListItem>
+                    <ListItem bg='blue.500' px='6' py='2' rounded='4' cursor='pointer'>2025</ListItem>
+                    <ListItem px='6' py='2' cursor='pointer'>2024</ListItem>
                 </UnorderedList>
             </HStack>
         </Box>
