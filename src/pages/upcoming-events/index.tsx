@@ -1,4 +1,3 @@
-import React from 'react'
 import Layout from '../../components/layout'
 
 import { 
@@ -8,7 +7,6 @@ import {
     Card,
     CardBody,
     Flex,
-    Grid,
     Heading,
     Image,
     Text,

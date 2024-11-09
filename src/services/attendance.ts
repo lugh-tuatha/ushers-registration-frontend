@@ -1,6 +1,7 @@
 import axios from "axios"
 
 import { API_BASE_URL } from "../constants"
+import { checkInBody } from "../types";
 
 export const getAllAttendance = async () => {
     try {
@@ -9,5 +10,15 @@ export const getAllAttendance = async () => {
     } catch (error) {
         console.log(error);
         throw new Error("Failed to fetch attendees");
+    }
+}
+
+export const checkIn = async (body: checkInBody) => {
+    try {
+        const response = await axios.post(API_BASE_URL + "/attendance", body)
+        return response;
+    } catch (error) {
+        console.log(error);
+        throw new Error("Failed to create new attendees");
     }
 }

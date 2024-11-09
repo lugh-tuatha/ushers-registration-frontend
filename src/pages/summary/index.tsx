@@ -1,4 +1,3 @@
-import React from 'react'
 import Layout from '../../components/layout'
 
 import {
@@ -12,8 +11,6 @@ import {
     TabPanel,
 } from '@chakra-ui/react'
 import AttendeesListTable from '../regular/_components/attendees-list-table'
-import { useAttendees } from '../../hooks'
-
 
 export default function Summary() {
 

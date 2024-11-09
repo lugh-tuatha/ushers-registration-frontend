@@ -47,7 +47,7 @@ function App() {
                         </Flex>
                         
                         <Button colorScheme='blue'>
-                            <Link href="/attendance">Regular Attendees</Link>
+                            <Link href="/regular">Regular Attendees</Link>
                         </Button>
                     </CardBody>
                 </Card>

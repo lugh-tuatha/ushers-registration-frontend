@@ -1,19 +1,13 @@
-import React from 'react'
-
 import { 
     Stat,
     StatLabel,
     StatNumber,
     StatHelpText,
     StatArrow,
-    StatGroup,
     Card, 
     CardBody, 
-    HStack, 
  } from '@chakra-ui/react'
  
-import { FaPeopleLine } from 'react-icons/fa6'
-
 type StatCardType = { 
     label: String,
     value: number,

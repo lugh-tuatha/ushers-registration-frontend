@@ -1,7 +1,6 @@
-import React from 'react'
 import Layout from '../../components/layout'
 
-import { Box, Button, Card, CardBody, CardHeader, Heading, Input } from '@chakra-ui/react'
+import { Button, Card, CardBody, CardHeader, Heading, Input } from '@chakra-ui/react'
 
 export default function AdminLogin() {
     return (

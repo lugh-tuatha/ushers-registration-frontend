@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { CALENDAR_QUERY_KEY } from '../constants';
 import { CalendarResponseHttpData } from '../types/calendar';

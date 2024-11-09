@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-
-import Layout from '../../components/layout'
-import { useAttendees } from '../../hooks';
+import { useState } from 'react'
+import moment from 'moment'
 
 import { 
     Breadcrumb,
@@ -16,25 +14,49 @@ import {
     Th,
     Td,
     TableCaption,
-    TableContainer,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
     Button,
     Input,
+    useToast
 } from '@chakra-ui/react'
 
-export default function Attendance() {
+import Layout from '../../components/layout'
+import { useAttendees } from '../../hooks';
+import { useMutatecheckIn } from '../../hooks/use-attendance';
+
+export default function CheckIn() {
     const [searchTerm, setSearchTerm] = useState("")
     const [search, setSearch] = useState("")
 
     const { data, error, isLoading } = useAttendees(search)
+    const { mutate, isSuccess, isPending } = useMutatecheckIn()
+
+    const toast = useToast();
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if(event.key === "Enter"){
+        console.log(search)
+        if(event.key === "Enter" && searchTerm !== search){
             setSearch(searchTerm)
-            console.log(search)
+        }
+    }
+
+    const markPresent = (id: string, first_name: string) => {
+        mutate({
+            week_no: moment(new Date()).week(),
+            attendee: id,
+            time_in: new Date(),
+            attendance_type: "sunday"
+        })
+
+        console.log(isSuccess)
+        if(isSuccess){
+            toast({
+                title: 'Presence marked!',
+                description: `Thank you for attending today, ${first_name}`,
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+                position: 'bottom-right'
+            })
         }
     }
 
@@ -78,7 +100,11 @@ export default function Attendance() {
                             <Td>{attendee.network}</Td>
                             <Td>Regular</Td>
                             <Td textAlign='end'>
-                                <Button colorScheme='blue' size='sm'>Present</Button>
+                                <Button colorScheme='blue' size='sm' 
+                                    onClick={() => markPresent(attendee._id, attendee.first_name)}
+                                >
+                                    Present
+                                </Button>
                             </Td>
                         </Tr>
                     ))}

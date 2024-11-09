@@ -1,23 +1,24 @@
-import React from 'react'
-
-import { Box, Button, Container, Heading, Link, ListItem, UnorderedList,
+import { 
+    Box, 
+    Button, 
+    Container, 
+    Heading, 
+    Link, 
+    ListItem, 
+    UnorderedList,
     Menu,
     MenuButton,
     MenuList,
     MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
-    textDecoration,
     Flex,
     Text,
  } from '@chakra-ui/react'
+ 
 import { FaChevronDown } from 'react-icons/fa6'
 
 export default function Header() {
     return (
-        <Box px=''>
+        <Box>
             <Container maxW='7xl' p='4' display='flex' alignItems='center' justifyContent='space-between'>
                 <Heading size="xl" color='blue.600'>
                     <Link href='/'>Project Luke <Text fontSize='1.25rem' color='black'>Ushers Registration</Text></Link>
@@ -47,7 +48,7 @@ export default function Header() {
                         </Menu>
                     </ListItem>
                     <ListItem>
-                        <Link href='/attendance'>Search</Link>
+                        <Link href='/check-in'>Check-in</Link>
                     </ListItem>
                     <ListItem>
                         <Menu>
@@ -61,7 +62,6 @@ export default function Header() {
                                 <MenuItem>
                                     <Link href='/sunday-attendance' w='full'>
                                         Sunday Attendance 
-                                        
                                     </Link>
                                 </MenuItem>
                                 <MenuItem>Pepsol Attendance</MenuItem>

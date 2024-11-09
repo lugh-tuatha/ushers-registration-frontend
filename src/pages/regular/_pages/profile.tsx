@@ -1,8 +1,5 @@
-import React from 'react'
 import Layout from '../../../components/layout'
 import { useParams } from 'react-router-dom';
-
-import { useAttendee } from '../../../hooks';
 
 import { 
     Breadcrumb,
@@ -15,18 +12,19 @@ import {
     ListItem,
     Text,
     UnorderedList,
+    Tabs, 
+    TabList, 
+    TabPanels, 
+    Tab, 
+    TabPanel
 } from '@chakra-ui/react'
 
 import AttendanceHeatmap from '../_components/attendance-heatmap';
+import { useAttendee } from '../../../hooks';
 
 export default function Profile() {
     const params = useParams()
-
-    console.log(params.slug)
-
     const { data, error, isLoading } = useAttendee(params.slug)
-
-    console.log(data)
 
     return (
         <Layout>
@@ -56,7 +54,23 @@ export default function Profile() {
                             <Image src='/assets/attendee/default.jpg' alt="attendee's profile picture" h='full' rounded='4'/>
                         )}
 
-                        <AttendanceHeatmap />
+                        <Tabs>
+                            <TabList>
+                                <Tab>2025</Tab>
+                                <Tab>2024</Tab>
+                            </TabList>
+
+                            <TabPanels>
+                                <TabPanel px='0'>
+                                    <AttendanceHeatmap />
+                                </TabPanel>
+                                <TabPanel>
+                                    <p>two!</p>
+                                </TabPanel>
+                            </TabPanels>
+                        </Tabs>
+
+                        
                     </Flex>
                     
                     <Link href='/assets/attendee-qr/justin.egonia.png' download>

@@ -12,7 +12,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 import App from './App.tsx'
 import Regular from './pages/regular/index.tsx';
-import Attendance from './pages/attendance/index.tsx';
+import Attendance from './pages/check-in/index.tsx';
 import Vip from './pages/vip/index.tsx';
 import AdminLogin from './pages/admin-login/index.tsx';
 import Profile from './pages/regular/_pages/profile.tsx';
@@ -20,6 +20,7 @@ import Reports from './pages/reports/index.tsx';
 import Summary from './pages/summary/index.tsx';
 import SundayAttendance from './pages/sunday-attendance/index.tsx';
 import UpcomingEvents from './pages/upcoming-events/index.tsx';
+import CheckIn from './pages/check-in/index.tsx';
 
 const router = createBrowserRouter([
     {
@@ -39,8 +40,8 @@ const router = createBrowserRouter([
         element: <Vip />,
     },
     {
-        path: "/attendance",
-        element: <Attendance />,
+        path: "/check-in",
+        element: <CheckIn />,
     },
     {
         path: "/sunday-attendance",
