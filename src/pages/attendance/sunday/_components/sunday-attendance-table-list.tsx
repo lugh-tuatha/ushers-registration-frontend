@@ -16,7 +16,7 @@ import {
 
 import { FaFilter } from 'react-icons/fa'
 
-import { useSundayAttendance } from '../../../hooks/use-attendance'
+import { useSundayAttendance } from '../../../../hooks/use-attendance'
 
 export default function SundayAttendanceTableList() {
     const { data, isLoading } = useSundayAttendance()
@@ -59,8 +59,8 @@ export default function SundayAttendanceTableList() {
                             <Td>
                                 {attendee.attendee.primary_leader}
                             </Td>
-                            <Td>{attendee.church_process}</Td>
-                            <Td>{attendee.member_status}</Td>
+                            <Td>{attendee.attendee.church_process}</Td>
+                            <Td>{attendee.attendee.member_status}</Td>
                             <Td textAlign='end'>
                                 {
                                     new Date(attendee.time_in)

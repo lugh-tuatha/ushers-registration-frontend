@@ -60,11 +60,16 @@ export default function Header() {
                             </MenuButton>
                             <MenuList py='0'>
                                 <MenuItem>
-                                    <Link href='/sunday-attendance' w='full'>
+                                    <Link href='/attendance/sunday' w='full'>
                                         Sunday Attendance 
                                     </Link>
                                 </MenuItem>
                                 <MenuItem>Pepsol Attendance</MenuItem>
+                                <MenuItem>
+                                    <Link href='/attendance/prayer-night' w='full'>
+                                        Prayer Night Attendance 
+                                    </Link>
+                                </MenuItem>
                                 <MenuItem>Mentoring Attendance</MenuItem>
                                 <MenuItem>Conference Attendance</MenuItem>
                                 <MenuItem>Wild Fire Attendance</MenuItem>
@@ -82,6 +87,9 @@ export default function Header() {
                     </ListItem>
                     <ListItem>
                         <Link href='/reports'>Reports</Link>
+                    </ListItem>
+                    <ListItem>
+                        <Link href='/'>Training Process</Link>
                     </ListItem>
                 </UnorderedList>
 

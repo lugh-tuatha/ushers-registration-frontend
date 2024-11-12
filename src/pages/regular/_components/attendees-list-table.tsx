@@ -19,7 +19,6 @@ import { FaFilter, FaRegEdit } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 import { useAttendees, useMutateDeleteAttendee } from '../../../hooks';
-import ManageAttendeesDataModal from './manage-attendees-data-modal';
 
 export default function AttendeesListTable() {
     const { data, error, isLoading } = useAttendees()
@@ -39,7 +38,6 @@ export default function AttendeesListTable() {
                             <Th>Name</Th>
                             <Th>Age</Th>
                             <Th>Status</Th>
-                            <Th>Address</Th>
                             <Th>Member Status</Th>
                             <Th>Cell Hierarchy</Th>
                             <Th display='flex' alignItems='center' justifyContent='space-between'>
@@ -72,22 +70,18 @@ export default function AttendeesListTable() {
                                     </Td>
                                     <Td>{attendee.age}</Td>
                                     <Td>{attendee.status}</Td>
-                                    <Td noOfLines={1}>
-                                        {attendee.address.length > 35 ?
-                                            `${attendee.address.substring(0, 35)}...` : attendee.address
-                                        }
-                                    </Td>
                                     <Td>{attendee.member_status}</Td>
                                     <Td>{attendee.church_hierarchy}</Td>    
                                     <Td>
                                         {attendee.primary_leader.length > 20 ?
                                             `${attendee.primary_leader.substring(0, 20)}...` : attendee.primary_leader
                                         }
+                                        {/* {attendee.primary_leader} */}
                                     </Td>
                                     <Td>{attendee.church_process}</Td>
                                     <Td>{attendee.network}</Td>
                                     <Td display='flex' justifyContent='end' gap='2'>
-                                        <ManageAttendeesDataModal isEdit={true} attendeeId={attendee._id}/>
+                                        <FaRegEdit size={20} cursor='pointer'/>
                                         <FaRegTrashAlt onClick={() => handleDelete(attendee._id)} size={20} color='red' cursor='pointer'/>
                                     </Td>
                                 </Tr>

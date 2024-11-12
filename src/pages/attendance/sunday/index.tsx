@@ -7,7 +7,7 @@ import {
     Heading,
  } from '@chakra-ui/react'
 
-import Layout from '../../components/layout'
+import Layout from '../../../components/layout'
 import SundayAttendanceTableList from './_components/sunday-attendance-table-list'
 
 export default function SundayAttendance() {
@@ -28,7 +28,7 @@ export default function SundayAttendance() {
             </Breadcrumb>
 
             <Flex justifyContent='space-between' alignItems='center' mb='2'>
-                <Heading size="md" mb='2'>Attendees This Sunday (10/23/2024)</Heading>
+                <Heading size="md" mb='2'>Sunday Service Attendance This Sunday (11/10/2024)</Heading>
                 <Button colorScheme='blue'>
                     Print
                 </Button>

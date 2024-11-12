@@ -3,9 +3,11 @@ import axios from "axios"
 import { API_BASE_URL } from "../constants"
 import { checkInBody } from "../types";
 
+const axiosInstance = axios.create({ baseURL: API_BASE_URL })
+
 export const getAllAttendance = async () => {
     try {
-        const response = await axios.get(API_BASE_URL + "/attendance/type/sunday")
+        const response = await axiosInstance.get("/attendance/type/sunday")
         return response.data.data;
     } catch (error) {
         console.log(error);
@@ -15,7 +17,7 @@ export const getAllAttendance = async () => {
 
 export const checkIn = async (body: checkInBody) => {
     try {
-        const response = await axios.post(API_BASE_URL + "/attendance", body)
+        const response = await axiosInstance.post("/attendance", body)
         return response;
     } catch (error) {
         console.log(error);

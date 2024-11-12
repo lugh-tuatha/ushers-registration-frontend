@@ -30,6 +30,7 @@ export default function Summary() {
                 <TabList>
                     <Tab>Primary Leader</Tab>
                     <Tab>Secondary Leader</Tab>
+                    <Tab>Cell Member</Tab>
                 </TabList>
 
                 <TabPanels>

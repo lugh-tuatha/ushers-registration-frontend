@@ -1,11 +1,13 @@
 import axios from "axios";
 
 import { API_BASE_URL } from "../constants";
-import { CreateNewAttendeeBody } from "../types";
+import { CreateNewAttendeeBody, UpdateAttendeeBody } from "../types";
 
-export const getAllAttendees = async (search = ""): Promise<any> => {
+const axiosInstance = axios.create({ baseURL: API_BASE_URL })
+
+export const getAllAttendees = async (search = "") => {
     try {
-        const response = await axios.get(API_BASE_URL + "/attendees?search=" + search);
+        const response = await axiosInstance.get<any>("/attendees?search=" + search);
         return response.data.data;
     } catch (error) {
         console.log(error);
@@ -13,9 +15,9 @@ export const getAllAttendees = async (search = ""): Promise<any> => {
     }
 }
 
-export const getAttendeesById = async (id: string): Promise<any> => {
+export const getAttendeesById = async (id: string) => {
     try {
-        const response = await axios.get(API_BASE_URL + "/attendees/" + id)
+        const response = await axiosInstance.get<any>("/attendees/" + id)
         return response.data.data
     } catch (error) {
         console.log(error);
@@ -25,7 +27,7 @@ export const getAttendeesById = async (id: string): Promise<any> => {
 
 export const createNewAttendee = async (body: CreateNewAttendeeBody) => {
     try {
-        const response = await axios.post(API_BASE_URL + "/attendees", body)
+        const response = await axiosInstance.post("/attendees", body)
         return response;
     } catch (error) {
         console.log(error);
@@ -33,9 +35,19 @@ export const createNewAttendee = async (body: CreateNewAttendeeBody) => {
     }
 }
 
+export const updateAttendee = async (body: UpdateAttendeeBody) => {
+    try {
+        const response = await axiosInstance.put("/attendees" + `/${body._id}`, body)
+        return response;
+    } catch (error) {
+        console.log(error);
+        throw new Error("Failed to edit attendee");
+    }
+}
+
 export const deleteAttendee = async (id: string) => {
     try {
-        const response = await axios.delete(API_BASE_URL + "/attendees/" + id)
+        const response = await axiosInstance.delete("/attendees/" + id)
         return response
     } catch (error) {
         console.log(error)

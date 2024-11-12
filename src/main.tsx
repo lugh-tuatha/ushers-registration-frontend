@@ -12,13 +12,13 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 import App from './App.tsx'
 import Regular from './pages/regular/index.tsx';
-import Attendance from './pages/check-in/index.tsx';
 import Vip from './pages/vip/index.tsx';
 import AdminLogin from './pages/admin-login/index.tsx';
 import Profile from './pages/regular/_pages/profile.tsx';
 import Reports from './pages/reports/index.tsx';
 import Summary from './pages/summary/index.tsx';
-import SundayAttendance from './pages/sunday-attendance/index.tsx';
+import SundayAttendance from './pages/attendance/sunday/index.tsx';
+import PrayerNightAttendance from './pages/attendance/prayer-night/index.tsx';
 import UpcomingEvents from './pages/upcoming-events/index.tsx';
 import CheckIn from './pages/check-in/index.tsx';
 
@@ -44,8 +44,12 @@ const router = createBrowserRouter([
         element: <CheckIn />,
     },
     {
-        path: "/sunday-attendance",
+        path: "attendance/sunday",
         element: <SundayAttendance />
+    },
+    {
+        path: "attendance/prayer-night",
+        element: <PrayerNightAttendance />
     },
     {
         path: "/login",

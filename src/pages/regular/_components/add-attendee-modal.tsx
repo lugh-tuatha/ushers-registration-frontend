@@ -1,13 +1,9 @@
-import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import {     
     Box,
     useDisclosure,
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
     Text,
-    HStack,
     Button,
     Modal,
     ModalOverlay,
@@ -21,154 +17,78 @@ import {
     Textarea,
     FormControl,
 } from '@chakra-ui/react'
-import { FaRegEdit } from 'react-icons/fa';
 
-import { useAttendee, useMutateAttendees } from '../../../hooks';
+import { useCreateAttendee } from '../../../hooks';
+import { CreateNewAttendeeBody } from '../../../types';
 
-interface Props {
-    isEdit: boolean,
-    attendeeId?: string
-}
-
-export default function ManageAttendeesDataModal( { isEdit, attendeeId }: Props ) {
+export default function AddAttendeeModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()
-
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [age, setAge] = useState("")
-    const [status, setStatus] = useState("")
-    const [address, setAddress] = useState("")
-    const [network, setNetwork] = useState("")
-    const [churchHierarchy, setChurchHierarchy] = useState("")
-    const [primaryLeader, setPrimaryLeader] = useState("")
-    const [churchProcess, setChurchProcess] = useState("")
-    const [memberStatus, setMemberStatus] = useState("")
-
-    const modalTitle = isEdit ? `Edit Attendee: (name)` : 'Insert New Attendee'
-
-    const setAttendeeInfo = () => {
-        setFirstName("Aasda")
-        setLastName("");
-        setAge("");
-        setStatus("");
-        setAddress("");
-        setNetwork("");
-        setChurchHierarchy("");
-        setPrimaryLeader("");
-    }
-    
-    const { data, isLoading, isError } = useAttendee(attendeeId)
-    
-    // if(data)
-    // setAttendeeInfo()
 
     const { 
         mutate: createAttendeeMutation, 
         isSuccess: isCreateAttendeeSuccess, 
-        isPending: isCreatePostPending
-    } = useMutateAttendees()
-    
-    const resetForm = () => {
-        setFirstName("")
-        setLastName("");
-        setAge("");
-        setStatus("");
-        setAddress("");
-        setNetwork("");
-        setChurchHierarchy("");
-        setPrimaryLeader("");
-    }
+        isPending: isCreateAttendeePending
+    } = useCreateAttendee()
 
-    const handleSubmit = () => {
-        createAttendeeMutation({
-            first_name: firstName,
-            last_name: lastName,
-            age: parseInt(age),
-            status: status,
-            address: address,
-            network: network,
-            church_hierarchy: churchHierarchy,
-            primary_leader: primaryLeader,
-            is_leader: false,
-            church_process: churchProcess,
-            member_status: memberStatus
-        })
-        onClose()
-        resetForm()
+    const { register, handleSubmit, reset } = useForm<CreateNewAttendeeBody>()
+
+    const handleCreateAttendeeSubmit: SubmitHandler<CreateNewAttendeeBody> = (body) => {
+        createAttendeeMutation(body)
+
+        if(isCreateAttendeeSuccess){
+            onClose()
+        }
+    } 
+
+    const handleOpenModal = () => {
+        reset()
+        onOpen()
     }
 
     return (
         <Box>
-            {isEdit ? (
-                <FaRegEdit onClick={onOpen} size={20} cursor='pointer'/>
-            ): (
-                <Button colorScheme='blue' onClick={onOpen}>New Account +</Button>
-            )}
+            <Button colorScheme='blue' onClick={handleOpenModal}>New Account +</Button>
 
             <Modal size='xl' isOpen={isOpen} onClose={onClose}> 
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>{modalTitle}</ModalHeader>
+                    <ModalHeader>Insert New Attendee</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody display='flex' gap='8'>
                         <FormControl display='flex' flexDirection='column' gap='2' width='50%'>
                             <Text>Personal Information</Text>
                             <Input 
-                                name='first-name' 
                                 placeholder='First Name' 
-                                value={firstName}
-                                onChange={(event) => {
-                                    setFirstName(event.target.value)
-                                }}
+                                {...register("first_name")}
                             />
                             <Input 
-                                name='last-name' 
                                 placeholder='Last Name' 
-                                value={lastName}
-                                onChange={(event) => {
-                                    setLastName(event.target.value)
-                                }}
+                                {...register("last_name")}
                             />
                             <Input 
                                 type='number'
-                                name='age' 
                                 placeholder='Age' 
-                                value={age}
-                                onChange={(event) => {
-                                    setAge(event.target.value)
-                                }}
+                                {...register("age")}
                             />
                             <Select 
-                                name='status' 
                                 placeholder='Status' 
-                                value={status} 
-                                onChange={(event) => {
-                                    setStatus(event.target.value)
-                                }}
+                                {...register("status")}
                             >
                                 <option value='Single'>Single</option>
                                 <option value='Married'>Married</option>
                                 <option value='Divorced'>Divorced</option>
                                 <option value='Widowed'>Widowed</option>
                             </Select>
-                            <Textarea 
-                                name='address' 
+                            <Textarea
                                 placeholder='Address' 
-                                value={address} 
-                                onChange={(event) => {
-                                    setAddress(event.target.value)
-                                }}
+                                {...register("address")}
                             />
                         </FormControl>
                         <FormControl display='flex' flexDirection='column' width='50%' gap='2'>
                             <Text textAlign='right'>Church Role Information</Text>
                             <Select 
-                                name='primary-leader' 
                                 placeholder='Primary Leader'
-                                value={primaryLeader} 
-                                onChange={(event) => {
-                                    setPrimaryLeader(event.target.value)
-                                }}
+                                {...register("primary_leader")}
                             >
                                 <option value='Ps. Alip Aspiras'>
                                     Ps. Alip Aspiras
@@ -239,12 +159,8 @@ export default function ManageAttendeesDataModal( { isEdit, attendeeId }: Props 
                                 
                             </Select>
                             <Select 
-                                name='network' 
                                 placeholder='Net'
-                                value={network} 
-                                onChange={(event) => {
-                                    setNetwork(event.target.value)
-                                }}
+                                {...register("network")}
                             >
                                 <option value='Young'>Youth</option>
                                 <option value='Young Pro'>Young Pro</option>
@@ -254,12 +170,8 @@ export default function ManageAttendeesDataModal( { isEdit, attendeeId }: Props 
                                 <option value='Wife'>Wife</option>
                             </Select>
                             <Select 
-                                name='church-hierarchy' 
                                 placeholder='Church Hierarchy'
-                                value={churchHierarchy} 
-                                onChange={(event) => {
-                                    setChurchHierarchy(event.target.value)
-                                }} 
+                                {...register("church_hierarchy")}
                             >
                                 <option value='Cell Member'>Cell Member</option>
                                 <option value='Cell Leader'>Cell Leader</option>
@@ -268,12 +180,17 @@ export default function ManageAttendeesDataModal( { isEdit, attendeeId }: Props 
                                 <option value='Pastor'>Pastor</option>
                             </Select>
                             <Select 
-                                name='church-process' 
+                                placeholder='Member Status'
+                                {...register("member_status")}
+                            >
+                                <option value='Regular Attendees'>Regular Attendees</option>
+                                <option value='Regular Disciple'>Regular Disciple</option>
+                                <option value='Regular Startup'>Regular Startup</option>
+                                <option value='Back to Life'>Back to Life</option>
+                            </Select>
+                            <Select 
                                 placeholder='Church Process'
-                                value={churchProcess} 
-                                onChange={(event) => {
-                                    setChurchProcess(event.target.value)
-                                }}
+                                {...register("church_process")}
                             >
                                 <option value='Start Up Lesson'>Start Up Lesson</option>
                                 <option value='Pre-Encounter'>Pre-Encounter</option>
@@ -284,19 +201,6 @@ export default function ManageAttendeesDataModal( { isEdit, attendeeId }: Props 
                                 <option value='SOL 3'>SOL 3</option>
                                 <option value='Pastoral Ministry'>Pastoral Ministry</option>
                             </Select>
-                            <Select 
-                                name='member-status' 
-                                placeholder='Member Status'
-                                value={memberStatus} 
-                                onChange={(event) => {
-                                    setMemberStatus(event.target.value)
-                                }}
-                            >
-                                <option value='Regular Attendees'>Regular Attendees</option>
-                                <option value='Regular Disciple'>Regular Disciple</option>
-                                <option value='Regular Startup'>Regular Startup</option>
-                                <option value='Back to Life'>Back to Life</option>
-                            </Select>
                         </FormControl>
                     </ModalBody>
 
@@ -304,7 +208,14 @@ export default function ManageAttendeesDataModal( { isEdit, attendeeId }: Props 
                         <Button colorScheme='blue' mr={3} onClick={onClose}>
                             Close
                         </Button>
-                        <Button variant='ghost' onClick={handleSubmit}>Submit</Button>
+            
+                        <Button 
+                            variant='ghost' 
+                            onClick={handleSubmit(handleCreateAttendeeSubmit)}
+                            disabled={isCreateAttendeePending}
+                        >
+                            {isCreateAttendeePending ? 'Creating...' : 'Insert Attendee'}
+                        </Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

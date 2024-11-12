@@ -22,7 +22,7 @@ import {
 } from '@chakra-ui/react'
 
 import AttendeesListTable from './_components/attendees-list-table';
-import ManageAttendeesDataModal from './_components/manage-attendees-data-modal';
+import AddAttendeeModal from './_components/add-attendee-modal';
 
 export default function Regular() {
     return (
@@ -38,7 +38,7 @@ export default function Regular() {
             </Breadcrumb>
 
             <HStack mb='4'>
-                <ManageAttendeesDataModal isEdit={false}/>
+                <AddAttendeeModal />
             </HStack>
             
             <AttendeesListTable />

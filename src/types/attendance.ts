@@ -2,7 +2,9 @@ interface attendee{
     _id: String,
     first_name: String,
     last_name: String,
-    primary_leader: String
+    primary_leader: String,
+    church_process: String,
+    member_status: String
 }
 
 export interface AttendanceResponseHttpData{
