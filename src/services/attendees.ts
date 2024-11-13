@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { API_BASE_URL } from "../constants";
-import { CreateNewAttendeeBody, UpdateAttendeeBody } from "../types";
+import { CreateNewAttendeeBody, UpdateAttendeeBody, AttendeesResponseHttpData } from "../types";
 
 const axiosInstance = axios.create({ baseURL: API_BASE_URL })
 
@@ -21,6 +21,16 @@ export const getAttendeesById = async (id: string) => {
         return response.data.data
     } catch (error) {
         console.log(error);
+        throw new Error("Failed to fetch attendee")
+    }
+}
+
+export const getAttendeesByHierarchy = async (hierarchy: string) => {
+    try {
+        const response = await axiosInstance.get<any>("/attendees/hierarchy/" + hierarchy)
+        return response.data.data
+    } catch (error) {
+        console.log(error)
         throw new Error("Failed to fetch attendee")
     }
 }

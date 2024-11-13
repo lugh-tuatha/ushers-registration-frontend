@@ -43,14 +43,19 @@ export default function CheckIn() {
     }
 
     const markPresent = (id: string, first_name: string) => {
+        let attendance_type = "sunday"
+
+        if(moment().format('ddd') == "Wed"){
+            attendance_type = "prayer-night"
+        }
+        
         mutate({
             week_no: moment(new Date()).week(),
             attendee: id,
             time_in: new Date(),
-            attendance_type: "sunday"
+            attendance_type: attendance_type
         })
 
-        console.log(isSuccess)
         if(isSuccess){
             toast({
                 title: 'Presence marked!',

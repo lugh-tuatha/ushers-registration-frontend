@@ -17,8 +17,8 @@ import AdminLogin from './pages/admin-login/index.tsx';
 import Profile from './pages/regular/_pages/profile.tsx';
 import Reports from './pages/reports/index.tsx';
 import Summary from './pages/summary/index.tsx';
-import SundayAttendance from './pages/attendance/sunday/index.tsx';
-import PrayerNightAttendance from './pages/attendance/prayer-night/index.tsx';
+import SundayAttendance from './pages/attendance/_pages/sunday.tsx';
+import PrayerNightAttendance from './pages/attendance/_pages/prayer-night.tsx';
 import UpcomingEvents from './pages/upcoming-events/index.tsx';
 import CheckIn from './pages/check-in/index.tsx';
 

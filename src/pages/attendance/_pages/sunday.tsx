@@ -8,9 +8,9 @@ import {
  } from '@chakra-ui/react'
 
 import Layout from '../../../components/layout'
-// import SundayAttendanceTableList from './_components/sunday-attendance-table-list'
+import AttendanceTableList from '../_components/attendance-table-list'
 
-export default function PrayerNightAttendance() {
+export default function SundayAttendance() {
     return (
         <Layout>
             <Breadcrumb mb='4'>
@@ -23,18 +23,18 @@ export default function PrayerNightAttendance() {
                 </BreadcrumbItem>
 
                 <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink href='#'>Prayer Night Attendance</BreadcrumbLink>
-                </BreadcrumbItem> 
+                    <BreadcrumbLink href='#'>Sunday Attendance</BreadcrumbLink>
+                </BreadcrumbItem>
             </Breadcrumb>
 
             <Flex justifyContent='space-between' alignItems='center' mb='2'>
-                <Heading size="md" mb='2'>Prayer Night Attendance This Wednesday (11/12/2024)</Heading>
+                <Heading size="md" mb='2'>Sunday Service Attendance This Sunday (11/10/2024)</Heading>
                 <Button colorScheme='blue'>
                     Print
                 </Button>
             </Flex>
 
-            {/* <SundayAttendanceTableList /> */}
+            <AttendanceTableList attendanceType="sunday" />
         </Layout>
     )
 }

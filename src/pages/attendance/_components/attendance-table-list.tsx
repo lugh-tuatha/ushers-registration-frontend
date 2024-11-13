@@ -16,10 +16,14 @@ import {
 
 import { FaFilter } from 'react-icons/fa'
 
-import { useSundayAttendance } from '../../../../hooks/use-attendance'
+import { useSundayAttendanceByType } from '../../../hooks/use-attendance'
 
-export default function SundayAttendanceTableList() {
-    const { data, isLoading } = useSundayAttendance()
+interface Props {
+    attendanceType: string
+}
+
+export default function AttendanceTableList( {attendanceType}: Props ) {
+    const { data, isLoading } = useSundayAttendanceByType(attendanceType)
 
     console.log(data)
 

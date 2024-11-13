@@ -5,9 +5,9 @@ import { checkInBody } from "../types";
 
 const axiosInstance = axios.create({ baseURL: API_BASE_URL })
 
-export const getAllAttendance = async () => {
+export const getAllAttendanceByType = async (type: string) => {
     try {
-        const response = await axiosInstance.get("/attendance/type/sunday")
+        const response = await axiosInstance.get("/attendance/type/" + type)
         return response.data.data;
     } catch (error) {
         console.log(error);

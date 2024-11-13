@@ -19,6 +19,7 @@ import { FaFilter, FaRegEdit } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 import { useAttendees, useMutateDeleteAttendee } from '../../../hooks';
+import EditAttendeeModal from './edit-attendee-modal';
 
 export default function AttendeesListTable() {
     const { data, error, isLoading } = useAttendees()
@@ -81,7 +82,7 @@ export default function AttendeesListTable() {
                                     <Td>{attendee.church_process}</Td>
                                     <Td>{attendee.network}</Td>
                                     <Td display='flex' justifyContent='end' gap='2'>
-                                        <FaRegEdit size={20} cursor='pointer'/>
+                                        <EditAttendeeModal attendeeId={attendee._id} />
                                         <FaRegTrashAlt onClick={() => handleDelete(attendee._id)} size={20} color='red' cursor='pointer'/>
                                     </Td>
                                 </Tr>

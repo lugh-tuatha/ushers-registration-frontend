@@ -17,23 +17,35 @@ import {
     FormControl,
 } from '@chakra-ui/react'
 
-import { useCreateAttendee, useGetAttendeesByHierarchy } from '../../../hooks';
-import { CreateNewAttendeeBody } from '../../../types';
+import { FaRegEdit } from "react-icons/fa";
 
-export default function AddAttendeeModal() {
+import { useAttendee, useCreateAttendee, useGetAttendeesByHierarchy, useUpdateAttendee } from '../../../hooks';
+import { CreateNewAttendeeBody, UpdateAttendeeBody } from '../../../types';
+
+interface Props {
+    attendeeId: string
+}
+
+export default function EditAttendeeModal({ attendeeId }: Props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    
+    const {
+        data
+    } = useAttendee(attendeeId)
 
-    const { data } = useGetAttendeesByHierarchy("Primary Leader")
     const { 
-        mutate: createAttendeeMutation, 
+        data: leaderData
+    } = useGetAttendeesByHierarchy("Primary Leader")
+    const { 
+        mutate: updateAttendeeMutation, 
         isSuccess: isCreateAttendeeSuccess, 
         isPending: isCreateAttendeePending
-    } = useCreateAttendee()
+    } = useUpdateAttendee()
 
-    const { register, handleSubmit, reset } = useForm<CreateNewAttendeeBody>()
+    const { register, handleSubmit, reset } = useForm<UpdateAttendeeBody>()
 
-    const handleCreateAttendeeSubmit: SubmitHandler<CreateNewAttendeeBody> = (body) => {
-        createAttendeeMutation(body)
+    const handleUpdateAttendeeSubmit: SubmitHandler<UpdateAttendeeBody> = (body) => {
+        updateAttendeeMutation(body)
 
         if(isCreateAttendeeSuccess){
             onClose()
@@ -41,18 +53,18 @@ export default function AddAttendeeModal() {
     } 
 
     const handleOpenModal = () => {
-        reset()
+        reset(data)
         onOpen()
     }
 
     return (
         <>
-            <Button colorScheme='blue' onClick={handleOpenModal}>New Account +</Button>
+            <FaRegEdit size={20} cursor='pointer' onClick={handleOpenModal}/>
 
             <Modal size='xl' isOpen={isOpen} onClose={onClose}> 
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Insert New Attendee</ModalHeader>
+                    <ModalHeader>Edit Attendee</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody display='flex' gap='8'>
                         <FormControl display='flex' flexDirection='column' gap='2' width='50%'>
@@ -90,7 +102,7 @@ export default function AddAttendeeModal() {
                                 placeholder='Primary Leader'
                                 {...register("primary_leader")}
                             >
-                                {data?.map((leader: any) => (
+                                {leaderData?.map((leader: any) => (
                                     <option 
                                         key={leader._id} 
                                         value={`${leader.first_name} + " " + ${leader.last_name}`}
@@ -152,15 +164,14 @@ export default function AddAttendeeModal() {
             
                         <Button 
                             variant='ghost' 
-                            onClick={handleSubmit(handleCreateAttendeeSubmit)}
+                            onClick={handleSubmit(handleUpdateAttendeeSubmit)}
                             disabled={isCreateAttendeePending}
                         >
-                            {isCreateAttendeePending ? 'Updating...' : 'Insert Attendee'}
+                            {isCreateAttendeePending ? 'Creating...' : 'Update Attendee'}
                         </Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
         </>
-        
     )
 }
