@@ -20,7 +20,7 @@ export default function Vip() {
     const [tabIndex, setTabIndex] = useState(0)
 
     const memberStatuses = ["First Timer", "Second Timer", "Third Timer", "Fourth Timer"]
-    const { data, error, isLoading } = useGetAttendeesByMemberStatus(memberStatuses[tabIndex])
+    const { data, error, isLoading } =   useGetAttendeesByMemberStatus(memberStatuses[tabIndex])
 
     console.log(tabIndex)
     return (

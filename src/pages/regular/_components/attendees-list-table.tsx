@@ -13,6 +13,17 @@ import {
     Text,
     MenuItem,
     Link,
+    Flex,
+    Spinner,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    Button,
 } from '@chakra-ui/react'
 
 import { FaFilter, FaRegEdit } from "react-icons/fa";
@@ -23,10 +34,14 @@ import EditAttendeeModal from './edit-attendee-modal';
 
 export default function AttendeesListTable() {
     const { data, error, isLoading } = useAttendees()
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     const { mutate: deleteAttendeeMutation } = useMutateDeleteAttendee()
 
     const handleDelete = (id: string) => {
         deleteAttendeeMutation(id)
+        onClose()
     }
 
     return (
@@ -82,7 +97,24 @@ export default function AttendeesListTable() {
                                     <Td>{attendee.network || "-"}</Td>
                                     <Td display='flex' justifyContent='end' gap='2'>
                                         <EditAttendeeModal attendeeId={attendee._id} />
-                                        <FaRegTrashAlt onClick={() => handleDelete(attendee._id)} size={20} color='red' cursor='pointer'/>
+                                        <FaRegTrashAlt onClick={onOpen} size={20} color='red' cursor='pointer'/>
+                                        <Modal isOpen={isOpen} onClose={onClose}>
+                                            <ModalOverlay />
+                                            <ModalContent>
+                                                <ModalHeader>Delete Confirmation!</ModalHeader>
+                                                <ModalCloseButton />
+                                                <ModalBody>
+                                                    <Text>Are you sure you want to delete this? This action cannot be undone.</Text>
+                                                </ModalBody>
+
+                                                <ModalFooter>
+                                                    <Button colorScheme='blue' mr={3} onClick={() => handleDelete(attendee._id)}>
+                                                        Yes
+                                                    </Button>
+                                                    <Button variant='ghost'>Close</Button>
+                                                </ModalFooter>
+                                            </ModalContent>
+                                        </Modal>
                                     </Td>
                                 </Tr>
                             ))}
@@ -90,7 +122,10 @@ export default function AttendeesListTable() {
                     ) : (
                         <Tr>
                             <Td colSpan={7} textAlign="center">
-                                Loading...
+                                <Flex p="4" gap='4' justifyContent='center'>
+                                    <Spinner />
+                                    <Text>The initial loading time takes 1 to 2 minutes, but once it starts, the loading speeds up.</Text>
+                                </Flex>
                             </Td>
                         </Tr>
                     )}

@@ -2,7 +2,7 @@ import React from 'react'
 
 import AddVip from './add-vip';
 
-import { Flex, Heading, TabPanel, Text } from '@chakra-ui/react';
+import { Flex, Heading, TabPanel, Text, Spinner, Box } from '@chakra-ui/react';
 
 interface Props {
     title: string;
@@ -35,7 +35,10 @@ export default function TabContent({title, data, isLoading} : Props) {
                     <Text>No attendees available.</Text>
                 )
             ) : (
-                <Text>Loading...</Text>
+                <Flex p="4" gap='4'>
+                    <Spinner />
+                    <Text>The initial loading time takes 1 to 2 minutes, but once it starts, the loading speeds up.</Text>
+                </Flex>
             )}
         </TabPanel>
     )

@@ -54,18 +54,19 @@ export default function CheckIn() {
             attendee: id,
             time_in: new Date(),
             attendance_type: attendance_type
+        }, 
+        {
+            onSuccess: () => {
+                toast({
+                    title: 'Presence marked!',
+                    description: `Thank you for attending today, ${first_name}`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                    position: 'bottom-right',
+                });
+            },
         })
-
-        if(isSuccess){
-            toast({
-                title: 'Presence marked!',
-                description: `Thank you for attending today, ${first_name}`,
-                status: 'success',
-                duration: 5000,
-                isClosable: true,
-                position: 'bottom-right'
-            })
-        }
     }
 
     return (
