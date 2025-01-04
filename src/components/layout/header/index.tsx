@@ -28,7 +28,7 @@ export default function Header() {
         setOpenMenu(!openMenu);
     };
 
-    const menuDisplay = openMenu ? '0' : '-100%';
+    const menuDisplay = openMenu ? 'block' : 'none';
 
     return (
         <>
@@ -117,15 +117,14 @@ export default function Header() {
 
             {/* mobile menu */}
             <Container 
-                display={{ base: 'block', md: 'none'}} 
+                display={{ base: menuDisplay, md: 'none'}} 
                 w='100vw'
                 h='100vh'
                 p='4'
                 bg='white'
                 position='absolute' 
                 top='0' 
-                right={menuDisplay}
-                transition="right 0.3s ease-in-out" 
+                right='0'
                 zIndex='2'
             >
                 <Heading size="xl" display='flex' alignItems='center' justifyContent='space-between'>
