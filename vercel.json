@@ -1,0 +1,40 @@
+{
+    "routes": [
+        {
+            "src": "/",
+            "dest": "/"
+        },
+        {
+            "src": "/login",
+            "dest": "/"
+        },
+        {
+            "src": "/regular",
+            "dest": "/"
+        },
+        {
+            "src": "/vip",
+            "dest": "/"
+        },
+        {
+            "src": "/check-in",
+            "dest": "/"
+        },
+        {
+            "src": "/attendance/(.*)",
+            "dest": "/"
+        },
+        {
+            "src": "/upcoming-events",
+            "dest": "/"
+        },
+        {
+            "src": "/summary",
+            "dest": "/"
+        },
+        {
+            "src": "/reports",
+            "dest": "/"
+        }
+    ]
+}
