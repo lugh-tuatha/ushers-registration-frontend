@@ -69,18 +69,17 @@ export default function AttendeesListTable() {
                                             {attendee.first_name} {attendee.last_name}
                                         </Link>
                                     </Td>
-                                    <Td>{attendee.age}</Td>
-                                    <Td>{attendee.status}</Td>
-                                    <Td>{attendee.member_status}</Td>
-                                    <Td>{attendee.church_hierarchy}</Td>    
+                                    <Td>{attendee.age || "-"}</Td>
+                                    <Td>{attendee.status || "-"}</Td>
+                                    <Td>{attendee.member_status || "-"}</Td>
+                                    <Td>{attendee.church_hierarchy || "-"}</Td>    
                                     <Td>
-                                        {attendee.primary_leader.length > 20 ?
-                                            `${attendee.primary_leader.substring(0, 20)}...` : attendee.primary_leader
+                                        {attendee.primary_leader?.length > 20 ?
+                                            `${attendee.primary_leader.substring(0, 20)}...` : attendee.primary_leader || "-"
                                         }
-                                        {/* {attendee.primary_leader} */}
                                     </Td>
-                                    <Td>{attendee.church_process}</Td>
-                                    <Td>{attendee.network}</Td>
+                                    <Td>{attendee.church_process || "-"}</Td>
+                                    <Td>{attendee.network || "-"}</Td>
                                     <Td display='flex' justifyContent='end' gap='2'>
                                         <EditAttendeeModal attendeeId={attendee._id} />
                                         <FaRegTrashAlt onClick={() => handleDelete(attendee._id)} size={20} color='red' cursor='pointer'/>

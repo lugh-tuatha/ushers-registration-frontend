@@ -19,6 +19,7 @@ import {
 
 import { useCreateAttendee, useGetAttendeesByHierarchy } from '../../../hooks';
 import { CreateNewAttendeeBody } from '../../../types';
+import { ATTENDEES_QUERY_KEY } from '../../../constants';
 
 export default function AddAttendeeModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -28,16 +29,17 @@ export default function AddAttendeeModal() {
         mutate: createAttendeeMutation, 
         isSuccess: isCreateAttendeeSuccess, 
         isPending: isCreateAttendeePending
-    } = useCreateAttendee()
+    } = useCreateAttendee([ATTENDEES_QUERY_KEY])
 
     const { register, handleSubmit, reset } = useForm<CreateNewAttendeeBody>()
 
     const handleCreateAttendeeSubmit: SubmitHandler<CreateNewAttendeeBody> = (body) => {
-        createAttendeeMutation(body)
-
-        if(isCreateAttendeeSuccess){
-            onClose()
-        }
+        createAttendeeMutation(body, {
+            onSuccess: () => {
+                reset()
+                onClose()
+            },
+        })
     } 
 
     const handleOpenModal = () => {

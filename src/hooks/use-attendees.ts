@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { ATTENDEE_QUERY_KEY, ATTENDEES_BY_HIERARCHY_QUERY_KEY, ATTENDEES_QUERY_KEY } from "../constants";
-import { createNewAttendee, deleteAttendee, getAllAttendees, getAttendeesByHierarchy, getAttendeesById, updateAttendee } from "../services";
+import { createNewAttendee, deleteAttendee, getAllAttendees, getAttendeesByHierarchy, getAttendeesByMemberStatus, getAttendeesById, updateAttendee } from "../services";
 import { AttendeesResponseHttpData, CreateNewAttendeeBody, UpdateAttendeeBody } from "../types";
 
 export const useAttendees = (search: string | undefined = undefined) => 
@@ -23,13 +23,19 @@ export const useGetAttendeesByHierarchy = (hierarchy: string) =>
         queryFn: () => getAttendeesByHierarchy(hierarchy),
     })
 
-export const useCreateAttendee = () => {
+export const useGetAttendeesByMemberStatus = (status: string) => 
+    useQuery<any>({
+        queryKey: [ATTENDEES_BY_HIERARCHY_QUERY_KEY, status],
+        queryFn: () => getAttendeesByMemberStatus(status),
+    })
+
+export const useCreateAttendee = (queryKey: string[]) => {
     const queryClient = useQueryClient()
 
     return useMutation({
         mutationFn: (body: CreateNewAttendeeBody) => createNewAttendee(body),
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [ATTENDEES_QUERY_KEY] })
+            queryClient.invalidateQueries({ queryKey })
         }
     })
 }

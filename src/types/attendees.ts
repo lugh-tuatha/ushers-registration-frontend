@@ -26,6 +26,7 @@ export interface CreateNewAttendeeBody {
     is_leader: boolean,
     church_process: String,
     member_status: String,
+    invited_by: String
 }
 
 export interface UpdateAttendeeBody {
