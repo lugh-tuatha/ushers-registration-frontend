@@ -24,10 +24,10 @@ import {
     TabPanels, 
     Tab, 
     TabPanel,
-    HStack,
     Heading,
     Alert,
-    AlertIcon, 
+    AlertIcon,
+    Box, 
 } from '@chakra-ui/react'
 
 import { FaPeopleLine } from "react-icons/fa6";
@@ -36,7 +36,6 @@ import { TiUserAdd } from "react-icons/ti";
 import { BsArrowRepeat } from "react-icons/bs";
 import { GiAchievement } from "react-icons/gi";
 import { GrAchievement } from "react-icons/gr";
-
 
 export default function Reports() {
     return (
@@ -61,7 +60,7 @@ export default function Reports() {
                 <TabPanels>
                     <TabPanel px='0' py='1'>
                         <Heading size='sm' mt="4">VIPs</Heading>
-                        <HStack mt='1' gap='4'>
+                        <Box display='flex' flexDirection={{base: 'column', md: 'row'}} mt='1' gap='4'>
                             <StatCard 
                                 label="First Timer (This Week)"
                                 value={9}
@@ -89,10 +88,10 @@ export default function Reports() {
                                 change_percentage={11.63}
                                 icon={<GrAchievement size={70} />} 
                             />
-                        </HStack>
+                        </Box>
 
                         <Heading size='sm' mt="4">Attendees</Heading>
-                        <HStack mt="1" gap='4'>
+                        <Box mt="1" gap='4' flexDirection={{base: 'column', md: 'row'}}>
                             <StatCard 
                                 label="Total Attendees (This Week)"
                                 value={440}
@@ -106,7 +105,7 @@ export default function Reports() {
                                 change_percentage={13.53}
                                 icon={<FaPeopleLine size={70} />} 
                             />
-                        </HStack>
+                        </Box>
 
                         <Heading size='sm' mt="4" mb="2">Weekly Attendance Chart</Heading>
                         <LineChart 
@@ -123,7 +122,7 @@ export default function Reports() {
                     </TabPanel>
                     <TabPanel px='0' py='1'>
                         <Heading size='sm' mt="4">VIPs</Heading>
-                        <HStack mt='1' gap='4'>
+                        <Box mt='1' gap='4' flexDirection={{base: 'column', md: 'row'}}>
                             <StatCard 
                                 label="First Timer (This Month)"
                                 value={42}
@@ -151,10 +150,10 @@ export default function Reports() {
                                 change_percentage={-13}
                                 icon={<GrAchievement size={70} />} 
                             />
-                        </HStack>
+                        </Box>
 
                         <Heading size='sm' mt="4">Attendees</Heading>
-                        <HStack mt='1' gap='4'>
+                        <Box mt='1' gap='4' flexDirection={{base: 'column', md: 'row'}}>
                             <StatCard 
                                 label="Total Attendees (This Month)"
                                 value={1440}
@@ -168,7 +167,7 @@ export default function Reports() {
                                 change_percentage={13.53}
                                 icon={<FaPeopleLine size={70} />} 
                             />
-                        </HStack>
+                        </Box>
 
                         <Heading size='sm' mt="4" mb="2">Monthly Attendance Chart</Heading>
                         <Alert status='info'>

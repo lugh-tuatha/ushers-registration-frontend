@@ -5,22 +5,18 @@ import Layout from './components/layout'
 import { 
     Heading,
     Card, 
-    CardHeader, 
     CardBody, 
-    CardFooter,
     Button,
     Text,
     Box,
     Image,
-    HStack,
-    Flex,
     Link
  } from '@chakra-ui/react'
 function App() {
     return (
         <Layout>
             <Box display={{base: 'block', md: 'flex'}} gap="4">
-                <Card size="md" mt="4" width={{base: 'block', md: "50%"}}>
+                <Card size="md" mt={{base: "0", md: "4"}} width={{base: 'block', md: "50%"}}>
                     <CardBody>
                         <Heading size="md">VIPs</Heading>
 

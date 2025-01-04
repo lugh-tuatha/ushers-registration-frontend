@@ -1,12 +1,12 @@
 import Layout from '../../components/layout'
 
 import { 
+    Box,
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
     Card,
     CardBody,
-    Flex,
     Heading,
     Image,
     Text,
@@ -25,7 +25,7 @@ export default function UpcomingEvents() {
                 </BreadcrumbItem>
             </Breadcrumb>
 
-            <Flex gap='4'>
+            <Box display='flex' flexDirection={{base: 'column', md: 'row'}} gap='4'>
                 <Card>
                     <CardBody>
                         <Image src='/assets/anniversary.png' alt='church anniversary' height='10rem'/>
@@ -58,7 +58,7 @@ export default function UpcomingEvents() {
                         <Text opacity='.5' mt="2">Dec 8, 2024</Text>
                     </CardBody>
                 </Card>
-            </Flex>
+            </Box>
             
         </Layout>
     )
