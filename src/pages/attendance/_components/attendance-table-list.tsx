@@ -23,7 +23,7 @@ interface Props {
 }
 
 export default function AttendanceTableList( {attendanceType}: Props ) {
-    const { data, isLoading } = useSundayAttendanceByType(attendanceType)
+    const { data } = useSundayAttendanceByType(attendanceType)
 
     console.log(data)
 

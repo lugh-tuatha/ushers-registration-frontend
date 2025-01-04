@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { API_BASE_URL } from "../constants";
-import { CreateNewAttendeeBody, UpdateAttendeeBody, AttendeesResponseHttpData } from "../types";
+import { CreateNewAttendeeBody, UpdateAttendeeBody } from "../types";
 
 const axiosInstance = axios.create({ baseURL: API_BASE_URL })
 

@@ -27,7 +27,6 @@ export default function AddAttendeeModal() {
     const { data } = useGetAttendeesByHierarchy("Primary Leader")
     const { 
         mutate: createAttendeeMutation, 
-        isSuccess: isCreateAttendeeSuccess, 
         isPending: isCreateAttendeePending
     } = useCreateAttendee([ATTENDEES_QUERY_KEY])
 
@@ -53,11 +52,11 @@ export default function AddAttendeeModal() {
 
             <Modal size='xl' isOpen={isOpen} onClose={onClose}> 
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent mt={{base: '0', md: 'auto'}} >
                     <ModalHeader>Insert New Attendee</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody display='flex' gap='8'>
-                        <FormControl display='flex' flexDirection='column' gap='2' width='50%'>
+                    <ModalBody display={{base: 'block', md: 'flex'}} gap='8'>
+                        <FormControl display='flex' flexDirection='column' gap='2' width={{base: '100%', md: '50%'}}>
                             <Text>Personal Information</Text>
                             <Input 
                                 placeholder='First Name' 
@@ -86,8 +85,8 @@ export default function AddAttendeeModal() {
                                 {...register("address")}
                             />
                         </FormControl>
-                        <FormControl display='flex' flexDirection='column' width='50%' gap='2'>
-                            <Text textAlign='right'>Church Role Information</Text>
+                        <FormControl display='flex' flexDirection='column' width={{base: '100%', md: '50%'}} gap='2'>
+                            <Text textAlign={{md: 'right'}}>Church Role Information</Text>
                             <Select 
                                 placeholder='Primary Leader'
                                 {...register("primary_leader")}

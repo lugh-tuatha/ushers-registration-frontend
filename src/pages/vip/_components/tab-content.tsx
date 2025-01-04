@@ -1,8 +1,6 @@
-import React from 'react'
-
 import AddVip from './add-vip';
 
-import { Flex, Heading, TabPanel, Text, Spinner, Box } from '@chakra-ui/react';
+import { Flex, Heading, TabPanel, Text, Spinner } from '@chakra-ui/react';
 
 interface Props {
     title: string;

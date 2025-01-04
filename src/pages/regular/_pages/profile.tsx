@@ -24,7 +24,7 @@ import { useAttendee } from '../../../hooks';
 
 export default function Profile() {
     const params = useParams()
-    const { data, error, isLoading } = useAttendee(params.slug)
+    const { data, isLoading } = useAttendee(params.slug)
 
     return (
         <Layout>

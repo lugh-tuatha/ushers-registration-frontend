@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { 
     Button,
     Modal,
@@ -23,8 +21,6 @@ export default function AddVip() {
 
     const { 
         mutate: createVipMutation, 
-        isSuccess: isCreateVipSuccess, 
-        isPending: isCreateVipPending
     } = useCreateAttendee([ATTENDEES_BY_HIERARCHY_QUERY_KEY])
 
     const { register, handleSubmit, reset } = useForm<CreateNewAttendeeBody>()
@@ -45,7 +41,7 @@ export default function AddVip() {
     
     return (
         <>
-            <Button onClick={   handleOpenModal} colorScheme='blue'>New VIP</Button>
+            <Button onClick={handleOpenModal} colorScheme='blue'>New VIP</Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />

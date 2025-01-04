@@ -19,8 +19,8 @@ import {
 
 import { FaRegEdit } from "react-icons/fa";
 
-import { useAttendee, useCreateAttendee, useGetAttendeesByHierarchy, useUpdateAttendee } from '../../../hooks';
-import { CreateNewAttendeeBody, UpdateAttendeeBody } from '../../../types';
+import { useAttendee, useGetAttendeesByHierarchy, useUpdateAttendee } from '../../../hooks';
+import { UpdateAttendeeBody } from '../../../types';
 
 interface Props {
     attendeeId: string

@@ -4,21 +4,7 @@ import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
-    Text,
-    useDisclosure,
     HStack,
-    Button,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Input,
-    Select,
-    Textarea,
-    FormControl,
 } from '@chakra-ui/react'
 
 import AttendeesListTable from './_components/attendees-list-table';

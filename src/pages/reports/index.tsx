@@ -1,4 +1,3 @@
-import React from 'react'
 import Layout from '../../components/layout'
 import StatCard from './_components/stat-card';
 
@@ -32,7 +31,6 @@ import {
 } from '@chakra-ui/react'
 
 import { FaPeopleLine } from "react-icons/fa6";
-import { MdAccessibilityNew } from "react-icons/md";
 import { FaChurch } from "react-icons/fa";
 import { TiUserAdd } from "react-icons/ti";
 import { BsArrowRepeat } from "react-icons/bs";

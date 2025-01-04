@@ -5,9 +5,7 @@ import Layout from './components/layout'
 import { 
     Heading,
     Card, 
-    CardHeader, 
     CardBody, 
-    CardFooter,
     Button,
     Text,
     Box,

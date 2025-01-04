@@ -17,7 +17,8 @@ import {
     Button,
     Input,
     useToast,
-    HStack
+    HStack,
+    TableContainer
 } from '@chakra-ui/react'
 
 import { FaQrcode } from "react-icons/fa";
@@ -30,8 +31,8 @@ export default function CheckIn() {
     const [searchTerm, setSearchTerm] = useState("")
     const [search, setSearch] = useState("")
 
-    const { data, error, isLoading } = useAttendees(search)
-    const { mutate, isSuccess, isPending } = useMutatecheckIn()
+    const { data } = useAttendees(search)
+    const { mutate } = useMutatecheckIn()
 
     const toast = useToast();
 
@@ -86,7 +87,7 @@ export default function CheckIn() {
 
             <HStack>
                 <Input 
-                    placeholder='Enter your name to check in' type='search' my='4' w='90%'
+                    placeholder='Enter your name to check in' type='search' my='4' w={{base: '70%', md: '90%'}}
                     value={searchTerm}
                     onChange={(event) => {
                         setSearchTerm(event.target.value)
@@ -94,39 +95,40 @@ export default function CheckIn() {
                     onKeyDown={handleKeyDown}
                 />
 
-                <Button colorScheme='blue' w='10%' display='flex' alignItems="center" gap='2'>
+                <Button colorScheme='blue' w={{base:'30%', md: '10%'}} display='flex' alignItems="center" gap='2'>
                     Scan QR
                     <FaQrcode />
                 </Button>
             </HStack>
-            
-            <Table size='sm'>
-                <TableCaption>List of all Attendees</TableCaption>
-                <Thead>
-                    <Tr>
-                        <Th>Name</Th>
-                        <Th>Church Hierarchy</Th>
-                        <Th>Member Status</Th>
-                        <Th textAlign='end'>Action</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {data?.map((attendee: any) => (
-                        <Tr key={attendee._id}>
-                            <Td>{attendee.first_name} {attendee.last_name}</Td>
-                            <Td>{attendee.network}</Td>
-                            <Td>{attendee.member_status}</Td>
-                            <Td textAlign='end'>
-                                <Button colorScheme='blue' size='sm' 
-                                    onClick={() => markPresent(attendee._id, attendee.first_name)}
-                                >
-                                    Present
-                                </Button>
-                            </Td>
+            <TableContainer>
+                <Table size='sm'>
+                    <TableCaption>List of all Attendees</TableCaption>
+                    <Thead>
+                        <Tr>
+                            <Th>Name</Th>
+                            <Th>Church Hierarchy</Th>
+                            <Th>Member Status</Th>
+                            <Th textAlign='end'>Action</Th>
                         </Tr>
-                    ))}
-                </Tbody>
-            </Table>
+                    </Thead>
+                    <Tbody>
+                        {data?.map((attendee: any) => (
+                            <Tr key={attendee._id}>
+                                <Td>{attendee.first_name} {attendee.last_name}</Td>
+                                <Td>{attendee.network}</Td>
+                                <Td>{attendee.member_status}</Td>
+                                <Td textAlign='end'>
+                                    <Button colorScheme='blue' size='sm' 
+                                        onClick={() => markPresent(attendee._id, attendee.first_name)}
+                                    >
+                                        Present
+                                    </Button>
+                                </Td>
+                            </Tr>
+                        ))}
+                    </Tbody>
+                </Table>
+            </TableContainer>
         </Layout>
     )
 }

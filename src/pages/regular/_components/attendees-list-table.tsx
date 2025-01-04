@@ -26,14 +26,14 @@ import {
     Button,
 } from '@chakra-ui/react'
 
-import { FaFilter, FaRegEdit } from "react-icons/fa";
+import { FaFilter } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 import { useAttendees, useMutateDeleteAttendee } from '../../../hooks';
 import EditAttendeeModal from './edit-attendee-modal';
 
 export default function AttendeesListTable() {
-    const { data, error, isLoading } = useAttendees()
+    const { data, isLoading } = useAttendees()
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
