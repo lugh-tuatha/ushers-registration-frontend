@@ -16,21 +16,20 @@ import {
 
 import { FaFilter } from 'react-icons/fa'
 
-import { useSundayAttendanceByType } from '../../../hooks/use-attendance'
+import { useAttendanceByType } from '../../../hooks/use-attendance'
 
 interface Props {
     attendanceType: string
+    week: number
 }
 
-export default function AttendanceTableList( {attendanceType}: Props ) {
-    const { data } = useSundayAttendanceByType(attendanceType)
-
-    console.log(data)
+export default function AttendanceTableList( {attendanceType, week}: Props ) {
+    const { data } = useAttendanceByType(attendanceType, week)
 
     return (
         <TableContainer>
             <Table size='sm'>
-                <TableCaption>List of all attendees this sunday 10/23/2024</TableCaption>
+                <TableCaption>List of all attendees this sunday week {week}</TableCaption>
                 <Thead>
                         <Tr>
                             <Th>Name</Th>

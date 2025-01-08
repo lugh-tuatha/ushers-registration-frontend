@@ -94,7 +94,7 @@ export default function AddAttendeeModal() {
                                 {data?.map((leader: any) => (
                                     <option 
                                         key={leader._id} 
-                                        value={`${leader.first_name} + " " + ${leader.last_name}`}
+                                        value={`${leader.first_name} ${leader.last_name}`}
                                     >
                                         {leader.first_name} {leader.last_name}
                                     </option>

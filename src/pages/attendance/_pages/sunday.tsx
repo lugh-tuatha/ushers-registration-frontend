@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { useFetchSundaysOfYear } from '../../../hooks/use-calendar'
+
 import { 
     Breadcrumb,
     BreadcrumbItem,
@@ -12,12 +14,16 @@ import {
 
 import Layout from '../../../components/layout'
 import AttendanceTableList from '../_components/attendance-table-list'
+import { SudaysOfYearHttpData } from '../../../types/calendar'
+import moment from 'moment'
 
 export default function SundayAttendance() {
-    const [weekNumber, setWeekNumber] = useState(NaN)
+    const currentDate = new Date()
+    const previousWeekNumber = moment(currentDate.getDate() - 7).isoWeek()
+    const [weekNumber, setWeekNumber] = useState(previousWeekNumber)
     
-    console.log(weekNumber)
-
+    const { data: sundaysOfYearData } = useFetchSundaysOfYear()
+    
     return (
         <Layout>
             <Breadcrumb mb='4'>
@@ -35,7 +41,7 @@ export default function SundayAttendance() {
             </Breadcrumb>
 
             <Flex justifyContent='space-between' alignItems='center'>
-                <Heading size="md" mb='2'>Sunday Service Attendance This Sunday (11/10/2024)</Heading>
+                <Heading size="md" mb='2'>Sunday Service Attendance</Heading>
                 <Button colorScheme='blue'>
                     Print
                 </Button>
@@ -45,12 +51,12 @@ export default function SundayAttendance() {
                 value={weekNumber}
                 onChange={(event) => setWeekNumber(Number(event.target.value))}
             >
-                <option value="44">Week 44, Nov 3, 2024</option>
-                <option value="45">Week 45, Last Sunday</option>
-                <option value="46">Week 46, This Sunday</option>
+                {sundaysOfYearData?.map((sunday: SudaysOfYearHttpData) => (
+                    <option key={sunday.week_no} value={sunday.week_no}>{sunday.date}</option>
+                ))}
             </Select>
 
-            <AttendanceTableList attendanceType="sunday" />
+            <AttendanceTableList attendanceType="sunday" week={weekNumber} />
         </Layout>
     )
 }

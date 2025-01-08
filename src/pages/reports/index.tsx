@@ -1,7 +1,7 @@
 import Layout from '../../components/layout'
 import StatCard from './_components/stat-card';
 
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+// import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
 const data = [
     {name: 'Jan 5, 2025', attendees: 372, pv: 2400, amt: 2400},
@@ -37,7 +37,11 @@ import { BsArrowRepeat } from "react-icons/bs";
 import { GiAchievement } from "react-icons/gi";
 import { GrAchievement } from "react-icons/gr";
 
+import { useGetAttendeesReport } from '../../hooks/use-attendance';
+
 export default function Reports() {
+    const { data: attendanceReportData, isLoading } = useGetAttendeesReport('sunday', 1)
+    console.log(attendanceReportData?.vips)
     return (
         <Layout>
             <Breadcrumb mb='4'>
@@ -59,56 +63,65 @@ export default function Reports() {
 
                 <TabPanels>
                     <TabPanel px='0' py='1'>
-                        <Heading size='sm' mt="4">VIPs</Heading>
-                        <Box display='flex' flexDirection={{base: 'column', md: 'row'}} mt='1' gap='4'>
-                            <StatCard 
-                                label="First Timer (This Week)"
-                                value={9}
-                                change_percentage={61.43}
-                                icon={<TiUserAdd size={70} />} 
-                            />
 
-                            <StatCard 
-                                label="Second Timer (This Week)"
-                                value={7}
-                                change_percentage={12.3}
-                                icon={<BsArrowRepeat size={70} />} 
-                            />
+                        {!isLoading && data ? (
+                            <>
+                                <Heading size='sm' mt="4">VIPs</Heading>
+                                <Box display='flex' flexDirection={{base: 'column', md: 'row'}} mt='1' gap='4'>
+                                    <StatCard 
+                                        label="First Timer (This Week)"
+                                        value={attendanceReportData?.vips.first_timer.count}
+                                        change_percentage={attendanceReportData?.vips.first_timer.change_percentage}
+                                        icon={<TiUserAdd size={70} />} 
+                                    />
 
-                            <StatCard 
-                                label="Third Timer (This Week)"
-                                value={6}
-                                change_percentage={-1.43}
-                                icon={<GiAchievement size={70} />} 
-                            />
+                                    <StatCard 
+                                        label="Second Timer (This Week)"
+                                        value={attendanceReportData?.vips.second_timer.count}
+                                        change_percentage={attendanceReportData?.vips.second_timer.change_percentage}
+                                        icon={<BsArrowRepeat size={70} />} 
+                                    />
 
-                            <StatCard 
-                                label="Fourth Timer (This Week)"
-                                value={2}
-                                change_percentage={11.63}
-                                icon={<GrAchievement size={70} />} 
-                            />
-                        </Box>
+                                    <StatCard 
+                                        label="Third Timer (This Week)"
+                                        value={attendanceReportData?.vips.third_timer.count}
+                                        change_percentage={attendanceReportData?.vips.third_timer.change_percentage}
+                                        icon={<GiAchievement size={70} />} 
+                                    />
 
-                        <Heading size='sm' mt="4">Attendees</Heading>
-                        <Box mt="1" gap='4' flexDirection={{base: 'column', md: 'row'}}>
-                            <StatCard 
-                                label="Total Attendees (This Week)"
-                                value={440}
-                                change_percentage={23.33}
-                                icon={<FaChurch size={70} />} 
-                            />
+                                    <StatCard 
+                                        label="Fourth Timer (This Week)"
+                                        value={attendanceReportData?.vips.fourth_timer.count}
+                                        change_percentage={attendanceReportData?.vips.fourth_timer.change_percentage}
+                                        icon={<GrAchievement size={70} />} 
+                                    />
+                                </Box>
 
-                            <StatCard 
-                                label="Average Attendees (Weekly)"
-                                value={240}
-                                change_percentage={13.53}
-                                icon={<FaPeopleLine size={70} />} 
-                            />
-                        </Box>
+                                <Heading size='sm' mt="4">Attendees</Heading>
+                                <Box mt="1" gap='4' display='flex' flexDirection={{base: 'column', md: 'row'}}>
+                                    <StatCard 
+                                        label="Total Attendees (This Week)"
+                                        value={attendanceReportData?.attendees}
+                                        change_percentage={attendanceReportData?.attendees_change_percentage}
+                                        icon={<FaChurch size={70} />} 
+                                    />
+        
+                                    <StatCard 
+                                        label="Average Attendees (Weekly)"
+                                        value={attendanceReportData?.average_attendees}
+                                        change_percentage={attendanceReportData?.average_attendees_change_percentage}
+                                        icon={<FaPeopleLine size={70} />} 
+                                    />
+                                </Box>
+                            </>
+                        ) : (
+                            <>
+                                <p></p>
+                            </>
+                        )}
 
                         <Heading size='sm' mt="4" mb="2">Weekly Attendance Chart</Heading>
-                        <LineChart 
+                        {/* <LineChart 
                             width={1200} 
                             height={300} 
                             data={data}
@@ -118,11 +131,15 @@ export default function Reports() {
                             <XAxis dataKey="name" />
                             <YAxis />
                             <Tooltip />
-                        </LineChart>
+                        </LineChart> */}
+                        <Alert status='info'>
+                            <AlertIcon />
+                            Weekly trends require at least three weeks of data.
+                        </Alert>
                     </TabPanel>
                     <TabPanel px='0' py='1'>
                         <Heading size='sm' mt="4">VIPs</Heading>
-                        <Box mt='1' gap='4' flexDirection={{base: 'column', md: 'row'}}>
+                        <Box mt='1' gap='4' display='flex' flexDirection={{base: 'column', md: 'row'}}>
                             <StatCard 
                                 label="First Timer (This Month)"
                                 value={42}
@@ -153,7 +170,7 @@ export default function Reports() {
                         </Box>
 
                         <Heading size='sm' mt="4">Attendees</Heading>
-                        <Box mt='1' gap='4' flexDirection={{base: 'column', md: 'row'}}>
+                        <Box mt='1' gap='4' display='flex' flexDirection={{base: 'column', md: 'row'}}>
                             <StatCard 
                                 label="Total Attendees (This Month)"
                                 value={1440}

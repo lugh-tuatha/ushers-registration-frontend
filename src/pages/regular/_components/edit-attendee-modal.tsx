@@ -38,18 +38,17 @@ export default function EditAttendeeModal({ attendeeId }: Props) {
     } = useGetAttendeesByHierarchy("Primary Leader")
     const { 
         mutate: updateAttendeeMutation, 
-        isSuccess: isCreateAttendeeSuccess, 
         isPending: isCreateAttendeePending
     } = useUpdateAttendee()
 
     const { register, handleSubmit, reset } = useForm<UpdateAttendeeBody>()
 
     const handleUpdateAttendeeSubmit: SubmitHandler<UpdateAttendeeBody> = (body) => {
-        updateAttendeeMutation(body)
-
-        if(isCreateAttendeeSuccess){
-            onClose()
-        }
+        updateAttendeeMutation(body, {
+            onSuccess: () => {
+                onClose()
+            }
+        })
     } 
 
     const handleOpenModal = () => {
@@ -105,7 +104,7 @@ export default function EditAttendeeModal({ attendeeId }: Props) {
                                 {leaderData?.map((leader: any) => (
                                     <option 
                                         key={leader._id} 
-                                        value={`${leader.first_name} + " " + ${leader.last_name}`}
+                                        value={`${leader.first_name} ${leader.last_name}`}
                                     >
                                         {leader.first_name} {leader.last_name}
                                     </option>

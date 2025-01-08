@@ -1,0 +1,11 @@
+.scanner-label{
+    width: 10%;
+    background-color: #3182ce;
+    padding: .5rem 1rem;
+    color: white;
+    font-weight: 500;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './check-in.css'
 import moment from 'moment'
 
 import { 
@@ -18,7 +19,9 @@ import {
     Input,
     useToast,
     HStack,
-    TableContainer
+    TableContainer,
+    Flex,
+    Spinner,
 } from '@chakra-ui/react'
 
 import { FaQrcode } from "react-icons/fa";
@@ -31,7 +34,7 @@ export default function CheckIn() {
     const [searchTerm, setSearchTerm] = useState("")
     const [search, setSearch] = useState("")
 
-    const { data } = useAttendees(search)
+    const { data, isLoading } = useAttendees(search)
     const { mutate } = useMutatecheckIn()
 
     const toast = useToast();
@@ -51,7 +54,7 @@ export default function CheckIn() {
         }
         
         mutate({
-            week_no: moment(new Date()).week(),
+            week_no: moment(new Date()).isoWeek(),
             attendee: id,
             time_in: new Date(),
             attendance_type: attendance_type
@@ -70,6 +73,11 @@ export default function CheckIn() {
         })
     }
 
+    const checkInOnScan = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if(event.key === 'Enter'){
+            console.log('enter>')
+        }
+    }
     return (
         <Layout>
             <Breadcrumb mb='4'>
@@ -87,7 +95,21 @@ export default function CheckIn() {
 
             <HStack>
                 <Input 
-                    placeholder='Enter your name to check in' type='search' my='4' w={{base: '70%', md: '90%'}}
+                    placeholder='ID' 
+                    type='search' 
+                    my='4' 
+                    w={{base: '70%', md: '80%'}}
+                    position='absolute'
+                    opacity='0'
+                    onKeyDown={handleKeyDown}
+                    onKeyUp={checkInOnScan}
+                    id='scanner-input'
+                />
+                <Input 
+                    placeholder='Enter your name to check in' 
+                    type='search' 
+                    my='4' 
+                    w={{base: '70%', md: '90%'}}
                     value={searchTerm}
                     onChange={(event) => {
                         setSearchTerm(event.target.value)
@@ -95,10 +117,13 @@ export default function CheckIn() {
                     onKeyDown={handleKeyDown}
                 />
 
-                <Button colorScheme='blue' w={{base:'30%', md: '10%'}} display='flex' alignItems="center" gap='2'>
+                <label
+                    htmlFor='scanner-input'
+                    className='scanner-label'
+                >
                     Scan QR
                     <FaQrcode />
-                </Button>
+                </label>
             </HStack>
             <TableContainer>
                 <Table size='sm'>
@@ -112,20 +137,33 @@ export default function CheckIn() {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {data?.map((attendee: any) => (
-                            <Tr key={attendee._id}>
-                                <Td>{attendee.first_name} {attendee.last_name}</Td>
-                                <Td>{attendee.network}</Td>
-                                <Td>{attendee.member_status}</Td>
-                                <Td textAlign='end'>
-                                    <Button colorScheme='blue' size='sm' 
-                                        onClick={() => markPresent(attendee._id, attendee.first_name)}
-                                    >
-                                        Present
-                                    </Button>
-                                </Td>
-                            </Tr>
-                        ))}
+                    {!isLoading && data ? (
+                        <>
+                            {data?.map((attendee: any) => (
+                                <Tr key={attendee._id}>
+                                    <Td>{attendee.first_name} {attendee.last_name}</Td>
+                                    <Td>{attendee.network}</Td>
+                                    <Td>{attendee.member_status}</Td>
+                                    <Td textAlign='end'>
+                                        <Button colorScheme='blue' size='sm' 
+                                            onClick={() => markPresent(attendee._id, attendee.first_name)}
+                                        >
+                                            Present
+                                        </Button>
+                                    </Td>
+                                </Tr>
+                            ))}
+                        </>
+                    ) : (
+                        <Tr>
+                            <Td colSpan={7} textAlign="center">
+                                <Flex p="4" gap='4' justifyContent='center'>
+                                    <Spinner />
+                                    <Text>The initial loading time takes 1 to 2 minutes, but once it starts, the loading speeds up.</Text>
+                                </Flex>
+                            </Td>
+                        </Tr>
+                    )}
                     </Tbody>
                 </Table>
             </TableContainer>
