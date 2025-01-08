@@ -48,12 +48,12 @@ export default function Header() {
                             </MenuButton>
                             <MenuList py='0'>
                                 <MenuItem>
-                                    <Link href='/regular' w='full'>
+                                    <Link href='/guest/regular' w='full'>
                                         Regular
                                     </Link>
                                 </MenuItem>
                                 <MenuItem>
-                                    <Link href='/vip' w='full'>
+                                    <Link href='/guest/vip' w='full'>
                                         VIPs
                                     </Link>
                                 </MenuItem>
@@ -144,12 +144,12 @@ export default function Header() {
                             </MenuButton>
                             <MenuList py='0'  w='full'>
                                 <MenuItem>
-                                    <Link href='/regular' w='full'>
+                                    <Link href='/guest/regular' w='full'>
                                         Regular
                                     </Link>
                                 </MenuItem>
                                 <MenuItem>
-                                    <Link href='/vip' w='full'>
+                                    <Link href='/guest/vip' w='full'>
                                         VIPs
                                     </Link>
                                 </MenuItem>

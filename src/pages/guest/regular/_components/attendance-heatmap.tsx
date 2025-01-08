@@ -5,7 +5,7 @@ import {
     Tooltip,
 } from '@chakra-ui/react'
 
-import { useCalendar } from '../../../hooks/use-calendar'
+import { useCalendar } from '../../../../hooks/use-calendar'
 
 export default function AttendanceHeatmap() {
     const { data: calendarData, isLoading: isCalendarLoading } = useCalendar(2024)

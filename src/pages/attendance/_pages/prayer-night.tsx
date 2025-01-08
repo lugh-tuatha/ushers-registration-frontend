@@ -34,7 +34,7 @@ export default function PrayerNightAttendance() {
                 </Button>
             </Flex>
 
-            <AttendanceTableList attendanceType="prayer-night" />
+            <AttendanceTableList attendanceType="prayer-night" week={2}/>
         </Layout>
     )
 }

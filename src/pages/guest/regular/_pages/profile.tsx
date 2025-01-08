@@ -1,4 +1,4 @@
-import Layout from '../../../components/layout'
+import Layout from '../../../../components/layout'
 import { useParams } from 'react-router-dom';
 
 import { 
@@ -20,7 +20,7 @@ import {
 } from '@chakra-ui/react'
 
 import AttendanceHeatmap from '../_components/attendance-heatmap';
-import { useAttendee } from '../../../hooks';
+import { useAttendee } from '../../../../hooks';
 
 export default function Profile() {
     const params = useParams()

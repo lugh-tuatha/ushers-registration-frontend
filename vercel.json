@@ -9,11 +9,7 @@
             "dest": "/"
         },
         {
-            "src": "/regular/(.*)",
-            "dest": "/"
-        },
-        {
-            "src": "/vip",
+            "src": "/guest/(.*)",
             "dest": "/"
         },
         {

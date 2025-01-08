@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './vip.css'
 
-import Layout from '../../components/layout'
+import Layout from '../../../components/layout'
 
 import { 
     Breadcrumb,
@@ -13,7 +13,7 @@ import {
     Tab, 
 } from '@chakra-ui/react'
 
-import { useGetAttendeesByMemberStatus } from '../../hooks'
+import { useGetAttendeesByMemberStatus } from '../../../hooks'
 import TabContent from './_components/tab-content'
 
 export default function Vip() {

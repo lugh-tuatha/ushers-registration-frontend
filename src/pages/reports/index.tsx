@@ -27,7 +27,10 @@ import {
     Heading,
     Alert,
     AlertIcon,
-    Box, 
+    Box,
+    Flex,
+    Spinner,
+    Text, 
 } from '@chakra-ui/react'
 
 import { FaPeopleLine } from "react-icons/fa6";
@@ -115,9 +118,10 @@ export default function Reports() {
                                 </Box>
                             </>
                         ) : (
-                            <>
-                                <p></p>
-                            </>
+                            <Flex p="4" gap='4'>
+                                <Spinner />
+                                <Text>The initial loading time takes 1 to 2 minutes, but once it starts, the loading speeds up.</Text>
+                            </Flex>
                         )}
 
                         <Heading size='sm' mt="4" mb="2">Weekly Attendance Chart</Heading>

@@ -32,7 +32,7 @@ function App() {
                         </Box>
                         
                         <Button colorScheme='blue'>
-                            <Link href='/vip'>View all VIP's</Link>
+                            <Link href='/guest/vip'>View all VIP's</Link>
                         </Button>
                     </CardBody>
                 </Card>

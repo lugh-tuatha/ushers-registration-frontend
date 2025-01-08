@@ -29,7 +29,7 @@ import {
 import { FaFilter } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 
-import { useAttendees, useMutateDeleteAttendee } from '../../../hooks';
+import { useAttendees, useMutateDeleteAttendee } from '../../../../hooks';
 import EditAttendeeModal from './edit-attendee-modal';
 
 export default function AttendeesListTable() {

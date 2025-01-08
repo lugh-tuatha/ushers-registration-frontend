@@ -10,7 +10,7 @@ import {
     Tab,
     TabPanel,
 } from '@chakra-ui/react'
-import AttendeesListTable from '../regular/_components/attendees-list-table'
+import AttendeesListTable from '../guest/regular/_components/attendees-list-table'
 
 export default function Summary() {
 
