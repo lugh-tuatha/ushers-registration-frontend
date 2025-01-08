@@ -34,7 +34,7 @@ export default function Profile() {
                 </BreadcrumbItem>
 
                 <BreadcrumbItem>
-                    <BreadcrumbLink href='/regular'>Regular</BreadcrumbLink>
+                    <BreadcrumbLink href='/guest/regular'>Regular</BreadcrumbLink>
                 </BreadcrumbItem>
 
                 <BreadcrumbItem isCurrentPage>

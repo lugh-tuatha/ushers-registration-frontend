@@ -58,7 +58,7 @@ function App() {
                         </Box>
                         
                         <Button colorScheme='blue'>
-                            <Link href="/regular">Regular Attendees</Link>
+                            <Link href="/guest/regular">Regular Attendees</Link>
                         </Button>
                     </CardBody>
                 </Card>
@@ -82,7 +82,7 @@ function App() {
                     <Text textAlign='end' fontWeight='bold' opacity='.75'>- Luke 12:36-38</Text>
 
                     <Button colorScheme='blue'>
-                        <Link href="/regular">View Attendees This Week</Link>
+                        <Link href="/guest/regular">View Attendees This Week</Link>
                     </Button>
 
                     <Text mt="2" textDecoration="underline" cursor="pointer">Watch this week's Live</Text>

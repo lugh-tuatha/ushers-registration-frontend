@@ -80,7 +80,7 @@ export default function AttendeesListTable() {
                             {data?.map((attendee: any) => (
                                 <Tr key={attendee._id}>
                                     <Td cursor='pointer'>
-                                        <Link href={`/regular/${attendee._id}`}>
+                                        <Link href={`/guest/regular/${attendee._id}`}>
                                             {attendee.first_name} {attendee.last_name}
                                         </Link>
                                     </Td>
