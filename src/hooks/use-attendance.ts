@@ -4,7 +4,7 @@ import { AttendanceResponseHttpData } from "../types";
 import { ATTENDANCE_QUERY_KEY, ATTENDANCE_REPORT_QUERY_KEY } from "../constants";
 import { checkIn, getAllAttendanceByType, getAttendanceReport } from "../services/attendance";
 
-export const useAttendanceByType = (type: string, week: number) => 
+export const useAttendanceByType = (type: string = "", week: number) => 
     useQuery<AttendanceResponseHttpData[]>({
         queryKey: [ATTENDANCE_QUERY_KEY, type, week],
         queryFn: () => getAllAttendanceByType(type, week),

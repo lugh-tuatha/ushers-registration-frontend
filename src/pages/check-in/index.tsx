@@ -33,6 +33,7 @@ import { useMutatecheckIn } from '../../hooks/use-attendance';
 export default function CheckIn() {
     const [searchTerm, setSearchTerm] = useState("")
     const [search, setSearch] = useState("")
+    const [isFocus, setIsFocus] = useState(false)
 
     const { data, isLoading } = useAttendees(search)
     const { mutate } = useMutatecheckIn()
@@ -45,7 +46,7 @@ export default function CheckIn() {
         }
     }
 
-    const markPresent = (id: string, first_name: string) => {
+    const markPresent = (id: string, first_name?: string) => {
         let attendance_type = "sunday"
 
         if(moment().format('ddd') == "Wed"){
@@ -62,7 +63,7 @@ export default function CheckIn() {
             onSuccess: () => {
                 toast({
                     title: 'Presence marked!',
-                    description: `Thank you for attending today, ${first_name}`,
+                    description: `Thank you for attending today, ${first_name || id}`,
                     status: 'success',
                     duration: 5000,
                     isClosable: true,
@@ -85,7 +86,8 @@ export default function CheckIn() {
     const checkInOnScan = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if(event.key === 'Enter'){
             const id = event.currentTarget.value
-            markPresent(id, id)
+            markPresent(id)
+            event.currentTarget.value = ''
         }   
     }
 
@@ -108,11 +110,13 @@ export default function CheckIn() {
                 <Input 
                     type='search' 
                     my='4' 
-                    w={{base: '70%', md: '80%'}}
+                    w='5%'
                     position='absolute'
                     opacity='0'
                     onKeyDown={checkInOnScan}
                     id='scanner-input'
+                    onFocus={() => setIsFocus(true)}
+                    onBlur={() => setIsFocus(false)}
                 />
                 <Input 
                     placeholder='Enter your name to check in' 
@@ -129,8 +133,12 @@ export default function CheckIn() {
                 <label
                     htmlFor='scanner-input'
                     className='scanner-label'
+                    style={{
+                        border: isFocus ? '2px solid green' : '',
+                        color: isFocus ? 'black' : 'white'
+                    }}
                 >
-                    Scan QR
+                    Scanner
                     <FaQrcode />
                 </label>
             </HStack>

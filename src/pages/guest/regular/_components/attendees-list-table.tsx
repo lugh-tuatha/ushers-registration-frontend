@@ -19,12 +19,10 @@ import {
 
 import { FaFilter } from "react-icons/fa";
 
-import { useAttendees } from '../../../../hooks';
 import EditAttendeeModal from './edit-attendee-modal';
 import DeleteConfirmationModal from './delete-confirmation-modal';
 
-export default function AttendeesListTable() {
-    const { data, isLoading } = useAttendees()
+export default function AttendeesListTable({ data }: any) {
     return (
         <>
             <TableContainer>
@@ -56,7 +54,7 @@ export default function AttendeesListTable() {
                         </Tr>
                     </Thead>
                     <Tbody>
-                    {!isLoading && data ? (
+                    {data ? (
                         <>
                             {data?.map((attendee: any) => (
                                 <Tr key={attendee._id}>

@@ -13,7 +13,7 @@
             "dest": "/"
         },
         {
-            "src": "/check-in",
+            "src": "/check-in/(.*)",
             "dest": "/"
         },
         {

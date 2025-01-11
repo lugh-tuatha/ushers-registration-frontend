@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useFetchSundaysOfYear } from '../../../hooks/use-calendar'
+import { useFetchSundaysOfYear } from '../../hooks/use-calendar'
 
 import { 
     Breadcrumb,
@@ -12,17 +12,21 @@ import {
     Select,
  } from '@chakra-ui/react'
 
-import Layout from '../../../components/layout'
-import AttendanceTableList from '../_components/attendance-table-list'
-import { SudaysOfYearHttpData } from '../../../types/calendar'
+import Layout from '../../components/layout'
+import AttendanceTableList from './_components/attendance-table-list'
+import { SudaysOfYearHttpData } from '../../types/calendar'
 import moment from 'moment'
+import { useAttendanceByType } from '../../hooks/use-attendance'
+import { useParams } from 'react-router-dom'
 
 export default function SundayAttendance() {
+    const params = useParams()
     const currentDate = new Date()
     const previousWeekNumber = moment(currentDate.getDate() - 7).isoWeek()
     const [weekNumber, setWeekNumber] = useState(previousWeekNumber)
     
     const { data: sundaysOfYearData } = useFetchSundaysOfYear()
+    const { data } = useAttendanceByType(params.type, weekNumber)
     
     return (
         <Layout>
@@ -41,7 +45,9 @@ export default function SundayAttendance() {
             </Breadcrumb>
 
             <Flex justifyContent='space-between' alignItems='center'>
-                <Heading size="md" mb='2'>Sunday Service Attendance</Heading>
+                {data ? (
+                    <Heading size="md" mb='2' textTransform="capitalize">{params.type} Attendance ({data.length})</Heading>
+                ): ''}
                 <Button colorScheme='blue'>
                     Print
                 </Button>
@@ -56,7 +62,7 @@ export default function SundayAttendance() {
                 ))}
             </Select>
 
-            <AttendanceTableList attendanceType="sunday" week={weekNumber} />
+            <AttendanceTableList data={data} week={weekNumber} />
         </Layout>
     )
 }

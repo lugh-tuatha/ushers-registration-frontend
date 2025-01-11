@@ -16,15 +16,12 @@ import {
 
 import { FaFilter } from 'react-icons/fa'
 
-import { useAttendanceByType } from '../../../hooks/use-attendance'
-
 interface Props {
-    attendanceType: string
+    data: any
     week: number
 }
 
-export default function AttendanceTableList( {attendanceType, week}: Props ) {
-    const { data } = useAttendanceByType(attendanceType, week)
+export default function AttendanceTableList( {data, week}: Props ) {
 
     return (
         <TableContainer>
@@ -52,7 +49,7 @@ export default function AttendanceTableList( {attendanceType, week}: Props ) {
                         </Tr>
                 </Thead>
                 <Tbody>
-                    {data?.map((attendee, index) => (
+                    {data?.map((attendee: any, index: number) => (
                         <Tr key={index}>
                             <Td cursor='pointer'>
                                 {/* <Link href={`/profile/${data._id}`} > */}
