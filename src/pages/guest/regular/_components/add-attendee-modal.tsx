@@ -15,22 +15,27 @@ import {
     Select,
     Textarea,
     FormControl,
+    Checkbox,
 } from '@chakra-ui/react'
 
-import { useCreateAttendee, useGetAttendeesByHierarchy } from '../../../../hooks';
+import { useCreateAttendee, useGetLeaderAttendees } from '../../../../hooks';
 import { CreateNewAttendeeBody } from '../../../../types';
 import { ATTENDEES_QUERY_KEY } from '../../../../constants';
 
 export default function AddAttendeeModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
-    const { data } = useGetAttendeesByHierarchy("Primary Leader")
+    const { data } = useGetLeaderAttendees()
     const { 
         mutate: createAttendeeMutation, 
         isPending: isCreateAttendeePending
     } = useCreateAttendee([ATTENDEES_QUERY_KEY])
 
-    const { register, handleSubmit, reset } = useForm<CreateNewAttendeeBody>()
+    const { register, handleSubmit, reset } = useForm<CreateNewAttendeeBody>({
+        defaultValues: {
+            is_leader: false
+        }
+    })
 
     const handleCreateAttendeeSubmit: SubmitHandler<CreateNewAttendeeBody> = (body) => {
         createAttendeeMutation(body, {
@@ -84,6 +89,9 @@ export default function AddAttendeeModal() {
                                 placeholder='Address' 
                                 {...register("address")}
                             />
+                            <Checkbox {...register("is_leader")}>
+                                Are you a leader?
+                            </Checkbox>
                         </FormControl>
                         <FormControl display='flex' flexDirection='column' width={{base: '100%', md: '50%'}} gap='2'>
                             <Text textAlign={{md: 'right'}}>Church Role Information</Text>

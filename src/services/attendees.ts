@@ -25,9 +25,9 @@ export const getAttendeesById = async (id: string) => {
     }
 }
 
-export const getAttendeesByHierarchy = async (hierarchy: string) => {
+export const getLeaderAttendees = async () => {
     try {
-        const response = await axiosInstance.get<any>("/attendees/hierarchy/" + hierarchy)
+        const response = await axiosInstance.get<any>("/attendees/leader/all")
         return response.data.data
     } catch (error) {
         console.log(error)

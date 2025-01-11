@@ -1,7 +1,10 @@
+import { useState } from 'react';
+
 import Layout from '../../components/layout'
 import StatCard from './_components/stat-card';
 
 // import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import moment from 'moment';
 
 const data = [
     {name: 'Jan 5, 2025', attendees: 372, pv: 2400, amt: 2400},
@@ -30,7 +33,8 @@ import {
     Box,
     Flex,
     Spinner,
-    Text, 
+    Text,
+    Select, 
 } from '@chakra-ui/react'
 
 import { FaPeopleLine } from "react-icons/fa6";
@@ -41,10 +45,18 @@ import { GiAchievement } from "react-icons/gi";
 import { GrAchievement } from "react-icons/gr";
 
 import { useGetAttendeesReport } from '../../hooks/use-attendance';
+import { useFetchSundaysOfYear } from '../../hooks/use-calendar';
+import { SudaysOfYearHttpData } from '../../types/calendar';
 
 export default function Reports() {
-    const { data: attendanceReportData, isLoading } = useGetAttendeesReport('sunday', 1)
-    console.log(attendanceReportData?.vips)
+    const currentDate = new Date()
+    const previousWeekNumber = moment(currentDate.getDate() - 7).isoWeek()
+    const [weekNumber, setWeekNumber] = useState(previousWeekNumber)
+    const [attendanceType, setAttendanceType]  = useState('sunday')
+
+    const { data: attendanceReportData, isLoading } = useGetAttendeesReport(attendanceType, weekNumber)
+    const { data: sundaysOfYearData } = useFetchSundaysOfYear()
+    
     return (
         <Layout>
             <Breadcrumb mb='4'>
@@ -66,7 +78,26 @@ export default function Reports() {
 
                 <TabPanels>
                     <TabPanel px='0' py='1'>
-
+                        <Flex gap='4' alignItems='center' my="2">
+                            <Select 
+                                w={{base: '50%', md: "25%"}}
+                                value={weekNumber}
+                                onChange={(event) => setWeekNumber(Number(event.target.value))}
+                            >
+                                {sundaysOfYearData?.map((sunday: SudaysOfYearHttpData) => (
+                                    <option key={sunday.week_no} value={sunday.week_no}>Week {sunday.week_no}</option>
+                                ))}
+                            </Select>
+                            <Select 
+                                w={{base: '50%', md: "25%"}}
+                                value={attendanceType}
+                                onChange={(event) => setAttendanceType(event.target.value)}
+                            >
+                                <option value="sunday">Sunday</option>
+                                <option value="prayer-night">Prayer Night</option>
+                            </Select>
+                        </Flex>
+                        
                         {!isLoading && data ? (
                             <>
                                 <Heading size='sm' mt="4">VIPs</Heading>

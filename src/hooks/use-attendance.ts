@@ -23,4 +23,3 @@ export const useMutatecheckIn = () => {
         mutationFn: checkIn,
     })
 }
-

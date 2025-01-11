@@ -21,6 +21,7 @@ import SundayAttendance from './pages/attendance/_pages/sunday.tsx';
 import PrayerNightAttendance from './pages/attendance/_pages/prayer-night.tsx';
 import UpcomingEvents from './pages/upcoming-events/index.tsx';
 import CheckIn from './pages/check-in/index.tsx';
+import QRCheckIn from './pages/check-in/_page/qr-check-in.tsx';
 
 const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
     {
         path: "/check-in",
         element: <CheckIn />,
+    },
+    {
+        path: "/check-in/:id",
+        element: <QRCheckIn />,
     },
     {
         path: "attendance/sunday",

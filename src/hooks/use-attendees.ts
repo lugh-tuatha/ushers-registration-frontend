@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { ATTENDEE_QUERY_KEY, ATTENDEES_BY_HIERARCHY_QUERY_KEY, ATTENDEES_QUERY_KEY } from "../constants";
-import { createNewAttendee, deleteAttendee, getAllAttendees, getAttendeesByHierarchy, getAttendeesByMemberStatus, getAttendeesById, updateAttendee } from "../services";
+import { createNewAttendee, deleteAttendee, getAllAttendees, getLeaderAttendees, getAttendeesByMemberStatus, getAttendeesById, updateAttendee } from "../services";
 import { AttendeesResponseHttpData, CreateNewAttendeeBody, UpdateAttendeeBody } from "../types";
 
 export const useAttendees = (search: string | undefined = undefined) => 
@@ -17,10 +17,10 @@ export const useAttendee = (id: string = "") =>
         staleTime: Infinity
     })
 
-export const useGetAttendeesByHierarchy = (hierarchy: string) =>
+export const useGetLeaderAttendees = () =>
     useQuery<any>({
-        queryKey: [ATTENDEES_BY_HIERARCHY_QUERY_KEY, hierarchy],
-        queryFn: () => getAttendeesByHierarchy(hierarchy),
+        queryKey: [ATTENDEES_BY_HIERARCHY_QUERY_KEY],
+        queryFn: () => getLeaderAttendees(),
     })
 
 export const useGetAttendeesByMemberStatus = (status: string) => 

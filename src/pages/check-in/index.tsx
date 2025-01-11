@@ -40,7 +40,6 @@ export default function CheckIn() {
     const toast = useToast();
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        console.log(search)
         if(event.key === "Enter" && searchTerm !== search){
             setSearch(searchTerm)
         }
@@ -70,14 +69,26 @@ export default function CheckIn() {
                     position: 'bottom-right',
                 });
             },
+            onError: () => {
+                toast({
+                    title: 'Error!',
+                    description: `${first_name} not found. Please check the attendee details.`,
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                    position: 'bottom-right',
+                });
+            }
         })
     }
 
     const checkInOnScan = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if(event.key === 'Enter'){
-            console.log('enter>')
-        }
+            const id = event.currentTarget.value
+            markPresent(id, id)
+        }   
     }
+
     return (
         <Layout>
             <Breadcrumb mb='4'>
@@ -95,14 +106,12 @@ export default function CheckIn() {
 
             <HStack>
                 <Input 
-                    placeholder='ID' 
                     type='search' 
                     my='4' 
                     w={{base: '70%', md: '80%'}}
                     position='absolute'
                     opacity='0'
-                    onKeyDown={handleKeyDown}
-                    onKeyUp={checkInOnScan}
+                    onKeyDown={checkInOnScan}
                     id='scanner-input'
                 />
                 <Input 
