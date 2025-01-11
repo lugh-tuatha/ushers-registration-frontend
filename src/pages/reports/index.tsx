@@ -43,6 +43,7 @@ import { TiUserAdd } from "react-icons/ti";
 import { BsArrowRepeat } from "react-icons/bs";
 import { GiAchievement } from "react-icons/gi";
 import { GrAchievement } from "react-icons/gr";
+import { FaChildren } from "react-icons/fa6";
 
 import { useGetAttendeesReport } from '../../hooks/use-attendance';
 import { useFetchSundaysOfYear } from '../../hooks/use-calendar';
@@ -145,6 +146,13 @@ export default function Reports() {
                                         value={attendanceReportData?.average_attendees}
                                         change_percentage={attendanceReportData?.average_attendees_change_percentage}
                                         icon={<FaPeopleLine size={70} />} 
+                                    />
+
+                                    <StatCard 
+                                        label="Total Children Attendees (Weekly)"
+                                        value={attendanceReportData?.children_attendees}
+                                        change_percentage={attendanceReportData?.children_attendees_change_percentage}
+                                        icon={<FaChildren size={70} />} 
                                     />
                                 </Box>
                             </>
