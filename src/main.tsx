@@ -7,13 +7,14 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import './index.css'
-
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+import { ClerkProvider } from '@clerk/clerk-react'
 import { ChakraProvider } from '@chakra-ui/react'
 
 import App from './App.tsx'
+import SignIn from './pages/sign-in/[[...index]].tsx'
 import Regular from './pages/guest/regular/index.tsx';
 import Vip from './pages/guest/vip/index.tsx';
-import AdminLogin from './pages/admin-login/index.tsx';
 import Profile from './pages/guest/regular/_pages/profile.tsx';
 import Reports from './pages/reports/index.tsx';
 import Summary from './pages/summary/index.tsx';
@@ -21,6 +22,7 @@ import SundayAttendance from './pages/attendance/index.tsx';
 import UpcomingEvents from './pages/upcoming-events/index.tsx';
 import CheckIn from './pages/check-in/index.tsx';
 import QRCheckIn from './pages/check-in/_page/qr-check-in.tsx';
+import ProtectedRoute from './components/routing/protected-route';
 
 const router = createBrowserRouter([
     {
@@ -28,20 +30,36 @@ const router = createBrowserRouter([
         element: <App />,
     },
     {
+        path: "/sign-in",
+        element: <SignIn />
+    },
+    {
         path: "/guest/regular/",
-        element: <Regular />,
+        element: (
+            <ProtectedRoute>
+                <Regular />
+            </ProtectedRoute>
+        ),
     },
     {
         path: "/guest/regular/:slug",
-        element: <Profile />
+        element: <Profile />,
     },
     {
         path: "/guest/vip",
-        element: <Vip />,
+        element: (
+            <ProtectedRoute>
+                <Vip />
+            </ProtectedRoute>
+        ),
     },
     {
         path: "/check-in",
-        element: <CheckIn />,
+        element: (
+            <ProtectedRoute>
+                <CheckIn />
+            </ProtectedRoute>
+        ),
     },
     {
         path: "/check-in/:id",
@@ -49,23 +67,31 @@ const router = createBrowserRouter([
     },
     {
         path: "attendance/:type",
-        element: <SundayAttendance />
-    },
-    {
-        path: "/login",
-        element: <AdminLogin />,
+        element: (
+            <ProtectedRoute>
+                <SundayAttendance />
+            </ProtectedRoute>
+        ),
     },
     {
         path: "/upcoming-events",
-        element: <UpcomingEvents />
+        element: <UpcomingEvents />,
     },
     {
         path: "/summary",
-        element: <Summary />
+        element: (
+            <ProtectedRoute>
+                <Summary />
+            </ProtectedRoute>
+        ),
     },
     {
         path: "/reports",
-        element: <Reports />,
+        element: (
+            <ProtectedRoute>
+                <Reports />
+            </ProtectedRoute>
+        ),
     },
 ]);
 
@@ -75,8 +101,10 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <QueryClientProvider client={queryClient}>
             <ChakraProvider>
-                <RouterProvider router={router} />
-                {/* <ReactQueryDevtools /> */}
+                <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+                    <RouterProvider router={router} />
+                    {/* <ReactQueryDevtools /> */}
+                </ClerkProvider>
             </ChakraProvider>
         </QueryClientProvider>
     </StrictMode>,

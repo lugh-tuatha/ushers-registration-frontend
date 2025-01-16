@@ -53,18 +53,18 @@ export default function AttendanceTableList( {data, week}: Props ) {
                         <Tr key={index}>
                             <Td cursor='pointer'>
                                 {/* <Link href={`/profile/${data._id}`} > */}
-                                {attendee.attendee.first_name} {attendee.attendee.last_name}
+                                {attendee.attendee?.first_name || "-"} {attendee.attendee?.last_name || ""}
                                 {/* </Link> */}
                             </Td>
                             <Td>
-                                {attendee.attendee.primary_leader}
+                                {attendee.attendee?.primary_leader || "-"}
                             </Td>
-                            <Td>{attendee.attendee.church_process}</Td>
-                            <Td>{attendee.attendee.member_status}</Td>
+                            <Td>{attendee.attendee?.church_process || "-"}</Td>
+                            <Td>{attendee.attendee?.member_status || "-"}</Td>
                             <Td textAlign='end'>
                                 {
                                     new Date(attendee.time_in)
-                                        .toLocaleString([], {hour: '2-digit', minute: '2-digit', hour12: true})
+                                        .toLocaleString([], {hour: '2-digit', minute: '2-digit', hour12: true}) || "-"
                                 }
                             </Td>
                         </Tr>

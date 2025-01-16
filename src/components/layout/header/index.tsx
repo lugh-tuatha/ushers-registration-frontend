@@ -15,6 +15,7 @@ import {
     Flex,
     Text,
  } from '@chakra-ui/react'
+ import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
  
 import { FaChevronDown } from 'react-icons/fa6'
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -106,9 +107,14 @@ export default function Header() {
                     </ListItem>
                 </UnorderedList>
 
-                <Button display={{base: 'none', md: 'block'}}>
-                    <Link href='/login'>Login as Admin</Link>
-                </Button>
+                <SignedOut>
+                    <Button colorScheme='blue'>
+                        <Link href='/sign-in'>Sign In</Link>
+                    </Button>
+                </SignedOut>
+                <SignedIn>
+                    <UserButton />
+                </SignedIn>
 
                 <Box display={{base: 'block', md: 'none'}}>
                     <RxHamburgerMenu size={32} onClick={toggleMenu}/>
