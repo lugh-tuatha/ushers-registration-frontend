@@ -23,9 +23,9 @@ export default function TabContent({title, data, isLoading} : Props) {
                             <span className="order-indicator">
                                 # {String(index + 1).padStart(2, "0")}{" "}
                             </span>
-                            {attendee.first_name} {attendee.last_name}
+                            {attendee.attendee.first_name} {attendee.attendee.last_name}
                             <span className="invited-by">
-                                <b>Invited by:</b> {attendee.invited_by}
+                                <b>Invited by:</b> {attendee.attendee.invited_by}
                             </span>
                         </Text>
                     ))

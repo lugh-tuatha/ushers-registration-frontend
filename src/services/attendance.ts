@@ -15,6 +15,16 @@ export const getAllAttendanceByType = async (type: string, week: number) => {
     }
 }
 
+export const getAttendanceByTypeAndStatus = async (type: string, week: number, status: string) => {
+    try {
+        const response = await axiosInstance.get("attendance/type/" + type + "/status/" + status + "?week_no=" + week)
+        return response.data.data
+    } catch (error) {
+        console.log(error);
+        throw new Error("Failed to fetch attendance");
+    }
+}
+
 export const checkIn = async (body: checkInBody) => {
     try {
         const response = await axiosInstance.post("/attendance", body)

@@ -35,16 +35,6 @@ export const getLeaderAttendees = async () => {
     }
 }
 
-export const getAttendeesByMemberStatus = async (status: string) => {
-    try {
-        const response = await axiosInstance.get<any>("/attendees/status/" + status)
-        return response.data.data
-    } catch (error) {
-        console.log(error)
-        throw new Error("Failed to fetch attendee")
-    }
-}
-
 export const createNewAttendee = async (body: CreateNewAttendeeBody) => {
     try {
         const response = await axiosInstance.post("/attendees", body)

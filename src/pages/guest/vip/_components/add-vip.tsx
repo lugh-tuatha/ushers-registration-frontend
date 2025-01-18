@@ -10,14 +10,19 @@ import {
     useDisclosure,
     Input,
     Select,
+    useToast,
 } from '@chakra-ui/react'
 import { useCreateAttendee } from '../../../../hooks'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { CreateNewAttendeeBody } from '../../../../types'
 import { ATTENDEES_BY_HIERARCHY_QUERY_KEY } from '../../../../constants'
+import moment from 'moment'
+import { useMutatecheckIn } from '../../../../hooks/use-attendance'
 
 export default function AddVip() {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const toast = useToast();
+    const { mutate } = useMutatecheckIn()
 
     const { 
         mutate: createVipMutation, 
@@ -27,12 +32,50 @@ export default function AddVip() {
 
     const handleCreateVipSubmit: SubmitHandler<CreateNewAttendeeBody> = (body) => {
         createVipMutation(body, {
-            onSuccess: () => {
+            onSuccess: (data) => {
                 reset()
                 onClose()
-            },
+                markPresent(data.data.data._id)
+            }
         })
     } 
+
+    const markPresent = (id: string, first_name?: string) => {
+        let attendance_type = "sunday"
+
+        if(moment().format('ddd') == "Wed"){
+            attendance_type = "prayer-night"
+        }
+        
+        mutate({
+            week_no: moment(new Date()).isoWeek(),
+            attendee: id,
+            time_in: new Date(),
+            attendance_type: attendance_type
+        }, 
+        {
+            onSuccess: () => {
+                toast({
+                    title: 'Presence marked!',
+                    description: `Thank you for attending today, ${first_name || id}`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                    position: 'bottom-right',
+                });
+            },
+            onError: () => {
+                toast({
+                    title: 'Error!',
+                    description: `${first_name} not found. Please check the attendee details.`,
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                    position: 'bottom-right',
+                });
+            }
+        })
+    }
 
     const handleOpenModal = () => {
         reset()
@@ -65,10 +108,10 @@ export default function AddVip() {
                             placeholder='Member Status'
                             {...register("member_status")}
                         >
-                            <option value='First Timer'>First Timer</option>
-                            <option value='Second Timer'>Second Timer</option>
-                            <option value='Third Timer'>Third Timer</option>
-                            <option value='Fourth Timer'>Fourth Timer</option>
+                            <option value='first-timer'>First Timer</option>
+                            <option value='second-timer'>Second Timer</option>
+                            <option value='third-timer'>Third Timer</option>
+                            <option value='fourth-timer'>Fourth Timer</option>
                         </Select>
                     </ModalBody>
 

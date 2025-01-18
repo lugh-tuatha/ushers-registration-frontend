@@ -23,6 +23,7 @@ import UpcomingEvents from './pages/upcoming-events/index.tsx';
 import CheckIn from './pages/check-in/index.tsx';
 import QRCheckIn from './pages/check-in/_page/qr-check-in.tsx';
 import ProtectedRoute from './components/routing/protected-route';
+import Leaders from './pages/maintenance/leaders/index.tsx';
 
 const router = createBrowserRouter([
     {
@@ -90,6 +91,14 @@ const router = createBrowserRouter([
         element: (
             <ProtectedRoute>
                 <Reports />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: "/maintenance/leaders",
+        element: (
+            <ProtectedRoute>
+                <Leaders />
             </ProtectedRoute>
         ),
     },

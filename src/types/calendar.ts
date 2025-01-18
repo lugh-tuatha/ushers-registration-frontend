@@ -4,5 +4,5 @@ export interface SudaysOfYearHttpData {
 }
 
 export interface CalendarResponseHttpData {
-    [monthName: string]: SudaysOfYearHttpData[]; // Each month maps directly to an array of Sundays
+    [monthName: string]: SudaysOfYearHttpData[];
 }

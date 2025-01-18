@@ -78,7 +78,11 @@ export default function Header() {
                                         Sunday Attendance 
                                     </Link>
                                 </MenuItem>
-                                <MenuItem>Pepsol Attendance</MenuItem>
+                                <MenuItem>
+                                    <Link href='/attendance/pepsol' w='full'>
+                                        Pepsol Attendance 
+                                    </Link>
+                                </MenuItem>
                                 <MenuItem>
                                     <Link href='/attendance/prayer-night' w='full'>
                                         Prayer Night Attendance 
@@ -87,7 +91,11 @@ export default function Header() {
                                 <MenuItem>Mentoring Attendance</MenuItem>
                                 <MenuItem>Conference Attendance</MenuItem>
                                 <MenuItem>Wild Fire Attendance</MenuItem>
-                                <MenuItem>Valenzuela Attendance</MenuItem>
+                                <MenuItem>
+                                    <Link href='/attendance/valenzuela' w='full'>
+                                        Valenzuela Attendance 
+                                    </Link>
+                                </MenuItem>
                                 <MenuItem>Japan Attendance</MenuItem>
                                 <MenuItem>Herbosa Attendance</MenuItem>
                             </MenuList>
@@ -104,6 +112,23 @@ export default function Header() {
                     </ListItem>
                     <ListItem>
                         <Link href='/'>Training Process</Link>
+                    </ListItem>
+                    <ListItem>
+                        <Menu>
+                            <MenuButton fontWeight="bold" _hover={{textDecoration: "underline"}}>
+                                <Flex alignItems='center' gap='2'>
+                                    Maintenance
+                                    <FaChevronDown size={15}/>
+                                </Flex>
+                            </MenuButton>
+                            <MenuList py='0'>
+                                <MenuItem>
+                                    <Link href='/maintenance/leaders' w='full'>
+                                        Leaders
+                                    </Link>
+                                </MenuItem>
+                            </MenuList>
+                        </Menu>
                     </ListItem>
                 </UnorderedList>
 
@@ -179,7 +204,11 @@ export default function Header() {
                                         Sunday Attendance 
                                     </Link>
                                 </MenuItem>
-                                <MenuItem>Pepsol Attendance</MenuItem>
+                                <MenuItem>
+                                    <Link href='/attendance/pepsol' w='full'>
+                                        Pepsol Attendance
+                                    </Link>
+                                </MenuItem>
                                 <MenuItem>
                                     <Link href='/attendance/prayer-night' w='full'>
                                         Prayer Night Attendance 
@@ -188,7 +217,11 @@ export default function Header() {
                                 <MenuItem>Mentoring Attendance</MenuItem>
                                 <MenuItem>Conference Attendance</MenuItem>
                                 <MenuItem>Wild Fire Attendance</MenuItem>
-                                <MenuItem>Valenzuela Attendance</MenuItem>
+                                <MenuItem>
+                                    <Link href='/attendance/valenzuela' w='full'>
+                                        Valenzuela Attendance
+                                    </Link>
+                                </MenuItem>
                                 <MenuItem>Japan Attendance</MenuItem>
                                 <MenuItem>Herbosa Attendance</MenuItem>
                             </MenuList>

@@ -51,6 +51,10 @@ export default function CheckIn() {
 
         if(moment().format('ddd') == "Wed"){
             attendance_type = "prayer-night"
+        }else if(moment().format('ddd') === "Sun" && moment().isAfter(moment().startOf('day').add(12, 'hours'))){
+            attendance_type = "pepsol"
+        }else if(moment().format('ddd') === "Sun" && moment().isAfter(moment().startOf('day').add(13, 'hours'))){
+            attendance_type = "valenzuela"
         }
         
         mutate({

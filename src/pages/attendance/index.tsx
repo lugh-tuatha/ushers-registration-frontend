@@ -40,7 +40,7 @@ export default function SundayAttendance() {
                 </BreadcrumbItem>
 
                 <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink href='#'>Sunday Attendance</BreadcrumbLink>
+                    <BreadcrumbLink href='#' textTransform='capitalize'>{params.type} Attendance</BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
 

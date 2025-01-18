@@ -13,16 +13,14 @@ import {
     Tab, 
 } from '@chakra-ui/react'
 
-import { useGetAttendeesByMemberStatus } from '../../../hooks'
 import TabContent from './_components/tab-content'
+import { useAttendanceByTypeAndStatus } from '../../../hooks/use-attendance'
 
 export default function Vip() {
     const [tabIndex, setTabIndex] = useState(0)
 
-    const memberStatuses = ["First Timer", "Second Timer", "Third Timer", "Fourth Timer"]
-    const { data, isLoading } =   useGetAttendeesByMemberStatus(memberStatuses[tabIndex])
-
-    console.log(tabIndex)
+    const memberStatuses = ["first-timer", "second-timer", "third-timer", "fourth-timer"]
+    const { data, isLoading } = useAttendanceByTypeAndStatus('sunday', 3, memberStatuses[tabIndex])
     return (
         <Layout>
             <Breadcrumb mb='4'>
