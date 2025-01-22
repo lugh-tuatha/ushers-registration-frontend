@@ -1,37 +1,27 @@
 import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import './vip.css'
 
-import Layout from '../../../components/layout'
+import { Tabs, TabList, TabPanels, Tab } from '@chakra-ui/react'
 
-import { 
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    Tabs, 
-    TabList, 
-    TabPanels, 
-    Tab, 
-} from '@chakra-ui/react'
-
+import Layout from '../../../../components/layout'
 import TabContent from './_components/tab-content'
-import { useAttendanceByTypeAndStatus } from '../../../hooks/use-attendance'
+
+import { useAttendanceByTypeAndStatus } from '../../../../hooks'
+import { generateBreadcrumb } from '../../../../utils'
+import BreadCrumb from '../../../../components/ui/breadcrumb'
 
 export default function Vip() {
     const [tabIndex, setTabIndex] = useState(0)
+
+    const location = useLocation();
+    const breadcrumbData = generateBreadcrumb(location.pathname)
 
     const memberStatuses = ["first-timer", "second-timer", "third-timer", "fourth-timer"]
     const { data, isLoading } = useAttendanceByTypeAndStatus('sunday', 3, memberStatuses[tabIndex])
     return (
         <Layout>
-            <Breadcrumb mb='4'>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink href='#'>Special Mention</BreadcrumbLink>
-                </BreadcrumbItem>
-            </Breadcrumb>
+            <BreadCrumb data={breadcrumbData} />
 
             <Tabs onChange={(index) => setTabIndex(index)}>
                 <TabList>

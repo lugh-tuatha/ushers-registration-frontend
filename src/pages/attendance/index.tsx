@@ -1,11 +1,9 @@
 import { useState } from 'react'
 
-import { useFetchSundaysOfYear } from '../../hooks/use-calendar'
+import moment from 'moment'
+import { useLocation, useParams } from 'react-router-dom'
 
 import { 
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
     Button,
     Flex,
     Heading,
@@ -14,35 +12,27 @@ import {
 
 import Layout from '../../components/layout'
 import AttendanceTableList from './_components/attendance-table-list'
-import { SudaysOfYearHttpData } from '../../types/calendar'
-import moment from 'moment'
-import { useAttendanceByType } from '../../hooks/use-attendance'
-import { useParams } from 'react-router-dom'
+import BreadCrumb from '../../components/ui/breadcrumb'
+
+import { SudaysOfYearHttpData } from '../../types' 
+import { useAttendanceByType, useFetchSundaysOfYear } from '../../hooks'
+import { generateBreadcrumb } from '../../utils'
 
 export default function SundayAttendance() {
     const params = useParams()
     const currentDate = new Date()
     const previousWeekNumber = moment(currentDate.getDate() - 7).isoWeek()
     const [weekNumber, setWeekNumber] = useState(previousWeekNumber)
-    
+
+    const location = useLocation();
+    const breadcrumbData = generateBreadcrumb(location.pathname)
+     
     const { data: sundaysOfYearData } = useFetchSundaysOfYear()
     const { data } = useAttendanceByType(params.type, weekNumber)
     
     return (
         <Layout>
-            <Breadcrumb mb='4'>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem>
-                    <BreadcrumbLink href='#'>Attendance</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink href='#' textTransform='capitalize'>{params.type} Attendance</BreadcrumbLink>
-                </BreadcrumbItem>
-            </Breadcrumb>
+            <BreadCrumb data={breadcrumbData}/>
 
             <Flex justifyContent='space-between' alignItems='center'>
                 {data ? (

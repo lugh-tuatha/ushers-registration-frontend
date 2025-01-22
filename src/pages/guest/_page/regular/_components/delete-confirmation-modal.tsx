@@ -13,7 +13,7 @@ import {
 
 import { FaRegTrashAlt } from "react-icons/fa";
 
-import { useMutateDeleteAttendee } from "../../../../hooks"
+import { useMutateDeleteAttendee } from "../../../../../hooks";
 
 interface Props {
     id: string

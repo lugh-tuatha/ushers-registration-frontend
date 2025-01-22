@@ -1,31 +1,26 @@
-import Layout from '../../../components/layout'
+import Layout from '../../../../components/layout';
+import { useLocation } from 'react-router-dom';
 
 import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
     Flex,
     Heading,
 } from '@chakra-ui/react'
 
 import AttendeesListTable from './_components/attendees-list-table';
 import AddAttendeeModal from './_components/add-attendee-modal';
-import { useAttendees } from '../../../hooks';
+import BreadCrumb from '../../../../components/ui/breadcrumb';
+import { useAttendees } from '../../../../hooks';
+import { generateBreadcrumb } from '../../../../utils';
 
 export default function Regular() {
     const { data, isLoading } = useAttendees()
+
+    const location = useLocation();
+    const breadcrumbData = generateBreadcrumb(location.pathname)
     
     return (
         <Layout>
-            <Breadcrumb mb='4'>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink href='#'>Regular</BreadcrumbLink>
-                </BreadcrumbItem>
-            </Breadcrumb>
+            <BreadCrumb data={breadcrumbData}/>
 
             <Flex justifyContent='space-between' alignItems='center' mb='4'>
                 {!isLoading && data ? (

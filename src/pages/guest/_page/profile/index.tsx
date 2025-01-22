@@ -1,10 +1,7 @@
 import Layout from '../../../../components/layout'
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import { 
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
     Button,
     Flex,
     Image,
@@ -19,31 +16,22 @@ import {
     TabPanel
 } from '@chakra-ui/react'
 
-import AttendanceHeatmap from '../_components/attendance-heatmap';
+import AttendanceHeatmap from './_components/attendance-heatmap';
+import BreadCrumb from '../../../../components/ui/breadcrumb';
+
 import { useAttendee } from '../../../../hooks';
+import { generateBreadcrumb } from '../../../../utils';
 
 export default function Profile() {
     const params = useParams()
     const { data, isLoading } = useAttendee(params.slug)
 
+    const location = useLocation();
+    const breadcrumbData = generateBreadcrumb(location.pathname)
+
     return (
         <Layout>
-            <Breadcrumb mb='4'>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem>
-                    <BreadcrumbLink href='/guest/regular'>Regular</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink href='#'>
-                        {data?.first_name} {data?.last_name}
-                    </BreadcrumbLink>
-                </BreadcrumbItem>
-            </Breadcrumb>
-
+            <BreadCrumb data={breadcrumbData}/>
 
             {!isLoading && data ? (
                 <>  

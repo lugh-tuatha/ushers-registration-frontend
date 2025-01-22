@@ -1,7 +1,5 @@
 import { useState } from 'react';
-
-import Layout from '../../components/layout'
-import StatCard from './_components/stat-card';
+import { useLocation } from 'react-router-dom';
 
 // import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import moment from 'moment';
@@ -19,9 +17,6 @@ const data = [
 ];
 
 import { 
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
     Tabs, 
     TabList, 
     TabPanels, 
@@ -45,9 +40,14 @@ import { GiAchievement } from "react-icons/gi";
 import { GrAchievement } from "react-icons/gr";
 import { FaChildren } from "react-icons/fa6";
 
+import Layout from '../../components/layout'
+import StatCard from './_components/stat-card';
+import BreadCrumb from '../../components/ui/breadcrumb';
+
 import { useGetAttendeesReport } from '../../hooks/use-attendance';
 import { useFetchSundaysOfYear } from '../../hooks/use-calendar';
 import { SudaysOfYearHttpData } from '../../types/calendar';
+import { generateBreadcrumb } from '../../utils';
 
 export default function Reports() {
     const currentDate = new Date()
@@ -55,20 +55,15 @@ export default function Reports() {
     const [weekNumber, setWeekNumber] = useState(previousWeekNumber)
     const [attendanceType, setAttendanceType]  = useState('sunday')
 
+    const location = useLocation();
+    const breadcrumbData = generateBreadcrumb(location.pathname)
+
     const { data: attendanceReportData, isLoading } = useGetAttendeesReport(attendanceType, weekNumber)
     const { data: sundaysOfYearData } = useFetchSundaysOfYear()
     
     return (
         <Layout>
-            <Breadcrumb mb='4'>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink href='#'>Reports</BreadcrumbLink>
-                </BreadcrumbItem>
-            </Breadcrumb>
+            <BreadCrumb data={breadcrumbData} />
             
             <Tabs>
                 <TabList>

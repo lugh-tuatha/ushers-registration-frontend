@@ -1,65 +1,48 @@
-import Layout from '../../components/layout'
+import { useLocation } from 'react-router-dom';
 
 import { 
     Box,
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    Card,
-    CardBody,
-    Heading,
-    Image,
-    Text,
 } from '@chakra-ui/react'
 
+import Layout from '../../components/layout'
+import BreadCrumb from '../../components/ui/breadcrumb'
+import EventCard from './_components/event-card.tsx';
+
+import { generateBreadcrumb } from '../../utils';
+
 export default function UpcomingEvents() {
+    const location = useLocation();
+    const breadcrumbData = generateBreadcrumb(location.pathname)
+
     return (
         <Layout>
-            <Breadcrumb mb='4'>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink href='#'>Upcoming Events</BreadcrumbLink>
-                </BreadcrumbItem>
-            </Breadcrumb>
+            <BreadCrumb data={breadcrumbData}/>
 
             <Box display='flex' flexDirection={{base: 'column', md: 'row'}} gap='4'>
-                <Card>
-                    <CardBody>
-                        <Image src='/assets/anniversary.png' alt='church anniversary' height='10rem'/>
+                <EventCard 
+                    cover='/assets/anniversary.png'
+                    heading='Saving Family, Transforming Cities'
+                    sub_heading='Each One, Bring One'
+                    description='deserunt consequatur veniam magni molestiae itaque voluptatem ipsum voluptate, neque sed ratione aliquid?s'
+                    date='Nov 17, 2024'
+                />
 
-                        <Heading size='md' mt='2'>Saving Family, Transforming Cities</Heading>
-                        <Heading size='sm' opacity='.50' my='2'>Each One, Bring One</Heading>
-                        <Text>deserunt consequatur veniam magni molestiae itaque voluptatem ipsum voluptate, neque sed ratione aliquid?s</Text>
-                        <Text opacity='.5' mt="2">Nov 17, 2024</Text>
-                    </CardBody>
-                </Card>
+                <EventCard 
+                    cover='/assets/encounter-god-retreat.jpg'
+                    heading='Freedom, Focus, Fire'
+                    sub_heading='Each One, Bring One'
+                    description='deserunt consequatur veniam magni molestiae itaque voluptatem ipsum voluptate, neque sed ratione aliquid?s'
+                    date='Nov 29, 2024 - Nov 30, 2024'
+                />
 
-                <Card>
-                    <CardBody>
-                        <Image src='/assets/encounter-god-retreat.jpg' alt='event thumb' height='10rem'/>
-
-                        <Heading size='md' mt='2'>Encounter God Retreat</Heading>
-                        <Heading size='sm' opacity='.50' my='2'>Freedom, Focus, Fire</Heading>
-                        <Text>deserunt consequatur veniam magni molestiae itaque voluptatem ipsum voluptate, neque sed ratione aliquid?s</Text>
-                        <Text opacity='.5' mt="2">Nov 29, 2024 - Nov 30, 2024</Text>
-                    </CardBody>
-                </Card>
-
-                <Card>
-                    <CardBody>
-                        <Image src='/assets/christmas-party.jpg' alt='event thumb' height='10rem' width="full"/>
-
-                        <Heading size='md' mt='2'>LHMI Christmas Party</Heading>
-                        <Heading size='sm' opacity='.50' my='2'>Each One, Bring One</Heading>
-                        <Text>deserunt consequatur veniam magni molestiae itaque voluptatem ipsum voluptate, neque sed ratione aliquid?s</Text>
-                        <Text opacity='.5' mt="2">Dec 8, 2024</Text>
-                    </CardBody>
-                </Card>
+                <EventCard 
+                    cover='/assets/christmas-party.jpg'
+                    heading='LHMI Christmas Party'
+                    sub_heading='Each One, Bring One'
+                    description='deserunt consequatur veniam magni molestiae itaque voluptatem ipsum voluptate, neque sed ratione aliqu id?s'
+                    date='Dec 8, 2024'
+                />
             </Box>
-            
         </Layout>
     )
 }

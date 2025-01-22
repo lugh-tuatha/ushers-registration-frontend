@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import './check-in.css'
 import moment from 'moment'
+import { useLocation } from 'react-router-dom';
 
 import { 
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
     Heading,
     Text,
     Table,
@@ -27,13 +25,19 @@ import {
 import { FaQrcode } from "react-icons/fa";
 
 import Layout from '../../components/layout'
+import BreadCrumb from '../../components/ui/breadcrumb';
+
 import { useAttendees } from '../../hooks';
 import { useMutatecheckIn } from '../../hooks/use-attendance';
+import { generateBreadcrumb } from '../../utils';
 
 export default function CheckIn() {
     const [searchTerm, setSearchTerm] = useState("")
     const [search, setSearch] = useState("")
     const [isFocus, setIsFocus] = useState(false)
+
+    const location = useLocation();
+    const breadcrumbData = generateBreadcrumb(location.pathname)
 
     const { data, isLoading } = useAttendees(search)
     const { mutate } = useMutatecheckIn()
@@ -51,10 +55,10 @@ export default function CheckIn() {
 
         if(moment().format('ddd') == "Wed"){
             attendance_type = "prayer-night"
-        }else if(moment().format('ddd') === "Sun" && moment().isAfter(moment().startOf('day').add(12, 'hours'))){
-            attendance_type = "pepsol"
         }else if(moment().format('ddd') === "Sun" && moment().isAfter(moment().startOf('day').add(13, 'hours'))){
             attendance_type = "valenzuela"
+        }else if(moment().format('ddd') === "Sun" && moment().isAfter(moment().startOf('day').add(12, 'hours'))){
+            attendance_type = "pepsol"
         }
         
         mutate({
@@ -97,15 +101,7 @@ export default function CheckIn() {
 
     return (
         <Layout>
-            <Breadcrumb mb='4'>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink href='#'>Attendance</BreadcrumbLink>
-                </BreadcrumbItem>
-            </Breadcrumb>
+            <BreadCrumb data={breadcrumbData}/>
 
             <Heading textAlign='center'>Welcome back 👋🏻</Heading>
             <Text textAlign='center'>Are you a regular attendee, part of Back to Life, or a VIP? Find your name here and click 'Present' to mark yourself as present.</Text>

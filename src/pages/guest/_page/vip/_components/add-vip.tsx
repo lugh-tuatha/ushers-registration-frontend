@@ -12,12 +12,12 @@ import {
     Select,
     useToast,
 } from '@chakra-ui/react'
-import { useCreateAttendee } from '../../../../hooks'
+import { useCreateAttendee } from '../../../../../hooks'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { CreateNewAttendeeBody } from '../../../../types'
-import { ATTENDEES_BY_HIERARCHY_QUERY_KEY } from '../../../../constants'
+import { CreateNewAttendeeBody } from '../../../../../types'
+import { ATTENDEES_BY_HIERARCHY_QUERY_KEY } from '../../../../../constants'
 import moment from 'moment'
-import { useMutatecheckIn } from '../../../../hooks/use-attendance'
+import { useMutatecheckIn } from '../../../../../hooks'
 
 export default function AddVip() {
     const { isOpen, onOpen, onClose } = useDisclosure()

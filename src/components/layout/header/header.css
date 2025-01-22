@@ -1,0 +1,27 @@
+.menu__item {
+    border-radius: .25rem;
+    position: absolute;
+    top: 3.85rem;
+    z-index: 20;
+    display: none;
+    overflow-y: auto;
+}
+
+.menu:hover .menu__item {
+    border: 2px solid #3182ce;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile__submenu {
+    overflow-y: auto;
+}
+
+.mobile__submenu .submenu__item {
+    height: 0;
+    list-style-type: none;
+}
+
+.mobile__submenu:hover .submenu__item {
+    height: auto;
+}

@@ -10,3 +10,9 @@
     cursor: pointer;
     gap: .5rem;
 }
+
+@media screen and (max-width: 500px) {
+    .scanner-label{
+        width: 30%;
+    }
+}

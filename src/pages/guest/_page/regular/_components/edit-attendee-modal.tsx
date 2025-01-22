@@ -15,53 +15,58 @@ import {
     Select,
     Textarea,
     FormControl,
-    Checkbox,
 } from '@chakra-ui/react'
 
-import { useCreateAttendee, useGetLeaderAttendees } from '../../../../hooks';
-import { CreateNewAttendeeBody } from '../../../../types';
-import { ATTENDEES_QUERY_KEY } from '../../../../constants';
+import { FaRegEdit } from "react-icons/fa";
 
-export default function AddAttendeeModal() {
+import { useAttendee, useGetLeaderAttendees, useUpdateAttendee } from '../../../../../hooks';
+import { UpdateAttendeeBody } from '../../../../../types';
+
+interface Props {
+    attendeeId: string
+}
+
+export default function EditAttendeeModal({ attendeeId }: Props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    
+    const {
+        data
+    } = useAttendee(attendeeId)
 
-    const { data } = useGetLeaderAttendees()
     const { 
-        mutate: createAttendeeMutation, 
+        data: leaderData
+    } = useGetLeaderAttendees()
+    const { 
+        mutate: updateAttendeeMutation, 
         isPending: isCreateAttendeePending
-    } = useCreateAttendee([ATTENDEES_QUERY_KEY])
+    } = useUpdateAttendee()
 
-    const { register, handleSubmit, reset } = useForm<CreateNewAttendeeBody>({
-        defaultValues: {
-            is_leader: false
-        }
-    })
+    const { register, handleSubmit, reset } = useForm<UpdateAttendeeBody>()
 
-    const handleCreateAttendeeSubmit: SubmitHandler<CreateNewAttendeeBody> = (body) => {
-        createAttendeeMutation(body, {
+    const handleUpdateAttendeeSubmit: SubmitHandler<UpdateAttendeeBody> = (body) => {
+        updateAttendeeMutation(body, {
             onSuccess: () => {
-                reset()
                 onClose()
-            },
+            }
         })
     } 
 
     const handleOpenModal = () => {
-        reset()
+        reset(data)
         onOpen()
     }
 
     return (
         <>
-            <Button colorScheme='blue' onClick={handleOpenModal}>New Account +</Button>
+            <FaRegEdit size={20} cursor='pointer' onClick={handleOpenModal}/>
 
             <Modal size='xl' isOpen={isOpen} onClose={onClose}> 
                 <ModalOverlay />
-                <ModalContent mt={{base: '0', md: 'auto'}} >
-                    <ModalHeader>Insert New Attendee</ModalHeader>
+                <ModalContent>
+                    <ModalHeader>Edit Attendee</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody display={{base: 'block', md: 'flex'}} gap='8'>
-                        <FormControl display='flex' flexDirection='column' gap='2' width={{base: '100%', md: '50%'}}>
+                    <ModalBody display='flex' gap='8'>
+                        <FormControl display='flex' flexDirection='column' gap='2' width='50%'>
                             <Text>Personal Information</Text>
                             <Input 
                                 placeholder='First Name' 
@@ -89,17 +94,14 @@ export default function AddAttendeeModal() {
                                 placeholder='Address' 
                                 {...register("address")}
                             />
-                            <Checkbox {...register("is_leader")}>
-                                Are you a leader?
-                            </Checkbox>
                         </FormControl>
-                        <FormControl display='flex' flexDirection='column' width={{base: '100%', md: '50%'}} gap='2'>
-                            <Text textAlign={{md: 'right'}}>Church Role Information</Text>
+                        <FormControl display='flex' flexDirection='column' width='50%' gap='2'>
+                            <Text textAlign='right'>Church Role Information</Text>
                             <Select 
-                                placeholder='Your Leader'
+                                placeholder='Primary Leader'
                                 {...register("primary_leader")}
                             >
-                                {data?.map((leader: any) => (
+                                {leaderData?.map((leader: any) => (
                                     <option 
                                         key={leader._id} 
                                         value={`${leader.first_name} ${leader.last_name}`}
@@ -112,7 +114,6 @@ export default function AddAttendeeModal() {
                                 placeholder='Net'
                                 {...register("network")}
                             >
-                                <option value='Children'>Children</option>
                                 <option value='Young'>Youth</option>
                                 <option value='Young Pro'>Young Pro</option>
                                 <option value='Mother'>Mother</option>
@@ -129,7 +130,6 @@ export default function AddAttendeeModal() {
                                 <option value='Primary Leader'>Primary Leader</option>
                                 <option value='Elder'>Elder</option>
                                 <option value='Pastor'>Pastor</option>
-                                <option value='Vishop'>Vishop</option>
                             </Select>
                             <Select 
                                 placeholder='Member Status'
@@ -144,7 +144,6 @@ export default function AddAttendeeModal() {
                                 placeholder='Church Process'
                                 {...register("church_process")}
                             >
-                                <option value='Pending'>Pending</option>
                                 <option value='Start Up Lesson'>Start Up Lesson</option>
                                 <option value='Pre-Encounter'>Pre-Encounter</option>
                                 <option value='Post-Encounter'>Post-Encounter</option>
@@ -164,15 +163,14 @@ export default function AddAttendeeModal() {
             
                         <Button 
                             variant='ghost' 
-                            onClick={handleSubmit(handleCreateAttendeeSubmit)}
+                            onClick={handleSubmit(handleUpdateAttendeeSubmit)}
                             disabled={isCreateAttendeePending}
                         >
-                            {isCreateAttendeePending ? 'Updating...' : 'Insert Attendee'}
+                            {isCreateAttendeePending ? 'Creating...' : 'Update Attendee'}
                         </Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
         </>
-        
     )
 }

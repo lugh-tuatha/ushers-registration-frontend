@@ -1,30 +1,19 @@
 import Layout from '../../components/layout'
+import { useLocation } from 'react-router-dom';
 
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    Tabs,
-    TabList,
-    TabPanels,
-    Tab,
-    TabPanel,
-} from '@chakra-ui/react'
-import AttendeesListTable from '../guest/regular/_components/attendees-list-table'
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+
+import AttendeesListTable from '../guest/_page/regular/_components/attendees-list-table';
+import BreadCrumb from '../../components/ui/breadcrumb'
+import { generateBreadcrumb } from '../../utils';
 
 export default function Summary() {
+    const location = useLocation();
+    const breadcrumbData = generateBreadcrumb(location.pathname)
 
     return (
         <Layout>
-            <Breadcrumb mb='4'>
-                <BreadcrumbItem>
-                    <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink href='#'>Summary</BreadcrumbLink>
-                </BreadcrumbItem>
-            </Breadcrumb>
+            <BreadCrumb data={breadcrumbData}/>
 
             <Tabs>
                 <TabList>
