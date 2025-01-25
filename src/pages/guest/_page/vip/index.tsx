@@ -18,7 +18,7 @@ export default function Vip() {
     const breadcrumbData = generateBreadcrumb(location.pathname)
 
     const memberStatuses = ["first-timer", "second-timer", "third-timer", "fourth-timer"]
-    const { data, isLoading } = useAttendanceByTypeAndStatus('sunday', 3, memberStatuses[tabIndex])
+    const { data, isLoading } = useAttendanceByTypeAndStatus('sunday', 4, memberStatuses[tabIndex])
     return (
         <Layout>
             <BreadCrumb data={breadcrumbData} />

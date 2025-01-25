@@ -1,2 +1,2 @@
-export * from './config.prod'
+export * from './config.dev'
 export * from './query-keys'

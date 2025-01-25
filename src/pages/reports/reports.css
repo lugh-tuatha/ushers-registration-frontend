@@ -1,0 +1,12 @@
+/* /index.tsx */
+.report-category-container {
+    padding: .5rem 1rem;
+    border: 1.5px solid var(--primary);
+    border-radius: .5rem;
+    box-shadow: var(--primary-shadow);
+}
+
+/* /weekly-attendance-summary/index.tsx */
+.report-table-container {
+    border: 1.5px solid var(--primary);
+}

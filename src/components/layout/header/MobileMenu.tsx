@@ -41,7 +41,7 @@ export default function MobileMenu({ menu }: any) {
                         const hasSubMenu = item.sub_menu;
 
                         return (
-                            <ListItem className="mobile__submenu">
+                            <ListItem key={item.name} className="mobile__submenu">
                                 <Link href={item.href} display='flex' justifyContent='space-between' alignItems='center' gap='2'>
                                     {item.name}
                                     {hasSubMenu && <FaChevronDown size={15}/>}
@@ -49,7 +49,7 @@ export default function MobileMenu({ menu }: any) {
                                 {hasSubMenu && (
                                     <UnorderedList className="submenu__item">
                                         {item.sub_menu?.map((item: any) => (
-                                            <ListItem pt='2'>
+                                            <ListItem pt='2' key={item.name}>
                                                 <Link href={item.href} _hover={{textDecoration: "underline"}}>
                                                     {item.name}
                                                 </Link>

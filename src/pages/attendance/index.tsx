@@ -15,20 +15,21 @@ import AttendanceTableList from './_components/attendance-table-list'
 import BreadCrumb from '../../components/ui/breadcrumb'
 
 import { SudaysOfYearHttpData } from '../../types' 
-import { useAttendanceByType, useFetchSundaysOfYear } from '../../hooks'
+import { useAttendance, useFetchSundaysOfYear } from '../../hooks'
 import { generateBreadcrumb } from '../../utils'
 
 export default function SundayAttendance() {
     const params = useParams()
     const currentDate = new Date()
-    const previousWeekNumber = moment(currentDate.getDate() - 7).isoWeek()
+    const previousWeekDate = moment(currentDate).subtract(7, 'days');
+    const previousWeekNumber = previousWeekDate.isoWeek();
     const [weekNumber, setWeekNumber] = useState(previousWeekNumber)
 
     const location = useLocation();
     const breadcrumbData = generateBreadcrumb(location.pathname)
      
     const { data: sundaysOfYearData } = useFetchSundaysOfYear()
-    const { data } = useAttendanceByType(params.type, weekNumber)
+    const { data } = useAttendance(params.type, weekNumber)
     
     return (
         <Layout>

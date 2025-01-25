@@ -9,11 +9,11 @@ import {
 import AttendeesListTable from './_components/attendees-list-table';
 import AddAttendeeModal from './_components/add-attendee-modal';
 import BreadCrumb from '../../../../components/ui/breadcrumb';
-import { useAttendees } from '../../../../hooks';
 import { generateBreadcrumb } from '../../../../utils';
+import { useRegularDiscipleCount } from '../../../../stores';
 
 export default function Regular() {
-    const { data, isLoading } = useAttendees()
+    const regulars = useRegularDiscipleCount((state) => state.regulars)
 
     const location = useLocation();
     const breadcrumbData = generateBreadcrumb(location.pathname)
@@ -23,13 +23,11 @@ export default function Regular() {
             <BreadCrumb data={breadcrumbData}/>
 
             <Flex justifyContent='space-between' alignItems='center' mb='4'>
-                {!isLoading && data ? (
-                    <Heading size='md'>Regular Desciples ({data.length})</Heading>
-                ) : <p>Loading</p>}
+                <Heading size='md'>Regular Disciples ({regulars})</Heading>
                 <AddAttendeeModal />
             </Flex>
             
-            <AttendeesListTable data={data} />
+            <AttendeesListTable />
         </Layout>
     )
 }

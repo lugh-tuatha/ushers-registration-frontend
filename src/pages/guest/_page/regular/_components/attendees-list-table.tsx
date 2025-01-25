@@ -21,8 +21,18 @@ import { FaFilter } from "react-icons/fa";
 
 import EditAttendeeModal from './edit-attendee-modal';
 import DeleteConfirmationModal from './delete-confirmation-modal';
+import { useAttendees } from '../../../../../hooks';
+import { useRegularDiscipleCount } from '../../../../../stores';
 
-export default function AttendeesListTable({ data }: any) {
+export default function AttendeesListTable() {
+    const updateRegularsCount = useRegularDiscipleCount((state) => state.updateRegularsCount)
+        
+    const { data } = useAttendees()
+
+    if (data) {
+        updateRegularsCount(data.length)
+    }
+
     return (
         <>
             <TableContainer>

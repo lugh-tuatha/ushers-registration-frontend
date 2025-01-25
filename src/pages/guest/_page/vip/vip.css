@@ -1,7 +1,7 @@
 .order-indicator{
     font-weight: bold;
     opacity: .5;
-    color: #3182ce;
+    color: var(--primary);
     font-size: 1.5rem;
 }
 

@@ -25,7 +25,7 @@ export default function LeadersTableList() {
                             Type
                         </Th>
                         <Th>
-                            Desciples
+                            Disciples
                         </Th>
                         <Th textAlign='end'>Action</Th>
                     </Tr>

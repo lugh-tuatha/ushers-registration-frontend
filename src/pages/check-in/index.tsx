@@ -20,6 +20,7 @@ import {
     TableContainer,
     Flex,
     Spinner,
+    Select,
 } from '@chakra-ui/react'
 
 import { FaQrcode } from "react-icons/fa";
@@ -35,6 +36,7 @@ export default function CheckIn() {
     const [searchTerm, setSearchTerm] = useState("")
     const [search, setSearch] = useState("")
     const [isFocus, setIsFocus] = useState(false)
+    const [attendanceType, setAttendanceType] = useState("sunday")
 
     const location = useLocation();
     const breadcrumbData = generateBreadcrumb(location.pathname)
@@ -51,21 +53,11 @@ export default function CheckIn() {
     }
 
     const markPresent = (id: string, first_name?: string) => {
-        let attendance_type = "sunday"
-
-        if(moment().format('ddd') == "Wed"){
-            attendance_type = "prayer-night"
-        }else if(moment().format('ddd') === "Sun" && moment().isAfter(moment().startOf('day').add(13, 'hours'))){
-            attendance_type = "valenzuela"
-        }else if(moment().format('ddd') === "Sun" && moment().isAfter(moment().startOf('day').add(12, 'hours'))){
-            attendance_type = "pepsol"
-        }
-        
         mutate({
             week_no: moment(new Date()).isoWeek(),
             attendee: id,
             time_in: new Date(),
-            attendance_type: attendance_type
+            attendance_type: attendanceType
         }, 
         {
             onSuccess: () => {
@@ -103,8 +95,20 @@ export default function CheckIn() {
         <Layout>
             <BreadCrumb data={breadcrumbData}/>
 
-            <Heading textAlign='center'>Welcome back 👋🏻</Heading>
-            <Text textAlign='center'>Are you a regular attendee, part of Back to Life, or a VIP? Find your name here and click 'Present' to mark yourself as present.</Text>
+            <Heading size="lg" fontWeight="500">Welcome back 👋🏻</Heading>
+            <Text>Are you a regular attendee, part of Back to Life, or a VIP? Find your name here and click 'Present' to mark yourself as present.</Text>
+
+            <Select 
+                w={{base: '40%', md: "20%"}}
+                mt="4"
+                value={attendanceType}
+                onChange={(event) => setAttendanceType(event.target.value)}
+            >
+                <option value="sunday">Sunday</option>
+                <option value="pepsol">Pepsol</option>
+                <option value="prayer-night">Prayer Night</option>
+                <option value="valenzuela">Valenzuela</option>
+            </Select>
 
             <HStack>
                 <Input 

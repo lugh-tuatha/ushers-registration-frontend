@@ -1,6 +1,6 @@
 .scanner-label{
     width: 10%;
-    background-color: #3182ce;
+    background-color: var(--primary);
     padding: .5rem 1rem;
     color: white;
     font-weight: 500;

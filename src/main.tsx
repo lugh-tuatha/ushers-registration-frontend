@@ -17,7 +17,8 @@ import Dashboard from './pages/dashboard/index.tsx';
 import Regular from './pages/guest/_page/regular/index.tsx';
 import Vip from './pages/guest/_page/vip/index.tsx';
 import Profile from './pages/guest/_page/profile/index.tsx';
-import Reports from './pages/reports/index.tsx';
+import Reports from './pages/reports';
+import WeeklyAttendaceSummary from './pages/reports/_page/weekly-attendance-summary/index.tsx';
 import Summary from './pages/summary/index.tsx';
 import SundayAttendance from './pages/attendance/index.tsx';
 import UpcomingEvents from './pages/upcoming-events/index.tsx';
@@ -96,6 +97,14 @@ const router = createBrowserRouter([
         element: (
             <ProtectedRoute>
                 <Reports />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: "/reports/weekly-attendance-summary",
+        element: (
+            <ProtectedRoute>
+                <WeeklyAttendaceSummary />
             </ProtectedRoute>
         ),
     },

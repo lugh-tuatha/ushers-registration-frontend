@@ -1,0 +1,23 @@
+.report-container {
+    margin-top: 1rem;
+    border-radius: .5rem;
+    border: 1px solid var(--primary);
+    box-shadow: var(--primary-shadow);
+}
+
+.report-subheading {
+    padding: .25rem 1rem;
+    font-weight: 600;
+    background-color: #3182ce;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.report-item {
+    display: flex;
+    justify-content: space-between;
+    padding: .25rem 1rem;
+    font-size: .85rem;
+    font-weight: 600; 
+    border-bottom: 1px solid black;
+}
