@@ -5,25 +5,18 @@ import { Flex, Grid, Heading, Select } from "@chakra-ui/react";
 
 import Layout from "../../components/layout";
 import BreadCrumb from "../../components/ui/breadcrumb";
-import DashboardCard from "./dashboard-card";
+import DashboardCard from "./_components/dashboard-card";
 
 import { generateBreadcrumb } from "../../utils";
 
 import { DashboardFilterDateOptions } from "../../assets/data/calendar/dashboard-filter-date-options";
-import { useRegularDiscipleCount } from "../../stores";
-
-const data = [
-    {name: 'Jan 5, 2025', attendees: 104, pv: 2400, amt: 2400},
-    {name: 'Jan 12, 2025', attendees: 195, pv: 2400, amt: 2400},
-    {name: 'Jan 19, 2025', attendees: 193, pv: 2400, amt: 2400},
-];
+import { useDashboardMetrics } from "../../hooks/use-dashboard";
 
 export default function Dashboard() {
-    const regulars = useRegularDiscipleCount((state) => state.regulars)
-
     const location = useLocation();
     const breadcrumbData = generateBreadcrumb(location.pathname)
 
+    const { data: dashboardMetrics } = useDashboardMetrics()
     return (
         <Layout>
             <BreadCrumb data={breadcrumbData}/>
@@ -52,26 +45,26 @@ export default function Dashboard() {
             <Grid templateColumns='repeat(4, 1fr)' gap={6} mt="2">
                 <DashboardCard 
                     title="Attendees (Overall)"
-                    value={300}
+                    value={dashboardMetrics?.total_attendees}
                     description="Total Attendees This Year"
                 />
 
                 <DashboardCard 
                     title="Regular Disciple"
-                    value={regulars}
-                    description="Total Children This Year"
+                    value={dashboardMetrics?.regular_disciple}
+                    description="Total Disciple This Year"
                 />
 
                 <DashboardCard 
                     title="Children Overview"
-                    value={300}
+                    value={dashboardMetrics?.children}
                     description="Total Children This Year"
                 />
 
                 <DashboardCard 
                     title="Total VIP"
-                    value={300}
-                    description="Total Children This Year"
+                    value={dashboardMetrics?.vips}
+                    description="Total VIP This Year"
                 />
             </Grid>
 
@@ -79,7 +72,7 @@ export default function Dashboard() {
             <LineChart
                 width={1200} 
                 height={300} 
-                data={data}
+                data={dashboardMetrics?.attendance_trends}
             >
                 <Line type="monotone" dataKey="attendees" stroke="#8884d8" />
                 <CartesianGrid stroke="#ccc" />

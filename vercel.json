@@ -37,7 +37,7 @@
             "dest": "/"
         },
         {
-            "src": "/reports",
+            "src": "/reports/(.*)",
             "dest": "/"
         }
     ]
