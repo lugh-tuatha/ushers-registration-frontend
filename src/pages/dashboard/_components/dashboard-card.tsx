@@ -3,7 +3,7 @@ import { IoIosPeople } from "react-icons/io";
 
 interface DashboardCardProps {
     title: string,
-    value: number,
+    value?: number,
     description: string,
 }
 
@@ -15,7 +15,7 @@ export default function DashboardCard({ title, value, description }: DashboardCa
                 <Text fontWeight="500">{title}</Text>
             </CardHeader>
             <CardBody px="4" pt="0" pb="4">
-                <Text fontWeight="500" fontSize="3xl">{value}</Text>
+                <Text fontWeight="500" fontSize="3xl">{value || "-"}</Text>
                 <Text fontSize="sm">{description}</Text>
             </CardBody>
         </Card>

@@ -13,6 +13,7 @@ import { IoMdPeople } from "react-icons/io";
 import { AttendeeStats, SudaysOfYearHttpData } from "../../../../types";
 import moment from "moment";
 import { useState } from "react";
+import TextSkeleton from "../../../../components/ui/text-skeleton";
 
 export default function WeeklyAttendaceSummary() {
     const currentDate = new Date()
@@ -25,7 +26,7 @@ export default function WeeklyAttendaceSummary() {
     const breadcrumbData = generateBreadcrumb(location.pathname)
 
     const { data: sundaysOfYearData } = useFetchSundaysOfYear()
-    const { data } = useWeeklyAttendanceSummary(weekNumber, attendanceType)
+    const { data, isLoading } = useWeeklyAttendanceSummary(weekNumber, attendanceType)
 
     return (
         <Layout>
@@ -66,16 +67,21 @@ export default function WeeklyAttendaceSummary() {
                             Attendees
                         </Heading>
 
-                        {data?.attendees?.map((attendee: AttendeeStats) => (
-                            <Box key={attendee.member_status} className="report-item">
-                                <Text>{attendee.member_status}</Text>
-                                <Text display="flex" alignItems="center" gap="1">
-                                    {attendee.count}
-                                    <IoMdPeople size={18}/>
-                                </Text>
-                            </Box>
-                        ))}
-
+                        {!isLoading ? (
+                            <>
+                                {data?.attendees?.map((attendee: AttendeeStats) => (
+                                    <Box key={attendee.member_status} className="report-item">
+                                        <Text>{attendee.member_status}</Text>
+                                        <Text display="flex" alignItems="center" gap="1">
+                                            {attendee.count}
+                                            <IoMdPeople size={18}/>
+                                        </Text>
+                                    </Box>
+                                ))}
+                            </>
+                        ) : (
+                            <TextSkeleton />
+                        )}
                         
                         <Box className="report-item" borderBottom="none" fontWeight="700">
                             <Text>Total</Text>
@@ -89,15 +95,21 @@ export default function WeeklyAttendaceSummary() {
                             VIPs
                         </Heading>
 
-                        {data?.vips?.map((vip: AttendeeStats) => (
-                            <Box key={vip.member_status} className="report-item">
-                                <Text>{vip.member_status}</Text>
-                                <Text display="flex" alignItems="center" gap="1">
-                                    {vip.count}
-                                    <IoMdPeople size={18}/>
-                                </Text>
-                            </Box>
-                        ))}
+                        {!isLoading ? (
+                            <>
+                                {data?.vips?.map((vip: AttendeeStats) => (
+                                    <Box key={vip.member_status} className="report-item">
+                                        <Text>{vip.member_status}</Text>
+                                        <Text display="flex" alignItems="center" gap="1">
+                                            {vip.count}
+                                            <IoMdPeople size={18}/>
+                                        </Text>
+                                    </Box>
+                                ))}
+                            </>
+                        ) : (
+                            <TextSkeleton />
+                        )}
                         
                         <Box className="report-item" fontWeight="700">
                             <Text>Total VIPs</Text>
@@ -107,7 +119,7 @@ export default function WeeklyAttendaceSummary() {
                             </Text>
                         </Box>
 
-                        <Box className="report-item" bg="#3182ce" fontSize="1rem">
+                        <Box className="report-item" fontWeight="bold" fontSize="1rem">
                             <Text>Total Attendees</Text>
                             <Text display="flex" alignItems="center" gap="1">
                                 {data?.total_attendees}

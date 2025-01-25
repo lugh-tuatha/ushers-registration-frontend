@@ -1,15 +1,15 @@
 interface LineChartData{
     name: String,
-    attendees: Number,
-    pv: Number,
-    amt: Number,
+    attendees: number,
+    pv: number,
+    amt: number,
 }
 
 export interface DashboardResponseHttpData{
     status: String,
-    total_attendees: Number,
-    regular_disciple: Number,
-    children: Number,
-    vips: Number,
+    total_attendees: number,
+    regular_disciple: number,
+    children: number,
+    vips: number,
     attendance_trends: LineChartData[],
 }
