@@ -20,7 +20,7 @@ export default function index() {
                 <Heading size="md" fontWeight="semibold">Attendance Overview</Heading>
 
                 <Grid templateColumns={{base: 'repeat(1, 1fr)', md: "repeat(3, 1fr)"}} rowGap="2" columnGap="4" py="2">
-                    <ReportItem title="Weekly Attendance Report" href="/reports/weekly-attendance-summary" />
+                    <ReportItem title="Weekly Attendance Summary" href="/reports/weekly-attendance-summary" />
                 </Grid>
             </Box>
         </Layout>

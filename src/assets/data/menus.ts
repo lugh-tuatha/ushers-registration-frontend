@@ -1,8 +1,8 @@
 export const Menus = [
-    // {
-    //     name: "Dashboard",
-    //     href: "/dashboard",
-    // },
+    {
+        name: "Dashboard",
+        href: "/dashboard",
+    },
     {
         name: "Guest",
         href: "#",
