@@ -1,5 +1,4 @@
-import Layout from '../../../../components/layout'
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 import { 
     Button,
@@ -17,22 +16,15 @@ import {
 } from '@chakra-ui/react'
 
 import AttendanceHeatmap from './_components/attendance-heatmap';
-import BreadCrumb from '../../../../components/ui/breadcrumb';
+import Layout from '../../../../components/layout'
 
 import { useAttendee } from '../../../../hooks';
-import { generateBreadcrumb } from '../../../../utils';
 
 export default function Profile() {
     const params = useParams()
     const { data, isLoading } = useAttendee(params.slug)
-
-    const location = useLocation();
-    const breadcrumbData = generateBreadcrumb(location.pathname)
-
     return (
         <Layout>
-            <BreadCrumb data={breadcrumbData}/>
-
             {!isLoading && data ? (
                 <>  
                     <Flex gap='5' h='15rem'>

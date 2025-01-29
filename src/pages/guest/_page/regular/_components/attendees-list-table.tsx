@@ -75,7 +75,7 @@ export default function AttendeesListTable() {
                                     </Td>
                                     <Td>{attendee.age || "-"}</Td>
                                     <Td>{attendee.status || "-"}</Td>
-                                    <Td>{attendee.member_status || "-"}</Td>
+                                    <Td textTransform="capitalize">{attendee.member_status || "-"}</Td>
                                     <Td>{attendee.church_hierarchy || "-"}</Td>    
                                     <Td>
                                         {attendee.primary_leader?.length > 20 ?

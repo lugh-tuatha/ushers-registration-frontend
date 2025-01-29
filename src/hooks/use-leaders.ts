@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import { LEADERS_QUERY_KEY } from '../constants';
 import { LeadersResponseHttpData } from '../types';
-import { getAllLeaders } from '../services';
+import { getLeadersByType } from '../services';
 
-export const useLeaders = () =>
+export const useLeadersByType = (type: string = "primary-leader") =>
     useQuery<LeadersResponseHttpData[]>({
-        queryKey: [LEADERS_QUERY_KEY],
-        queryFn: () => getAllLeaders(),
+        queryKey: [LEADERS_QUERY_KEY, type],
+        queryFn: () => getLeadersByType(type),
         staleTime: Infinity
     })

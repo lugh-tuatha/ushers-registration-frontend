@@ -1,4 +1,4 @@
-import { 
+import {
     Table,
     Thead,
     Tbody,
@@ -7,13 +7,10 @@ import {
     Td,
     TableCaption,
     TableContainer,
- } from "@chakra-ui/react";
+} from "@chakra-ui/react";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-import { useLeaders } from "../../../../hooks";
 
-export default function LeadersTableList() {
-    const { data } = useLeaders()
-    console.log(data)
+export default function LeadersListTable({ data } : { data: any } ) {
     return (
         <TableContainer>
             <Table size='sm'>
@@ -34,8 +31,8 @@ export default function LeadersTableList() {
                     {data && data.map((leader: any) => (
                         <Tr key={leader._id}>
                             <Td>{leader.first_name} {leader.last_name}</Td>
-                            <Td>{leader.type}</Td>
-                            <Td>{leader.desciples_count}</Td>
+                            <Td textTransform="capitalize">{leader.type}</Td>
+                            <Td>{leader.disciples_count}</Td>
                             <Td display='flex' gap='2' justifyContent='end'>
                                 <FaRegEdit size={20} cursor='pointer'/>
                                 <FaRegTrashAlt size={20} color='red' cursor='pointer'/>

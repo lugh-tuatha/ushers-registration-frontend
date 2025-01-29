@@ -1,26 +1,17 @@
-import { useLocation } from "react-router-dom";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
 import { Flex, Grid, Heading, Select } from "@chakra-ui/react";
 
 import Layout from "../../components/layout";
-import BreadCrumb from "../../components/ui/breadcrumb";
 import DashboardCard from "./_components/dashboard-card";
-
-import { generateBreadcrumb } from "../../utils";
 
 import { DashboardFilterDateOptions } from "../../assets/data/calendar/dashboard-filter-date-options";
 import { useDashboardMetrics } from "../../hooks/use-dashboard";
 
 export default function Dashboard() {
-    const location = useLocation();
-    const breadcrumbData = generateBreadcrumb(location.pathname)
-
     const { data: dashboardMetrics } = useDashboardMetrics()
     return (
         <Layout>
-            <BreadCrumb data={breadcrumbData}/>
-
             <Flex gap='4' alignItems='center' my="2">
                 <Select
                     w={{base: '50%', md: "25%"}}
@@ -51,7 +42,19 @@ export default function Dashboard() {
 
                 <DashboardCard 
                     title="Regular Disciple"
-                    value={dashboardMetrics?.regular_disciple}
+                    value={dashboardMetrics?.regular_disciples}
+                    description="Total Disciple This Year"
+                />
+
+                <DashboardCard
+                    title="Regular Attendees"
+                    value={dashboardMetrics?.regular_attendees}
+                    description="Total Disciple This Year"
+                />
+
+                <DashboardCard
+                    title="Regular Startup"
+                    value={dashboardMetrics?.regular_startup}
                     description="Total Disciple This Year"
                 />
 
@@ -61,6 +64,12 @@ export default function Dashboard() {
                     description="Total Children This Year"
                 />
 
+                <DashboardCard
+                    title="Back to Life"
+                    value={dashboardMetrics?.back_to_life}
+                    description="Total Disciple This Year"
+                />
+
                 <DashboardCard 
                     title="Total VIP"
                     value={dashboardMetrics?.vips}
@@ -68,7 +77,7 @@ export default function Dashboard() {
                 />
             </Grid>
 
-            <Heading size="md" my="2">Attendance Trends</Heading>
+            <Heading size="md" my="4">Attendance Trends</Heading>
             <LineChart
                 width={1200} 
                 height={300} 

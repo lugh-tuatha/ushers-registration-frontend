@@ -1,12 +1,9 @@
-import { useLocation } from "react-router-dom";
 import './index.css'
 
 import { Box, Flex, Heading, Select, Text } from "@chakra-ui/react";
 
 import Layout from "../../../../components/layout";
-import BreadCrumb from "../../../../components/ui/breadcrumb";
 
-import { generateBreadcrumb } from "../../../../utils";
 import { useFetchSundaysOfYear, useWeeklyAttendanceSummary } from "../../../../hooks";
 
 import { IoMdPeople } from "react-icons/io";
@@ -22,16 +19,11 @@ export default function WeeklyAttendaceSummary() {
     const [weekNumber, setWeekNumber] = useState(previousWeekNumber)
     const [attendanceType, setAttendanceType] = useState("sunday")
 
-    const location = useLocation();
-    const breadcrumbData = generateBreadcrumb(location.pathname)
-
     const { data: sundaysOfYearData } = useFetchSundaysOfYear()
     const { data, isLoading } = useWeeklyAttendanceSummary(weekNumber, attendanceType)
 
     return (
         <Layout>
-            <BreadCrumb data={breadcrumbData}/>
-
             <Flex gap='4' alignItems='center' my="2">
                 <Select
                     w={{base: '60%', md: "20%"}}

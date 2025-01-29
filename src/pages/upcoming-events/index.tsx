@@ -1,23 +1,13 @@
-import { useLocation } from 'react-router-dom';
-
-import { 
+import {
     Box,
 } from '@chakra-ui/react'
 
 import Layout from '../../components/layout'
-import BreadCrumb from '../../components/ui/breadcrumb'
 import EventCard from './_components/event-card.tsx';
 
-import { generateBreadcrumb } from '../../utils';
-
 export default function UpcomingEvents() {
-    const location = useLocation();
-    const breadcrumbData = generateBreadcrumb(location.pathname)
-
     return (
         <Layout>
-            <BreadCrumb data={breadcrumbData}/>
-
             <Box display='flex' flexDirection={{base: 'column', md: 'row'}} gap='4'>
                 <EventCard 
                     cover='/assets/anniversary.png'

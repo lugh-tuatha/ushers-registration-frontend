@@ -139,6 +139,7 @@ export default function AddAttendeeModal() {
                                 <option value='Regular Disciple'>Regular Disciple</option>
                                 <option value='Regular Startup'>Regular Startup</option>
                                 <option value='Back to Life'>Back to Life</option>
+                                <option value='Children'>Children</option>
                             </Select>
                             <Select 
                                 placeholder='Church Process'
