@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import moment from 'moment'
-import { useLocation, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import { 
     Button,
@@ -12,11 +12,9 @@ import {
 
 import Layout from '../../components/layout'
 import AttendanceTableList from './_components/attendance-table-list'
-import BreadCrumb from '../../components/ui/breadcrumb'
 
 import { SudaysOfYearHttpData } from '../../types' 
 import { useAttendance, useFetchSundaysOfYear } from '../../hooks'
-import { generateBreadcrumb } from '../../utils'
 
 export default function SundayAttendance() {
     const params = useParams()
@@ -25,16 +23,11 @@ export default function SundayAttendance() {
     const previousWeekNumber = previousWeekDate.isoWeek();
     const [weekNumber, setWeekNumber] = useState(previousWeekNumber)
 
-    const location = useLocation();
-    const breadcrumbData = generateBreadcrumb(location.pathname)
-     
     const { data: sundaysOfYearData } = useFetchSundaysOfYear()
     const { data } = useAttendance(params.type, weekNumber)
     
     return (
         <Layout>
-            <BreadCrumb data={breadcrumbData}/>
-
             <Flex justifyContent='space-between' alignItems='center'>
                 {data ? (
                     <Heading size="md" mb='2' textTransform="capitalize">{params.type} Attendance ({data.length})</Heading>

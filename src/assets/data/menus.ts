@@ -1,8 +1,8 @@
 export const Menus = [
-    // {
-    //     name: "Dashboard",
-    //     href: "/dashboard",
-    // },
+    {
+        name: "Dashboard",
+        href: "/dashboard",
+    },
     {
         name: "Guest",
         href: "#",
@@ -66,10 +66,6 @@ export const Menus = [
     {
         name: "Upcoming Events",
         href: "/upcoming-events",
-    },
-    {
-        name: "Summary",
-        href: "/summary",
     },
     {
         name: "Reports",

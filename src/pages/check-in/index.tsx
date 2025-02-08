@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import './check-in.css'
 import moment from 'moment'
-import { useLocation } from 'react-router-dom';
 
-import { 
+import {
     Heading,
     Text,
     Table,
@@ -26,20 +25,15 @@ import {
 import { FaQrcode } from "react-icons/fa";
 
 import Layout from '../../components/layout'
-import BreadCrumb from '../../components/ui/breadcrumb';
 
 import { useAttendees } from '../../hooks';
-import { useMutatecheckIn } from '../../hooks/use-attendance';
-import { generateBreadcrumb } from '../../utils';
+import { useMutatecheckIn } from '../../hooks';
 
 export default function CheckIn() {
     const [searchTerm, setSearchTerm] = useState("")
     const [search, setSearch] = useState("")
     const [isFocus, setIsFocus] = useState(false)
     const [attendanceType, setAttendanceType] = useState("sunday")
-
-    const location = useLocation();
-    const breadcrumbData = generateBreadcrumb(location.pathname)
 
     const { data, isLoading } = useAttendees(search)
     const { mutate } = useMutatecheckIn()
@@ -93,8 +87,6 @@ export default function CheckIn() {
 
     return (
         <Layout>
-            <BreadCrumb data={breadcrumbData}/>
-
             <Heading size="lg" fontWeight="500">Welcome back 👋🏻</Heading>
             <Text>Are you a regular attendee, part of Back to Life, or a VIP? Find your name here and click 'Present' to mark yourself as present.</Text>
 

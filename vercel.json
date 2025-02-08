@@ -37,6 +37,10 @@
             "dest": "/"
         },
         {
+            "src": "/summary/(.*)",
+            "dest": "/"
+        },
+        {
             "src": "/reports",
             "dest": "/"
         },

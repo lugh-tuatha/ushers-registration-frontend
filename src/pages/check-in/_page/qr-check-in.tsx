@@ -1,19 +1,14 @@
 import moment from "moment"
-import { useLocation, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { Button, Flex, Text } from "@chakra-ui/react"
 
 import Layout from "../../../components/layout"
-import BreadCrumb from "../../../components/ui/breadcrumb"
 
-import { useMutatecheckIn } from "../../../hooks/use-attendance"
-import { generateBreadcrumb } from "../../../utils"
+import { useMutatecheckIn } from "../../../hooks"
 
 export default function QRCheckIn() {
     const params = useParams()
     
-    const location = useLocation();
-    const breadcrumbData = generateBreadcrumb(location.pathname)
-
     const { mutate, isError, isSuccess } = useMutatecheckIn()
     
     const markPresent = () => {
@@ -38,8 +33,6 @@ export default function QRCheckIn() {
 
     return (
         <Layout>
-            <BreadCrumb data={breadcrumbData}/>
-
             <Flex alignItems='center' flexDirection='column'>
                 <Text>Attendee ID: {params.id}</Text>
                 <Button 
