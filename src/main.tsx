@@ -18,14 +18,14 @@ import Regular from './pages/guest/_page/regular/index.tsx';
 import Vip from './pages/guest/_page/vip/index.tsx';
 import Profile from './pages/guest/_page/profile/index.tsx';
 import Reports from './pages/reports';
-import WeeklyAttendaceSummary from './pages/reports/_page/weekly-attendance-summary/index.tsx';
-import Summary from './pages/summary/index.tsx';
+import WeeklyAttendanceSummary from './pages/reports/_page/weekly-attendance-summary/index.tsx';
+import LeadersAttendanceSummary from "./pages/reports/_page/leaders-attendance-summary";
+import LeaderMemberList from "./pages/reports/_page/leader-member-list";
 import SundayAttendance from './pages/attendance/index.tsx';
 import UpcomingEvents from './pages/upcoming-events/index.tsx';
 import CheckIn from './pages/check-in/index.tsx';
 import QRCheckIn from './pages/check-in/_page/qr-check-in.tsx';
 import ProtectedRoute from './components/routing/protected-route';
-import LeaderDetails from "./pages/summary/_page/leader-details";
 
 const router = createBrowserRouter([
     {
@@ -85,22 +85,6 @@ const router = createBrowserRouter([
         element: <UpcomingEvents />,
     },
     {
-        path: "/summary",
-        element: (
-            <ProtectedRoute>
-                <Summary />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: "/summary/:leader_id",
-        element: (
-            <ProtectedRoute>
-                <LeaderDetails />
-            </ProtectedRoute>
-        ),
-    },
-    {
         path: "/reports",
         element: (
             <ProtectedRoute>
@@ -112,10 +96,26 @@ const router = createBrowserRouter([
         path: "/reports/weekly-attendance-summary",
         element: (
             <ProtectedRoute>
-                <WeeklyAttendaceSummary />
+                <WeeklyAttendanceSummary />
             </ProtectedRoute>
         ),
     },
+    {
+        path: "/reports/leaders-attendance-summary",
+        element: (
+            <ProtectedRoute>
+                <LeadersAttendanceSummary />
+            </ProtectedRoute>
+        )
+    },
+    {
+        path: "/reports/leader-member-list",
+        element: (
+            <ProtectedRoute>
+                <LeaderMemberList />
+            </ProtectedRoute>
+        )
+    }
 ]);
 
 const queryClient = new QueryClient();

@@ -7,12 +7,14 @@ import Layout from '../../../../components/layout'
 import TabContent from './_components/tab-content'
 
 import { useAttendanceByTypeAndStatus } from '../../../../hooks'
+import {getCurrentWeek} from "../../../../utils/get-current-week.ts";
 
 export default function Vip() {
     const [tabIndex, setTabIndex] = useState(0)
+    const currentDate = getCurrentWeek()
 
     const memberStatuses = ["first-timer", "second-timer", "third-timer", "fourth-timer"]
-    const { data, isLoading } = useAttendanceByTypeAndStatus('sunday', 4, memberStatuses[tabIndex])
+    const { data, isLoading } = useAttendanceByTypeAndStatus('sunday', currentDate, memberStatuses[tabIndex])
     return (
         <Layout>
             <Tabs onChange={(index) => setTabIndex(index)}>

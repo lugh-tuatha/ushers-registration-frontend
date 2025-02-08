@@ -1,4 +1,4 @@
-import './index.css'
+import '../../reports.css'
 
 import { Box, Flex, Heading, Select, Text } from "@chakra-ui/react";
 
@@ -8,14 +8,12 @@ import { useFetchSundaysOfYear, useWeeklyAttendanceSummary } from "../../../../h
 
 import { IoMdPeople } from "react-icons/io";
 import { AttendeeStats, SudaysOfYearHttpData } from "../../../../types";
-import moment from "moment";
 import { useState } from "react";
 import TextSkeleton from "../../../../components/ui/text-skeleton";
+import {getCurrentWeek} from "../../../../utils/get-current-week.ts";
 
-export default function WeeklyAttendaceSummary() {
-    const currentDate = new Date()
-    const previousWeekDate = moment(currentDate).subtract(7, 'days');
-    const previousWeekNumber = previousWeekDate.isoWeek();
+export default function WeeklyAttendanceSummary() {
+    const previousWeekNumber = getCurrentWeek() - 1;
     const [weekNumber, setWeekNumber] = useState(previousWeekNumber)
     const [attendanceType, setAttendanceType] = useState("sunday")
 
@@ -53,71 +51,69 @@ export default function WeeklyAttendaceSummary() {
                     <Heading size="md" fontWeight="500">Attendees</Heading>
                 </Box>
 
-                <Box>
-                    <Box py="2">
-                        <Heading size="xs" className="report-subheading">
-                            Attendees
-                        </Heading>
+                <Box py="2">
+                    <Heading size="xs" className="report-subheading">
+                        Attendees
+                    </Heading>
 
-                        {!isLoading ? (
-                            <>
-                                {data?.attendees?.map((attendee: AttendeeStats) => (
-                                    <Box key={attendee.member_status} className="report-item">
-                                        <Text>{attendee.member_status}</Text>
-                                        <Text display="flex" alignItems="center" gap="1">
-                                            {attendee.count}
-                                            <IoMdPeople size={18}/>
-                                        </Text>
-                                    </Box>
-                                ))}
-                            </>
-                        ) : (
-                            <TextSkeleton />
-                        )}
-                        
-                        <Box className="report-item" borderBottom="none" fontWeight="700">
-                            <Text>Total</Text>
-                            <Text display="flex" alignItems="center" gap="1">
-                                {data?.total_regulars}
-                                <IoMdPeople size={18}/>
-                            </Text>
-                        </Box>
+                    {!isLoading ? (
+                        <>
+                            {data?.attendees?.map((attendee: AttendeeStats) => (
+                                <Box key={attendee.member_status} className="report-item">
+                                    <Text>{attendee.member_status}</Text>
+                                    <Text display="flex" alignItems="center" gap="1">
+                                        {attendee.count}
+                                        <IoMdPeople size={18}/>
+                                    </Text>
+                                </Box>
+                            ))}
+                        </>
+                    ) : (
+                        <TextSkeleton />
+                    )}
 
-                        <Heading size="xs" className="report-subheading">
-                            VIPs
-                        </Heading>
+                    <Box className="report-item" borderBottom="none" fontWeight="700">
+                        <Text>Total</Text>
+                        <Text display="flex" alignItems="center" gap="1">
+                            {data?.total_regulars}
+                            <IoMdPeople size={18}/>
+                        </Text>
+                    </Box>
 
-                        {!isLoading ? (
-                            <>
-                                {data?.vips?.map((vip: AttendeeStats) => (
-                                    <Box key={vip.member_status} className="report-item">
-                                        <Text>{vip.member_status}</Text>
-                                        <Text display="flex" alignItems="center" gap="1">
-                                            {vip.count}
-                                            <IoMdPeople size={18}/>
-                                        </Text>
-                                    </Box>
-                                ))}
-                            </>
-                        ) : (
-                            <TextSkeleton />
-                        )}
-                        
-                        <Box className="report-item" fontWeight="700">
-                            <Text>Total VIPs</Text>
-                            <Text display="flex" alignItems="center" gap="1">
-                                {data?.total_vips}
-                                <IoMdPeople size={18}/>
-                            </Text>
-                        </Box>
+                    <Heading size="xs" className="report-subheading">
+                        VIPs
+                    </Heading>
 
-                        <Box className="report-item" fontWeight="bold" fontSize="1rem">
-                            <Text>Total Attendees</Text>
-                            <Text display="flex" alignItems="center" gap="1">
-                                {data?.total_attendees}
-                                <IoMdPeople size={18}/>
-                            </Text>
-                        </Box>
+                    {!isLoading ? (
+                        <>
+                            {data?.vips?.map((vip: AttendeeStats) => (
+                                <Box key={vip.member_status} className="report-item">
+                                    <Text>{vip.member_status}</Text>
+                                    <Text display="flex" alignItems="center" gap="1">
+                                        {vip.count}
+                                        <IoMdPeople size={18}/>
+                                    </Text>
+                                </Box>
+                            ))}
+                        </>
+                    ) : (
+                        <TextSkeleton />
+                    )}
+
+                    <Box className="report-item" fontWeight="700">
+                        <Text>Total VIPs</Text>
+                        <Text display="flex" alignItems="center" gap="1">
+                            {data?.total_vips}
+                            <IoMdPeople size={18}/>
+                        </Text>
+                    </Box>
+
+                    <Box className="report-item" fontWeight="bold" fontSize="1rem">
+                        <Text>Total Attendees</Text>
+                        <Text display="flex" alignItems="center" gap="1">
+                            {data?.total_attendees}
+                            <IoMdPeople size={18}/>
+                        </Text>
                     </Box>
                 </Box>
             </Box>

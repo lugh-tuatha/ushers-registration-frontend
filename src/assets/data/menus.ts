@@ -68,10 +68,6 @@ export const Menus = [
         href: "/upcoming-events",
     },
     {
-        name: "Summary",
-        href: "/summary",
-    },
-    {
         name: "Reports",
         href: "/reports",
     },

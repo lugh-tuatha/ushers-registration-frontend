@@ -1,7 +1,7 @@
 export const DashboardFilterDateOptions = [
     {
-        label: "Yearly - 2024",
-        value: "2024"
+        label: "Yearly - 2025",
+        value: "2025"
     },
     {
         label: "First Half of 2025 (Jan-Jun)",

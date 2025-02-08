@@ -1,4 +1,4 @@
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import {LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer} from 'recharts';
 
 import { Flex, Grid, Heading, Select } from "@chakra-ui/react";
 
@@ -33,7 +33,7 @@ export default function Dashboard() {
 
             <Heading size="md">Overview</Heading>
 
-            <Grid templateColumns='repeat(4, 1fr)' gap={6} mt="2">
+            <Grid templateColumns={{base: '1fr', md: 'repeat(4, 1fr)'}} gap={{base: '2', md: '6'}} mt="2">
                 <DashboardCard 
                     title="Attendees (Overall)"
                     value={dashboardMetrics?.total_attendees}
@@ -78,17 +78,19 @@ export default function Dashboard() {
             </Grid>
 
             <Heading size="md" my="4">Attendance Trends</Heading>
-            <LineChart
-                width={1200} 
-                height={300} 
-                data={dashboardMetrics?.attendance_trends}
-            >
-                <Line type="monotone" dataKey="attendees" stroke="#8884d8" />
-                <CartesianGrid stroke="#ccc" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-            </LineChart>
+            <ResponsiveContainer width="100%" height={300}>
+                <LineChart
+                    width={1200}
+                    height={300}
+                    data={dashboardMetrics?.attendance_trends}
+                >
+                    <Line type="monotone" dataKey="attendees" stroke="#8884d8" />
+                    <CartesianGrid stroke="#ccc" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                </LineChart>
+            </ResponsiveContainer>
         </Layout>
     )
 }

@@ -15,6 +15,16 @@ export const getAttendance = async (type: string, week: number) => {
     }
 }
 
+export const getFilteredAttendance = async (attendance_type: string, church_hierarchy: string, week_no: number) => {
+    try {
+        const response = await axiosInstance.get(`/attendance/${attendance_type}/${church_hierarchy}/week/${week_no}`)
+        return response.data.data;
+    } catch (error) {
+        console.log(error);
+        throw new Error("Failed to fetch attendees");
+    }
+}
+
 export const getAttendanceByTypeAndStatus = async (type: string, week: number, status: string) => {
     try {
         const response = await axiosInstance.get("attendance/type/" + type + "/status/" + status + "?week_no=" + week)
