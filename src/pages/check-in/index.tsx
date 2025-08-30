@@ -17,8 +17,6 @@ import {
     useToast,
     HStack,
     TableContainer,
-    Flex,
-    Spinner,
     Select,
 } from '@chakra-ui/react'
 
@@ -28,6 +26,7 @@ import Layout from '../../components/layout'
 
 import { useAttendees } from '../../hooks';
 import { useMutatecheckIn } from '../../hooks';
+import Loader from "../../components/ui/loader";
 
 export default function CheckIn() {
     const [searchTerm, setSearchTerm] = useState("")
@@ -170,10 +169,7 @@ export default function CheckIn() {
                     ) : (
                         <Tr>
                             <Td colSpan={7} textAlign="center">
-                                <Flex p="4" gap='4' justifyContent='center'>
-                                    <Spinner />
-                                    <Text>The initial loading time takes 1 to 2 minutes, but once it starts, the loading speeds up.</Text>
-                                </Flex>
+                                <Loader />
                             </Td>
                         </Tr>
                     )}

@@ -25,9 +25,9 @@ export const getAttendeesById = async (id: string) => {
     }
 }
 
-export const getLeaderAttendees = async () => {
+export const getLeaderAttendees = async (type: string) => {
     try {
-        const response = await axiosInstance.get<any>("/attendees/leader/all")
+        const response = await axiosInstance.get<any>("/attendees/leader/" + type)
         return response.data.data
     } catch (error) {
         console.log(error)

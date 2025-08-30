@@ -17,10 +17,10 @@ export const useAttendee = (id: string = "") =>
         staleTime: Infinity
     })
 
-export const useGetLeaderAttendees = () =>
+export const useGetAttendeesByHierarchy = (type: string) =>
     useQuery<any>({
         queryKey: [ATTENDEES_BY_HIERARCHY_QUERY_KEY],
-        queryFn: () => getLeaderAttendees(),
+        queryFn: () => getLeaderAttendees(type),
     })
 
 export const useCreateAttendee = (queryKey: string[]) => {

@@ -13,8 +13,6 @@ import {
     Text,
     MenuItem,
     Link,
-    Flex,
-    Spinner,
 } from '@chakra-ui/react'
 
 import { FaFilter } from "react-icons/fa";
@@ -23,6 +21,7 @@ import EditAttendeeModal from './edit-attendee-modal';
 import DeleteConfirmationModal from './delete-confirmation-modal';
 import { useAttendees } from '../../../../../hooks';
 import { useRegularDiscipleCount } from '../../../../../stores';
+import Loader from "../../../../../components/ui/loader";
 
 export default function AttendeesListTable() {
     const updateRegularsCount = useRegularDiscipleCount((state) => state.updateRegularsCount)
@@ -94,10 +93,7 @@ export default function AttendeesListTable() {
                     ) : (
                         <Tr>
                             <Td colSpan={7} textAlign="center">
-                                <Flex p="4" gap='4' justifyContent='center'>
-                                    <Spinner />
-                                    <Text>The initial loading time takes 1 to 2 minutes, but once it starts, the loading speeds up.</Text>
-                                </Flex>
+                                <Loader />
                             </Td>
                         </Tr>
                     )}

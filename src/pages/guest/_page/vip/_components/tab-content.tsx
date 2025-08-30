@@ -1,6 +1,7 @@
 import AddVip from './add-vip';
 
-import { Flex, Heading, TabPanel, Text, Spinner } from '@chakra-ui/react';
+import { Flex, Heading, TabPanel, Text, Box } from '@chakra-ui/react';
+import Loader from "../../../../../components/ui/loader";
 
 interface Props {
     title: string;
@@ -15,28 +16,32 @@ export default function TabContent({title, data, isLoading} : Props) {
                 <Heading>{title}</Heading>
                 <AddVip />
             </Flex>
+            <Flex opacity=".45">
+                <Box w="10%">No.</Box>
+                <Box w="45%">Full Name</Box>
+                <Box w="45%">Invited by</Box>
+            </Flex>
 
             {!isLoading ? (
                 data?.length > 0 ? (
                     data.map((attendee, index) => (
-                        <Text key={attendee._id} fontSize="4xl" fontWeight="200">
-                            <span className="order-indicator">
+                        <Flex alignItems="center">
+                            <Box className="order-indicator" w="10%">
                                 # {String(index + 1).padStart(2, "0")}{" "}
-                            </span>
-                            {attendee.attendee.first_name} {attendee.attendee.last_name}
-                            <span className="invited-by">
-                                <b>Invited by:</b> {attendee.attendee.invited_by}
-                            </span>
-                        </Text>
+                            </Box>
+                            <Text key={attendee._id} fontSize="3xl" fontWeight="200" w="45%">
+                                {attendee.attendee.first_name} {attendee.attendee.last_name}
+                            </Text>
+                            <Text w="45%" fontSize='2xl'>
+                                <span className="invited-by">Invited by:</span> {attendee.attendee.invited_by}
+                            </Text>
+                        </Flex>
                     ))
                 ) : (
                     <Text>No attendees available.</Text>
                 )
             ) : (
-                <Flex p="4" gap='4'>
-                    <Spinner />
-                    <Text>The initial loading time takes 1 to 2 minutes, but once it starts, the loading speeds up.</Text>
-                </Flex>
+                <Loader />
             )}
         </TabPanel>
     )

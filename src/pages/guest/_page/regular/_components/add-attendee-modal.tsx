@@ -15,27 +15,22 @@ import {
     Select,
     Textarea,
     FormControl,
-    Checkbox,
 } from '@chakra-ui/react'
 
-import { useCreateAttendee, useGetLeaderAttendees } from '../../../../../hooks';
+import { useCreateAttendee, useGetAttendeesByHierarchy } from '../../../../../hooks';
 import { CreateNewAttendeeBody } from '../../../../../types';
 import { ATTENDEES_QUERY_KEY } from '../../../../../constants';
 
 export default function AddAttendeeModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
-    const { data } = useGetLeaderAttendees()
+    const { data: primaryLeader } = useGetAttendeesByHierarchy("Primary Leader")
     const { 
         mutate: createAttendeeMutation, 
         isPending: isCreateAttendeePending
     } = useCreateAttendee([ATTENDEES_QUERY_KEY])
 
-    const { register, handleSubmit, reset } = useForm<CreateNewAttendeeBody>({
-        defaultValues: {
-            is_leader: false
-        }
-    })
+    const { register, handleSubmit, reset } = useForm<CreateNewAttendeeBody>()
 
     const handleCreateAttendeeSubmit: SubmitHandler<CreateNewAttendeeBody> = (body) => {
         createAttendeeMutation(body, {
@@ -89,24 +84,31 @@ export default function AddAttendeeModal() {
                                 placeholder='Address' 
                                 {...register("address")}
                             />
-                            <Checkbox {...register("is_leader")}>
-                                Are you a leader?
-                            </Checkbox>
                         </FormControl>
                         <FormControl display='flex' flexDirection='column' width={{base: '100%', md: '50%'}} gap='2'>
                             <Text textAlign={{md: 'right'}}>Church Role Information</Text>
+                            <Select
+                                placeholder="Network Leader"
+                            >
+                                <option>Ps. Alip Aspiras</option>
+                            </Select>
                             <Select 
-                                placeholder='Your Leader'
+                                placeholder='Primary Leader'
                                 {...register("primary_leader")}
                             >
-                                {data?.map((leader: any) => (
-                                    <option 
+                                {primaryLeader?.map((leader: any) => (
+                                    <option
                                         key={leader._id} 
                                         value={`${leader.first_name} ${leader.last_name}`}
                                     >
                                         {leader.first_name} {leader.last_name}
                                     </option>
                                 ))}
+                            </Select>
+                            <Select
+                                placeholder="Secondary LEader"
+                            >
+                                <option>Ps. Alip Aspiras</option>
                             </Select>
                             <Select 
                                 placeholder='Net'

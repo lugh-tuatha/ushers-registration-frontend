@@ -1,4 +1,4 @@
-import {   
+import {
     Table,
     Thead,
     Tbody,
@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 
 import { FaFilter } from 'react-icons/fa'
+import Loader from "../../../components/ui/loader";
 
 interface Props {
     data: any
@@ -49,26 +50,37 @@ export default function AttendanceTableList( {data, week}: Props ) {
                         </Tr>
                 </Thead>
                 <Tbody>
-                    {data?.map((attendee: any, index: number) => (
-                        <Tr key={index}>
-                            <Td cursor='pointer'>
-                                {/* <Link href={`/profile/${data._id}`} > */}
-                                {attendee.attendee?.first_name || "-"} {attendee.attendee?.last_name || ""}
-                                {/* </Link> */}
-                            </Td>
-                            <Td>
-                                {attendee.attendee?.primary_leader || "-"}
-                            </Td>
-                            <Td>{attendee.attendee?.church_process || "-"}</Td>
-                            <Td>{attendee.attendee?.member_status || "-"}</Td>
-                            <Td textAlign='end'>
-                                {
-                                    new Date(attendee.time_in)
-                                        .toLocaleString([], {hour: '2-digit', minute: '2-digit', hour12: true}) || "-"
-                                }
+                    {data ? (
+                        <>
+                            {data?.map((attendee: any, index: number) => (
+                                <Tr key={index}>
+                                    <Td cursor='pointer'>
+                                        {/* <Link href={`/profile/${data._id}`} > */}
+                                        {attendee.attendee?.first_name || "-"} {attendee.attendee?.last_name || ""}
+                                        {/* </Link> */}
+                                    </Td>
+                                    <Td>
+                                        {attendee.attendee?.primary_leader || "-"}
+                                    </Td>
+                                    <Td>{attendee.attendee?.church_process || "-"}</Td>
+                                    <Td>{attendee.attendee?.member_status || "-"}</Td>
+                                    <Td textAlign='end'>
+                                        {
+                                            new Date(attendee.time_in)
+                                                .toLocaleString([], {hour: '2-digit', minute: '2-digit', hour12: true}) || "-"
+                                        }
+                                    </Td>
+                                </Tr>
+                            ))}
+                        </>
+                    ) : (
+                        <Tr>
+                            <Td colSpan={7} textAlign="center">
+                                <Loader />
                             </Td>
                         </Tr>
-                    ))}
+                    )}
+
                 </Tbody>
             </Table>
         </TableContainer>

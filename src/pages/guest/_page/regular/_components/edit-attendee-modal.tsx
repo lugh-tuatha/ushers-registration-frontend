@@ -19,7 +19,7 @@ import {
 
 import { FaRegEdit } from "react-icons/fa";
 
-import { useAttendee, useGetLeaderAttendees, useUpdateAttendee } from '../../../../../hooks';
+import { useAttendee, useGetAttendeesByHierarchy, useUpdateAttendee } from '../../../../../hooks';
 import { UpdateAttendeeBody } from '../../../../../types';
 
 interface Props {
@@ -34,8 +34,8 @@ export default function EditAttendeeModal({ attendeeId }: Props) {
     } = useAttendee(attendeeId)
 
     const { 
-        data: leaderData
-    } = useGetLeaderAttendees()
+        data: primaryLeader
+    } = useGetAttendeesByHierarchy("Primary Leader")
     const { 
         mutate: updateAttendeeMutation, 
         isPending: isCreateAttendeePending
@@ -101,7 +101,7 @@ export default function EditAttendeeModal({ attendeeId }: Props) {
                                 placeholder='Primary Leader'
                                 {...register("primary_leader")}
                             >
-                                {leaderData?.map((leader: any) => (
+                                {primaryLeader?.map((leader: any) => (
                                     <option 
                                         key={leader._id} 
                                         value={`${leader.first_name} ${leader.last_name}`}
